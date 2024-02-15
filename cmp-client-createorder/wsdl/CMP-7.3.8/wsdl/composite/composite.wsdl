@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/composite/definition"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:target="http://mdsuk.com/ws/dise3g/composite/definition"
+	xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition">
+
+	<documentation>This Web service definition encompasses all operations to
+		manage subscription services. </documentation>
+	
+	 <import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+	
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://mdsuk.com/ws/dise3g/composite/definition"
+			xmlns:composite="http://mdsuk.com/ws/dise3g/composite/dto/service"
+			elementFormDefault="qualified">
+			<import namespace="http://mdsuk.com/ws/dise3g/composite/dto/service"
+				schemaLocation="../../xsd/compositeservice.xsd" />
+
+			<element name="ManageSubscription">
+				<complexType>
+					<sequence>
+						<element name="Request" type="composite:ManageSubscriptionType" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="ManageSubscriptionResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="composite:ManageSubscriptionResponseType" />
+					</sequence>
+				</complexType>
+			</element>
+			
+		</schema>
+	</types>
+
+	<message name="ManageSubscriptionRequest">
+		<part name="parameters" element="target:ManageSubscription" />
+	</message>
+
+	<message name="ManageSubscriptionResponse">
+		<part name="parameters" element="target:ManageSubscriptionResponse" />
+	</message>
+	
+	<portType name="CompositePortType">
+		<operation name="ManageSubscription">
+			<input message="target:ManageSubscriptionRequest" />
+			<output message="target:ManageSubscriptionResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+	
+	</portType>
+</definitions>

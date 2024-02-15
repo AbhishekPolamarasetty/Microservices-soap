@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/payment/payment.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/payment/payment.wsdl#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/payment/payment.wsdl $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/payment/definition"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:target="http://mdsuk.com/ws/dise3g/payment/definition"
+    xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition">
+
+    <documentation>This Webservice definition encompasses all operations relating to Payment
+        management. </documentation>
+
+    <import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://mdsuk.com/ws/dise3g/payment/definition"
+            xmlns:payment="http://mdsuk.com/ws/dise3g/payment/dto/service"
+            elementFormDefault="qualified">
+            <import namespace="http://mdsuk.com/ws/dise3g/payment/dto/service"
+                schemaLocation="../../xsd/paymentservice.xsd"/>
+
+            <element name="CreatePayment">
+                <complexType>
+                    <sequence>
+                        <element name="PaymentData" type="payment:CreatePaymentType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="CreatePaymentResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="payment:CreatePaymentResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="ReleasePayment">
+                <complexType>
+                    <sequence>
+                        <element name="PaymentData" type="payment:ReleasePaymentType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="ReleasePaymentResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="payment:ReleasePaymentResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="PaymentHistory">
+                <complexType>
+                    <sequence>
+                        <element name="PaymentData" type="payment:PaymentHistoryType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="PaymentHistoryResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="payment:PaymentHistoryResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="GetPaymentErrors">
+                <complexType>
+                    <sequence>
+                        <element name="PaymentData" type="payment:GetPaymentErrorsType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="GetPaymentErrorsResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="payment:GetPaymentErrorsResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="RecordPayment">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="payment:RecordPaymentType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="RecordPaymentResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="payment:RecordPaymentResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+        </schema>
+    </types>
+
+    <message name="CreatePaymentRequest">
+        <part name="PaymentData" element="target:CreatePayment"/>
+    </message>
+
+    <message name="CreatePaymentResponse">
+        <part name="Result" element="target:CreatePaymentResponse"/>
+    </message>
+
+    <message name="ReleasePaymentRequest">
+        <part name="PaymentData" element="target:ReleasePayment"/>
+    </message>
+
+    <message name="ReleasePaymentResponse">
+        <part name="Result" element="target:ReleasePaymentResponse"/>
+    </message>
+
+    <message name="PaymentHistoryRequest">
+        <part name="AccountNumber" element="target:PaymentHistory"/>
+    </message>
+
+    <message name="PaymentHistoryResponse">
+        <part name="Result" element="target:PaymentHistoryResponse"/>
+    </message>
+
+    <message name="GetPaymentErrorsRequest">
+        <part name="PaymentData" element="target:GetPaymentErrors"/>
+    </message>
+
+    <message name="GetPaymentErrorsResponse">
+        <part name="Result" element="target:GetPaymentErrorsResponse"/>
+    </message>
+
+    <message name="RecordPaymentRequest">
+        <part name="Request" element="target:RecordPayment"/>
+    </message>
+
+    <message name="RecordPaymentResponse">
+        <part name="Result" element="target:RecordPaymentResponse"/>
+    </message>
+
+    <portType name="PaymentPortType">
+        <operation name="CreatePayment">
+            <input message="target:CreatePaymentRequest"/>
+            <output message="target:CreatePaymentResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="ReleasePayment">
+            <input message="target:ReleasePaymentRequest"/>
+            <output message="target:ReleasePaymentResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="PaymentHistory">
+            <input message="target:PaymentHistoryRequest"/>
+            <output message="target:PaymentHistoryResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="GetPaymentErrors">
+            <input message="target:GetPaymentErrorsRequest"/>
+            <output message="target:GetPaymentErrorsResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+		<operation name="RecordPayment">
+            <input message="target:RecordPaymentRequest"/>
+            <output message="target:RecordPaymentResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>				
+    </portType>
+</definitions>

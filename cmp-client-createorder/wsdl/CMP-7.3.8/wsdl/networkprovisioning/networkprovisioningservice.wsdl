@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/networkprovisioning/networkprovisioningservice.wsdl#2 
+	$ $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/networkprovisioning/networkprovisioningservice.wsdl#2 
+	$ $DateTime: 2015/05/19 12:03:03 $ $Author: Andrea.Jackuliakova $ $File: 
+	//Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/networkprovisioning/networkprovisioningservice.wsdl 
+	$ $Revision: #2 $ (c) Copyright 2015 Martin Dawes Systems Ltd -->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/networkprovisioning/service"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:target="http://mdsuk.com/ws/dise3g/networkprovisioning/service"
+	xmlns:definition="http://mdsuk.com/ws/dise3g/networkprovisioning/definition"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://mdsuk.com/ws/dise3g/networkprovisioning/definition"
+		location="networkprovisioning.wsdl" />
+
+	<!-- binding declns -->
+	<binding name="NetworkProvisioningSoapBinding" type="definition:NetworkProvisioningPortType">
+		<documentation> This Webservice binding encompasses all operations
+			relating to Dise Network Provisioning </documentation>
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<operation name="UpdateProvisioningStatus">
+			<documentation> Retrieving network provisioning status within Dise3G.
+			</documentation>
+			<soap:operation />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal" />
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal" />
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+		</operation>
+
+
+	</binding>
+
+	<!-- service declns -->
+	<service name="NetworkProvisioningPort">
+		<documentation>This is the webservice for DISE network provisioning
+			processing.</documentation>
+		<port name="NetworkProvisioningPort" binding="target:NetworkProvisioningSoapBinding">
+			<soap:address
+				location="http://localhost:8080/ws/dise3g/services/NetworkProvisioningPort" />
+		</port>
+	</service>
+</definitions>

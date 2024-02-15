@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/subscription/subscriptionservice.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/subscription/subscriptionservice.wsdl#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/subscription/subscriptionservice.wsdl $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/subscription/service"
+    xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:target="http://mdsuk.com/ws/dise3g/subscription/service"
+    xmlns:definition="http://mdsuk.com/ws/dise3g/subscription/definition"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+    <import namespace="http://mdsuk.com/ws/dise3g/subscription/definition"
+        location="subscription.wsdl"/>
+
+    <!-- binding declns -->
+    <binding name="SubscriptionSoapBinding" type="definition:SubscriptionPortType">
+        <documentation> This Webservice binding encompasses all operations relating to Subscription
+            management. </documentation>
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="QuerySubscription">
+            <documentation> Reports the state of a named subscription. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+        
+        <operation name="CreateSubscription">
+            <documentation> Creates a new subscription. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+		
+		<operation name="ProcessM2MSIM">
+            <documentation> Processes the Active number change request from the Jasper Push API. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+		</operation>
+        
+        <operation name="ActivateSubscription">
+            <documentation> Activate a new subscription. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+        
+        <operation name="UpdateSubscription">
+            <documentation> Updates subscription. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+        
+        <operation name="UpdateTariff">
+            <documentation> Updates Subscription Tariff. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+        
+        <operation name="RevertLastUpgrade">
+            <documentation> reverts last  Subscription Tariff upgrade </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+        
+   		<operation name="LinkSubscriptions">
+            <documentation> Links a subscription to one or many other subscriptions. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+        
+		<operation name="UpdateSubscriptionSerialNumbers">
+            <documentation> Enables bulk changes to subscription serial numbers. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="CreatePackage">
+            <documentation> Create a package for Subscription. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+        
+        <operation name="ExpirePackage">
+            <documentation> Expire a package of a Subscription. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+		
+		<operation name="ManagePackages">
+            <documentation> Manage Packages of a Subscription. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+		
+		<operation name="IsEligibleForUpgrade">
+            <documentation> Reports whether a subscription is eligible for an upgrade. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+    
+		<operation name="SetPostPayCaps">
+            <documentation> Create or Update of Subscription usage CAPS. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+	
+	</binding>
+
+    <!-- service declns -->
+    <service name="SubscriptionPort">
+        <documentation>This is the webservice for DISE Subscription Management.</documentation>
+        <port name="SubscriptionPort" binding="target:SubscriptionSoapBinding">
+            <soap:address location="http://localhost:2769/ws/dise3g/services/SubscriptionPort"/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/agreement/agreement.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/agreement/agreement.wsdl#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/agreement/agreement.wsdl $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/agreement/definition"
+    xmlns="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition"
+    xmlns:target="http://mdsuk.com/ws/dise3g/agreement/definition">
+
+    <documentation>This Webservice definition encompasses all operations relating to Agreement
+        management. </documentation>
+
+	<import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://mdsuk.com/ws/dise3g/agreement/definition"
+            xmlns:agreement="http://mdsuk.com/ws/dise3g/agreement/dto/service"
+            elementFormDefault="qualified">
+            <import namespace="http://mdsuk.com/ws/dise3g/agreement/dto/service"
+                schemaLocation="../../xsd/agreementservice.xsd"/>
+
+            <element name="CreateAgreement">
+                <complexType>
+                    <sequence>
+                        <element name="AgreementData" type="agreement:CreateAgreementType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="CreateAgreementResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="agreement:CreateAgreementResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="UpdateAgreement">
+                <complexType>
+                    <sequence>
+                        <element name="UpdateAgreementData" type="agreement:UpdateAgreementType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="UpdateAgreementResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="agreement:UpdateAgreementResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            
+            <element name="QueryAgreement">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="agreement:QueryAgreementType"/>
+                    </sequence>
+                </complexType>
+            </element>            
+         			
+			<element name="QueryAgreementResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="agreement:QueryAgreementResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+	<element name="QueryAgreementsByCustomerLevel">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="agreement:QueryAgreementsByCustomerLevelType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+	<element name="QueryAgreementsByCustomerLevelResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="agreement:QueryAgreementsByCustomerLevelResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+
+            <element name="CreateAgreementCostCentre">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="agreement:CreateAgreementCostCentreType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="CreateAgreementCostCentreResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="agreement:CreateAgreementCostCentreResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+           <element name="QueryAgreementCostCentres">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="agreement:QueryAgreementCostCentresType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="QueryAgreementCostCentresResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="agreement:QueryAgreementCostCentresResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>            
+            
+             <element name="CreateAggregatedBundles">
+				<complexType>
+					<sequence>
+						<element name="Request" type="agreement:CreateAggregatedBundlesRequestType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="CreateAggregatedBundlesResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="agreement:CreateAggregatedBundlesResponseType"/>
+					</sequence>
+				</complexType>
+			</element>     
+        </schema>
+
+    </types>
+
+    <message name="CreateAgreementRequest">
+        <part name="Parameters" element="target:CreateAgreement"/>
+    </message>
+
+    <message name="CreateAgreementResponse">
+        <part name="Result" element="target:CreateAgreementResponse"/>
+    </message>
+
+    <message name="QueryAgreementRequest">
+        <part name="Parameters" element="target:QueryAgreement"/>
+    </message>
+
+    <message name="QueryAgreementResponse">
+        <part name="Result" element="target:QueryAgreementResponse"/>
+    </message>
+    
+    <message name="QueryAgreementsByCustomerLevelRequest">
+        <part name="Parameters" element="target:QueryAgreementsByCustomerLevel"/>
+    </message>
+    
+    <message name="QueryAgreementsByCustomerLevelResponse">
+        <part name="Result" element="target:QueryAgreementsByCustomerLevelResponse"/>
+    </message>
+    
+    <message name="UpdateAgreementRequest">
+        <part name="Parameters" element="target:UpdateAgreement"/>
+    </message>
+
+    <message name="UpdateAgreementResponse">
+        <part name="Result" element="target:UpdateAgreementResponse"/>
+    </message>
+
+    <message name="CreateAgreementCostCentreRequest">
+        <part name="Parameters" element="target:CreateAgreementCostCentre"/>
+    </message>
+
+    <message name="CreateAgreementcostCentreResponse">
+        <part name="Result" element="target:CreateAgreementCostCentreResponse"/>
+    </message>
+
+    <message name="QueryAgreementCostCentres">
+        <part name="Parameters" element="target:QueryAgreementCostCentres"/>
+    </message>
+
+    <message name="QueryAgreementCostCentresResponse">
+        <part name="Result" element="target:QueryAgreementCostCentresResponse"/>
+    </message>
+  
+    <message name="CreateAggregatedBundles">
+        <part name="Parameters" element="target:CreateAggregatedBundles"/>
+    </message>
+
+    <message name="CreateAggregatedBundlesResponse">
+        <part name="Result" element="target:CreateAggregatedBundlesResponse"/>
+    </message>
+    
+    <portType name="AgreementPortType">
+        <operation name="CreateAgreement">
+            <input message="target:CreateAgreementRequest"/>
+            <output message="target:CreateAgreementResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="QueryAgreement">
+            <input message="target:QueryAgreementRequest"/>
+            <output message="target:QueryAgreementResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="QueryAgreementsByCustomerLevel">
+            <input message="target:QueryAgreementsByCustomerLevelRequest"/>
+            <output message="target:QueryAgreementsByCustomerLevelResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="UpdateAgreement">
+            <input message="target:UpdateAgreementRequest"/>
+            <output message="target:UpdateAgreementResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+         <operation name="CreateAgreementCostCentre">
+            <input message="target:CreateAgreementCostCentreRequest"/>
+            <output message="target:CreateAgreementcostCentreResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="QueryAgreementCostCentres">
+            <input message="target:QueryAgreementCostCentres"/>
+            <output message="target:QueryAgreementCostCentresResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="CreateAggregatedBundles">
+            <input message="target:CreateAggregatedBundles"/>
+            <output message="target:CreateAggregatedBundlesResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        
+    </portType>
+</definitions>

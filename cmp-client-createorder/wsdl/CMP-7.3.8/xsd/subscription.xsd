@@ -1,0 +1,1373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/subscription.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/subscription.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/subscription.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes data types used by the Subscription service. -->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+    xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:order="http://mdsuk.com/ws/dise3g/order/dto/business"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:services="http://mdsuk.com/ws/dise3g/services/dto/business"
+	xmlns:billing="http://mdsuk.com/ws/dise3g/billing/dto/business"
+	xmlns:porting="http://mdsuk.com/ws/dise3g/porting/dto/business"
+    xmlns:recordpayment="http://mdsuk.com/ws/dise3g/recordpayment/dto/business">
+
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business"
+        schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/order/dto/business"
+        schemaLocation="orderprocessing.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/services/dto/business"
+    	schemaLocation="services.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/billing/dto/business"
+    	schemaLocation="billing.xsd"/> 
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/porting/dto/business"
+    	schemaLocation="porting.xsd"/> 
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/recordpayment/dto/business"
+        schemaLocation="recordpayment.xsd"/>
+
+
+    <xs:complexType name="SubscriptionConnectionType">
+        <xs:all>
+            <xs:element name="AgreementNumber" type="base:AgreementNumberType" minOccurs="0"/>
+            <xs:element name="EnquirySource" type="base:EnquirySourceCodeType" minOccurs="0"/>
+            <xs:element name="CampaignNumber" type="base:CampaignCodeType" minOccurs="0"/>
+            <xs:element name="PricePlan" type="base:PricePlanCodeType" minOccurs="0"/>
+            <xs:element name="TariffCode" type="target:TariffCodeType" minOccurs="0"/>
+            <xs:element name="PackageCode" type="target:PackageCodeType" minOccurs="0"/>
+            <xs:element name="IgnoreDefaultPackage" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="SalesAccountCode" type="base:AccountNumberType" minOccurs="0"/>
+            <xs:element name="UserName" type="target:UserNameType" minOccurs="0"/>
+            <xs:element name="CustomerCostCentre" type="target:CustomerCostCentreType" minOccurs="0"/>
+            <xs:element name="CustomerReference" type="target:CustomerReferenceCodeType" minOccurs="0"/>
+			<xs:element name="SubPassword" type="target:SubPasswordType" minOccurs="0"/>
+            <xs:element name="DirectoryListingAllowed" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="ManagedSerialNumbers" type="target:ManagedSerialNumbersType"
+                minOccurs="0"/>
+            <xs:element name="NonManagedSerialNumbers" type="target:NonManagedSerialNumbersType"
+                minOccurs="0"/>
+            <xs:element name="NetworkSubCodes" type="target:NetworkSubCodesType" minOccurs="0"/>
+            <xs:element name="APNList" type="target:APNListType" minOccurs="0"/>
+            <xs:element name="ConnectionDetails" type="target:ConnectionDetailsType" minOccurs="1"/>
+            <xs:element name="Address" type="address:AddressType" minOccurs="0"/>
+            <xs:element name="Contract" type="target:ContractType" minOccurs="0"/>
+            <xs:element name="EmailData" type="target:CreateEmailType" minOccurs="0"/>
+            <xs:element name="AttributeGroup" type="billing:AttributeGroupType" minOccurs="0"/>
+            <xs:element name="DonorLedPortDetails" type="target:SubscriptionDonorLedPortDetailsType" minOccurs="0"/>
+			<xs:element name="PostPayCaps" type="target:PostPayCapsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AccountBond" type="target:RecordAccountBondType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ParentSubscription" type="xs:boolean" minOccurs="0" />
+			<xs:element name="BoltOnPackages" type="target:BoltOnPackageType" minOccurs="0"/>
+			<xs:element name="CUGNumbers" type="target:CUGNumbersType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>       
+
+    <xs:complexType name="SubscriptionBasicType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response
+                when BASIC dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>
+            <xs:element name="AgreementNumber" type="base:AgreementNumberType" minOccurs="1"/>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="CorporateCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="GroupCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="CompanyNumber" type="base:CompanyNumberType" minOccurs="1"/>
+            <xs:element name="SalesAccountCode" type="base:SalesAccountCodeType" minOccurs="0"/>
+            <xs:element name="SubscriptionStatus" type="target:SubscriptionStatusType"  minOccurs="1"/>
+			<xs:element name="LastSubscriptionOrderStatus" type="target:LastOrderStatusType" minOccurs="0"/>
+            <xs:element name="PricePlanCode" type="base:PricePlanCodeType" minOccurs="0"/>
+            <xs:element name="TariffChangePending" type="xs:boolean" minOccurs="1" />
+            <xs:element name="TariffCode" type="target:TariffCodeType" minOccurs="1"/>
+            <xs:element name="TariffShareGroup" type="target:TariffShareGroupType" minOccurs="0"/>
+            <xs:element name="BillingType" type="target:BillingTypeType" minOccurs="1"/>
+            <xs:element name="NetworkCode" type="base:NetworkCodeType" minOccurs="1"/>
+            <xs:element name="ConnectedDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="DisconnectedDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="TerminateOn" type="xs:date" minOccurs="0"/>
+            <xs:element name="ConnectionReason" type="target:ConnectionReasonType" minOccurs="1"/>
+            <xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="1"/>
+            <xs:element name="EmailAddress" type="xs:string" minOccurs="0"/>
+			<xs:element name="Parent" type="xs:boolean" minOccurs="0" />
+			<xs:element name="LastTariffChangeEvent" type="base:NineDigitNumberType" minOccurs="0"/> 
+			<xs:element name="LastNumberChangeEvent" type="base:NineDigitNumberType" minOccurs="0"/>
+			<xs:element name="LastConnectionEvent" type="base:NineDigitNumberType" minOccurs="0"/>
+			<xs:element name="SuspendedFromInvoicing" type="base:SuspendedFromInvoicingType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CustomerDetailsType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response
+                when CUSTOMERDETAILS dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="UserName" type="xs:string" minOccurs="0"/>
+            <xs:element name="SubPassword" type="xs:string" minOccurs="0"/>
+            <xs:element name="ItemCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="DirectoryListingAllowed" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="CustomerCostCentre" type="xs:string" minOccurs="0"/>
+            <xs:element name="CustomerReference" type="xs:string" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ContractAndSalesType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response
+                when CONTRACTANDSALES dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="ContractNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="PricePlanCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="FirstInvoiceDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="LastInvoiceDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="NextInvoiceDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="ContractStartDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="ContractEndDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="MinimumContractEndDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="TermOfContract" type="base:ThreeDigitNumberType" minOccurs="0"/>
+            <xs:element name="CarriedOverContractDays" type="base:ThreeDigitNumberType" minOccurs="0"/>
+            <xs:element name="FreezeContractDays" type="base:ThreeDigitNumberType" minOccurs="0"/>
+            <xs:element name="TermsAndConditionsGroupCode"
+                type="xs:string" minOccurs="0"/>
+            <xs:element name="TerminationInvoiceProduced" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="SerialNumbersType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response
+                when SERIALNUMBERS dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="SerialNumbers" type="target:ManagedSerialNumbersResponseType" minOccurs="0"/>
+            <xs:element name="NonManagedSerialNumbers" type="target:NonManagedSerialNumbersResponseType"
+                minOccurs="0"/>
+            <xs:element name="NetworkSubCodes" type="target:NetworkSubCodesResponseType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="BillingMediaType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response
+                when BILLINGMEDIA dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="BillingMediaCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="BillingMediaCopyInvoiceMediaCode" type="xs:string"
+                minOccurs="0"/>
+            <xs:element name="BillingMediaOverrideInvoiceMediaCode" type="xs:string"
+                minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UsageAndCreditControlType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response
+                when USAGEANDCREDITCONTROL dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="LowerUsageLimit" type="base:Currency9_2NotRequiredType" minOccurs="0"/>
+            <xs:element name="UpperUsageLimit" type="base:Currency9_2NotRequiredType" minOccurs="0"/>
+            <xs:element name="IgnoreUsageLimits" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="AutoAdjust" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="IgnoreCreditControlProcedures" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+
+    <xs:complexType name="UpdateSubscriptionBasicType">
+        <xs:annotation>
+            <xs:documentation>Update the Basic data associated with a Subscription</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="SalesAccountCode" type="base:AccountNumberType" minOccurs="0"/>
+            <xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+			<xs:element name="AgreementNumber" type="base:AgreementNumberType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType"/>
+            <xs:element name="ParentSubscription" type="xs:boolean" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateCustomerDetailsType">
+        <xs:annotation>
+            <xs:documentation>Update the Customer Details data associated with a
+            Subscription</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="UserName" type="target:UserNameType" minOccurs="0"/>
+            <xs:element name="SubPassword" type="target:SubPasswordType" minOccurs="0"/>
+            <xs:element name="ItemCode" type="order:ItemCodeType" minOccurs="0"/>
+            <xs:element name="DirectoryListingAllowed" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="CustomerCostCentre" type="target:CustomerCostCentreType"
+                minOccurs="0"/>
+                
+            <xs:element name="CustomerReference" type="target:CustomerReferenceCodeType" minOccurs="0"/>
+                
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType"/>
+        </xs:all>
+    </xs:complexType>
+
+
+    <xs:complexType name="UpdateContractAndSalesType">
+        <xs:annotation>
+            <xs:documentation>Update the Contract And Sales data associated with a Subscription - TB
+                check these are stored on Sub file rather than agreement file!!!</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="ContractNumber" type="target:ContractNumberType" minOccurs="0"/>
+            <xs:element name="ContractStartDate" type="base:ClearableDateType"
+                minOccurs="0"/>
+            <xs:element name="TermOfContract" type="target:ContractTermType" minOccurs="0"/>
+			<xs:element name="CarriedOverContractDays" type="base:ThreeDigitNumberType" minOccurs="0"/>
+            <xs:element name="TermsAndConditionsGroupCode"
+                type="target:TermsAndConditionsGroupCodeType" minOccurs="0"/>
+			<xs:element name="LastAmendedDate" type="base:LastAmendedDateType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateUsageAndCreditControlType">
+        <xs:annotation>
+            <xs:documentation>Update the Usage And Credit Control data associated with a
+                Subscription</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="LowerUsageLimit" type="base:Currency9_2Type" minOccurs="0"/>
+            <xs:element name="UpperUsageLimit" type="base:Currency9_2Type" minOccurs="0"/>
+            <xs:element name="IgnoreUsageLimits" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="AutoAdjust" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="IgnoreCreditControlProcedures" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateBillingMediaType">
+        <xs:annotation>
+            <xs:documentation>Update the Billing Media data associated with a
+            Subscription</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="BillingMediaCode" type="target:MediaCategoryCodeType"
+                minOccurs="0"/>
+            <xs:element name="BilllingMediaCopyInvoiceMediaCode"
+                type="target:MediaCategoryCodeType" minOccurs="0"/>
+            <xs:element name="BillingMediaOverrideInvoiceMediaCode"
+                type="target:MediaCategoryCodeType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="DiscountsOverridesType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response
+                when DISCOUNTOVERRIDES dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="IgnoreAgreementDiscounts" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="IgnoreAccountDiscounts" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:simpleType name="TariffCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+	
+	<xs:simpleType name="LastOrderStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AWAITING_ORDER_DESPATCH"/>
+			<xs:enumeration value="AWAITING_CUSTOMER_ACTIVATION"/>
+			<xs:enumeration value="COMPLETE"/>
+			<xs:enumeration value="CANCELLED"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TariffShareGroupType">
+		<xs:restriction base="base:StringMaxLength19Type"/>
+    </xs:simpleType>
+
+	<xs:simpleType name="BillingTypeType">
+		<xs:restriction base="base:StringMaxLength8Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="SubscriptionStatusType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ContractTermType">
+        <xs:restriction base="base:ThreeDigitNumber_NotZeroType"/>
+    </xs:simpleType>
+	
+	<xs:simpleType name="SalesAccountIdentifierType">
+    	<xs:restriction base="base:EightDigitNumberType"/>
+    </xs:simpleType>
+
+    <xs:complexType name="SubscriptionServicesType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the some Query responses
+                when SERVICES dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="SubscriptionService" type="target:SubscriptionServiceType"
+                minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SubscriptionServiceType">       
+        <xs:all>
+            <xs:element name="ServiceCode" type="target:ServiceCodeType" minOccurs="1"/>
+            <xs:element name="EffectiveDate" type="xs:date" minOccurs="1"/>
+            <xs:element name="ExpiryDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="SubscriptionServicesBasicType">
+	<xs:sequence>
+		<xs:element name="SubscriptionService" type="target:SubscriptionServiceBasicType"
+			minOccurs="1" maxOccurs="unbounded"/>
+	</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubscriptionServiceBasicType">
+		<xs:complexContent>
+			<xs:extension base="services:GenericServiceBasicType">
+				<xs:sequence>
+					<xs:element name="PackageCode" type="target:PackageCodeType" minOccurs="0"/>
+					<xs:element name="PricePeriodCoverage" type="target:PricingPeriodCoverageType" minOccurs="0"/>
+					<xs:element name="SalesAccountNumber" type="target:SalesPersonNumberType" minOccurs="0"/>
+					<xs:element name="BillingOffset" type="target:BillingOffsetType" minOccurs="0"/>
+					<xs:element name="AddingEvent" type="base:NineDigitNumberType" minOccurs="0"/>
+					<xs:element name="NetworkConfirmed" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="Migrated" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="PerBill" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="BilledUntil" type="xs:date" minOccurs="0"/>
+					<xs:element name="ServiceBarred" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="RecurringCharge" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="ContractService" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="ContractDuration" type="base:ThreeDigitNumberType" minOccurs="0"/>
+					<xs:element name="ContractReference" type="services:ContractReferenceType" minOccurs="0"/>
+					<xs:element name="SuppressRemainingCharge" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="PriceConsolidationService" type="target:ServiceCodeType" minOccurs="0"/>
+					<xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>	
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="PricingPeriodCoverageType">
+        <xs:all>
+            <xs:element name="CoverageType" type="target:CoverageTypeTypes" minOccurs="1"/>
+            <xs:element name="CoverageValue" type="base:ThreeDigitNumberType" minOccurs="1"/>
+        </xs:all>
+    
+	</xs:complexType>
+		<xs:simpleType name="CoverageTypeTypes">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DAYS"/>
+			<xs:enumeration value="MONTHS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="BillingOffsetType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="99"></xs:maxInclusive>
+		</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ServiceCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:complexType name="SubscriptionBarsType">
+        <xs:sequence>
+            <xs:element name="SubscriptionBar" type="target:SubscriptionBarType" minOccurs="1"
+                maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SubscriptionBarType">
+        <xs:all>
+            <xs:element name="NetworkCommandCode" type="xs:string" minOccurs="1"/>
+            <xs:element name="BarredDate" type="xs:dateTime" minOccurs="1"/>
+            <xs:element name="UnBarredDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="BarReasonCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="UnbarReasonCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="AdminBarFlag" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="QueryPostPayCapsType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response
+                when POSTPAYCAPS dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Cap" type="target:QueryPostPayCapType"
+                minOccurs="1" maxOccurs="999"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="QueryPostPayCapType">
+        <xs:all>
+            <xs:element name="CapCode" type="target:CapCodeType" minOccurs="0"/>
+            <xs:element name="Description" type="target:CapDescriptionType" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="ExpiryDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="Amount" type="target:CapValueType" minOccurs="0"/>
+ 			<xs:element name="UnitOfMeasure" type="base:StringMaxLength8NotRequiredType" minOccurs="0"/>
+            <xs:element name="CapType" type="target:CapTypeType" minOccurs="0"/>
+            <xs:element name="CapConsumption" type="target:CapValueType" minOccurs="0"/>
+            <xs:element name="CapDataType" type="target:CapDataTypeType" minOccurs="0"/>
+            <xs:element name="ThresholdWorkflow" type="base:NineDigitNumberType" minOccurs="0"/>
+            <xs:element name="BreachWorkflow" type="base:NineDigitNumberType" minOccurs="0"/>
+            <xs:element name="DefaultCapAmount" type="target:CapValueType" minOccurs="0"/>
+            <xs:element name="ResetAmount" type="target:CapValueType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ManagedSerialNumbersType">
+        <xs:sequence>
+            <xs:element name="ManagedSerialNumber" type="target:ManagedSerialNumberType"
+                minOccurs="0" maxOccurs="5"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ManagedSerialNumberType">
+        <xs:sequence>
+            <xs:element name="EnumerationId" type="target:NetworkSerialNumberIDType" minOccurs="1"/>
+            <xs:element name="NetworkSerialNumber" type="base:NetworkSerialNumberType"
+                minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+
+    <xs:complexType name="ManagedSerialNumbersResponseType">
+        <xs:sequence>
+            <xs:element name="ManagedSerialNumber" type="target:ManagedSerialNumberResponseType"
+                minOccurs="0" maxOccurs="5"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ManagedSerialNumberResponseType">
+        <xs:complexContent>
+            <xs:extension base="target:ManagedSerialNumberType">
+                <xs:sequence>
+                    <xs:element name="NetworkEffectiveDate" type="xs:date" minOccurs="0"/>
+                    <xs:element name="NetworkCode" type="base:NetworkCodeType" minOccurs="0"/>
+                    <xs:element name="NetworkSerialStatus" type="target:NetworkSerialStatusType"
+                        minOccurs="0"/>
+                    <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="NetworkSerialStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CHANGING"/>
+            <xs:enumeration value="CURRENT"/>
+            <xs:enumeration value="SUPERSEDED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NetworkSerialNumberIDType">
+        <xs:restriction base="target:EnumerationIdType">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="NonManagedSerialNumbersType">
+        <xs:sequence>
+            <xs:element name="NonManagedSerialNumber" type="target:NonManagedSerialNumberType"
+                minOccurs="0" maxOccurs="9"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="NonManagedSerialNumberType">
+        <xs:sequence>
+            <xs:element name="EnumerationId" type="target:NonManagedSerialNumberIDType"
+                minOccurs="1"/>
+            <xs:element name="NonManagedSerialNumber" type="base:NetworkSerialNumberType"
+                minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<!-- Similar element to the NonManagedSerialNumbersType, but using Value/id for the Serial Number -->
+	<xs:complexType name="NonManagedSerialNumbersValueType">
+        <xs:sequence>
+            <xs:element name="NonManagedSerialNumber" type="target:NonManagedSerialNumberValueType"
+                minOccurs="0" maxOccurs="9"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	
+	<!-- Similar element to the NonManagedSerialNumberType, but using Value/id for the Serial Number-->
+	 <xs:complexType name="NonManagedSerialNumberValueType">
+        <xs:sequence>
+            <xs:element name="Id" type="target:NonManagedSerialNumberIDType"
+                minOccurs="1"/>
+            <xs:element name="Value" type="base:NetworkSerialNumberType"
+                minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+		
+
+    <xs:complexType name="APNListType">
+        <xs:sequence>
+            <xs:element name="DelayEvent" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="APN" type="target:APNType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="APNType">
+        <xs:restriction base="base:StringMaxLength69Type"/>
+    </xs:simpleType>
+
+    <xs:complexType name="NonManagedSerialNumbersResponseType">
+        <xs:sequence>
+            <xs:element name="NonManagedSerialNumber" type="target:NonManagedSerialNumberResponseType"
+                minOccurs="0" maxOccurs="9"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="NonManagedSerialNumberResponseType">
+        <xs:complexContent>
+            <xs:extension base="target:NonManagedSerialNumberType">
+                <xs:sequence>
+                    <xs:element name="NetworkEffectiveDate" type="xs:date" minOccurs="0"/>
+                    <xs:element name="NetworkSerialStatus" type="target:NetworkSerialStatusType"
+                        minOccurs="0"/>
+                    <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="NonManagedSerialNumberIDType">
+        <xs:restriction base="target:EnumerationIdType">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+	
+    <xs:complexType name="NetworkSubCodesType">
+        <xs:sequence>
+            <xs:element name="NetworkSubCode" type="target:NetworkSubCodeType" minOccurs="0"
+                maxOccurs="2"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="NetworkSubCodeType">
+        <xs:sequence>
+            <xs:element name="EnumerationId" type="target:NetworkCodeIDType" minOccurs="1"/>
+            <xs:element name="NetworkSubCode" type="target:NetworkSubCodeBase" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	
+	<!-- Similar element to the NetworkSubCodesType, but using Value for the Sub Code -->
+	<xs:complexType name="NetworkSubCodesValueType">
+        <xs:sequence>
+            <xs:element name="NetworkSubCode" type="target:NetworkSubCodeValueType" minOccurs="0"
+                maxOccurs="2"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<!-- Similar element to the NetworkSubCodeType, but using Value for the Sub Code -->
+    <xs:complexType name="NetworkSubCodeValueType">
+        <xs:sequence>
+            <xs:element name="Id" type="target:NetworkCodeIDType" minOccurs="1"/>
+            <xs:element name="Value" type="target:NetworkSubCodeBase" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	
+
+    <xs:complexType name="NetworkSubCodesResponseType">
+        <xs:sequence>
+            <xs:element name="NetworkSubCode" type="target:NetworkSubCodeResponseType" minOccurs="0"
+                maxOccurs="2"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NetworkSubCodeResponseType">
+        <xs:complexContent>
+            <xs:extension base="target:NetworkSubCodeType">
+                <xs:sequence>
+                    <xs:element name="NetworkEffectiveDate" type="xs:date" minOccurs="0"/>
+                    <xs:element name="NetworkCode" type="target:NetworkCodeType" minOccurs="0"/>
+                    <xs:element name="NetworkSerialStatus" type="target:NetworkSerialStatusType"
+                        minOccurs="0"/>
+                    <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="NetworkCodeIDType">
+        <xs:restriction base="target:EnumerationIdType">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NetworkSubCodeBase">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+
+     <xs:complexType name="ConnectionDetailsType">
+        <xs:all>
+            <xs:element name="ConnectionType" type="target:ConnectionType" minOccurs="0"/>
+            <xs:element name="ConnectionDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="ConnectionReason" type="target:ConnectionReasonType" minOccurs="1"/>
+            <xs:element name="ConnectionTime" type="xs:time" minOccurs="0"/>
+            <xs:element name="HoldActivation" type="xs:boolean" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>          
+
+    <xs:simpleType name="ConnectionType">
+        <xs:restriction base="base:StringMaxLength4Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ConnectionReasonType">
+        <xs:restriction base="base:StringMaxLength4Type"/>
+    </xs:simpleType>
+    
+    <xs:complexType name="ActivateDataType">
+        <xs:all>
+		    <xs:element name="ContractNumber" type="target:ContractNumberType" minOccurs="0"/>
+            <xs:element name="ContractTerm" type="target:ContractTermType" minOccurs="0"/>
+            <xs:element name="ContractStartedOn" type="xs:date" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ContractType">
+        <xs:all>
+            <xs:element name="ContractNumber" type="target:ContractNumberType" minOccurs="0"/>
+            <xs:element name="ContractTerm" type="target:ContractTermType" minOccurs="0"/>
+            <xs:element name="ContractStartedOn" type="xs:date" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CreateEmailType">
+        <xs:all>
+            <xs:element name="EmailType" type="target:EmailTypeType" minOccurs="1"/>
+            <xs:element name="EmailDescription" type="target:EmailDescriptionType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="BasePackageType">
+    	<xs:all>
+    		<xs:element name="PackageCode" type="target:PackageCodeType" minOccurs="1"/>
+    	</xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="ExpirePackageType">
+    	<xs:all>
+    		<xs:element name="PackageCode" type="target:PackageCodeType"/>
+			<xs:element name="EffectiveDate" type="xs:date" minOccurs="0"/>		
+    	</xs:all>
+    </xs:complexType>
+    
+	
+	<xs:complexType name="ExpireBoltOnPackagesType">
+    	<xs:sequence>
+    		<xs:element name="BoltOnPackage" type="target:ExpirePackageType" minOccurs="1" maxOccurs="unbounded"/>
+    	</xs:sequence>
+    </xs:complexType>
+	
+    <xs:complexType name="BoltOnPackageType">
+    	<xs:sequence>
+    		<xs:element name="PackageCode" type="target:PackageCodeType" minOccurs="1" maxOccurs="unbounded"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="EmailTypeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="EmailDescriptionType">
+        <xs:restriction base="base:StringMaxLength70Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ContractNumberType">
+        <xs:restriction base="base:StringMaxLength12Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="NetworkCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="PackageCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="SalesPersonNumberType">
+        <xs:restriction base="base:EightDigitNumberType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="SalesAccountReferenceType">
+        <xs:restriction base="base:EightDigitNumberType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="MediaCategoryCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="CustomerCostCentreType">
+        <xs:restriction base="base:StringMaxLength20Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="CommandCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ExternalReferenceType">
+        <xs:restriction base="base:StringMaxLength30Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="UserNameType">
+        <xs:restriction base="base:StringMaxLength30Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumerationIdType">
+        <xs:restriction base="xs:integer"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ConnectionStatusCodeType">
+        <xs:restriction base="base:StringMaxLength2Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="SubPasswordType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="TermsAndConditionsGroupCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+		
+	<xs:simpleType name="AutoSelectType">
+        <xs:restriction base="base:StringMaxLength0Type"/>
+    </xs:simpleType>			
+		
+    <xs:complexType name="QuerySubscriptionDatasetsType">
+        <xs:sequence>
+            <xs:element name="Dataset" type="target:QuerySubscriptionDatasetType"
+                maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="QuerySubscriptionDatasetType">
+        <xs:restriction base="xs:string">
+        	<xs:enumeration value="ATTRIBUTES"/>
+            <xs:enumeration value="BASIC"/>
+            <xs:enumeration value="ADDRESS"/>
+            <xs:enumeration value="BILLINGMEDIA"/>
+            <xs:enumeration value="BUNDLES"/>
+            <xs:enumeration value="DISCOUNTS"/>
+            <xs:enumeration value="CONTRACTANDSALES"/>
+            <xs:enumeration value="CUSTOMERDETAILS"/>
+            <xs:enumeration value="DISCOUNTOVERRIDES"/>
+            <xs:enumeration value="SERIALNUMBERS"/>
+            <xs:enumeration value="SERVICES"/>
+            <xs:enumeration value="SUBSCRIPTIONBARS"/>
+            <xs:enumeration value="USAGEANDCREDITCONTROL"/>
+            <xs:enumeration value="POSTPAYCAPS"/>
+            <xs:enumeration value="ACTIVE_AND_PENDING_SERVICES"/>
+            <xs:enumeration value="FREEZES"/>
+            <xs:enumeration value="BASKETS"/>
+			<xs:enumeration value="SIM_PROFILE_INFORMATION"/>
+			<xs:enumeration value="TERMINATION_FEE"/>
+			<xs:enumeration value="RECENT_NOTIFICATIONS"/>
+			<xs:enumeration value="UPGRADEELIGIBILITY"/>
+			<xs:enumeration value="REWARD_ENTITLEMENTS"/>
+			<xs:enumeration value="DEFAULT_REWARD_CATEGORY"/>
+			<xs:enumeration value="FEATURES"/>
+			<xs:enumeration value="NOTIFICATION_PREFERENCES"/>
+			<xs:enumeration value="REFRESH"/>
+			<xs:enumeration value="TOTAL_ALLOWANCES"/>
+			<xs:enumeration value="PACKAGES"/>
+			<xs:enumeration value="DEFINITIONS"/>
+			<xs:enumeration value="PENDING_TARIFF_CHANGE"/>
+			<xs:enumeration value="CALL_CLASS_OVERRIDES"/>
+         </xs:restriction>
+    </xs:simpleType>
+	
+	<xs:complexType name="PackagesDatasetsType">
+        <xs:sequence>
+            <xs:element name="Package" type="target:PackageDatasetType" minOccurs="0" maxOccurs="unbounded"/>           
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PackageDatasetType">
+    	<xs:sequence>
+    		<xs:element name="PackageCode" type="target:PackageCodeType" minOccurs="1"/>
+    		<xs:element name="EffectiveDate" type="xs:date" minOccurs="1"/>
+    		<xs:element name="ExpiryDate" type="xs:date" minOccurs="0"/>
+    		<xs:element name="Price" type="xs:decimal" minOccurs="1"/>
+    		<xs:element name="DiscountedPrice" type="xs:decimal" minOccurs="0"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+	<xs:complexType name="DefinitionsDatasetsType">
+        <xs:sequence>
+            <xs:element name="PackageDefinitions" type="services:PackageDefinitionsType" minOccurs="0"/>
+            <xs:element name="PricePlanDefinitions" type="target:PricePlanDefinitionsType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PricePlanDefinitionsType">
+    	<xs:sequence>
+    		<xs:element name="PricePlanDefinition" type="target:PricePlanDefinitionType" minOccurs="0" maxOccurs="unbounded"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PricePlanDefinitionType">
+    	<xs:sequence>
+    		<xs:element name="PricePlanCode" type="base:PricePlanCodeType" minOccurs="1"/>
+    		<xs:element name="PricePlanDescription" type="base:StringMaxLength30Type" minOccurs="1"/>
+    		<xs:element name="LongDescription" type="base:StringMaxLength120NotRequiredType" minOccurs="0"/>
+    		<xs:element name="ToolTipText" type="base:StringMaxLength300NotRequiredType" minOccurs="0"/>
+			<xs:element name="ContractTerm" type="target:ContractTermType" minOccurs="0"/>
+    		<xs:element name="Attributes" type="base:AttributesType" minOccurs="0"/>
+    	</xs:sequence>
+    </xs:complexType>
+	
+	<xs:simpleType name="PackageClassificationType">
+        <xs:restriction base="xs:string">
+        	<xs:enumeration value="BASE_PACKAGE" />
+        	<xs:enumeration value="BOLTON_PACKAGE" />        	
+        </xs:restriction>
+     </xs:simpleType>	        	
+    
+    <xs:simpleType name="CustomerReferenceCodeType">
+        <xs:restriction base="base:StringMaxLength60Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="CountryOfOriginType">
+        <xs:restriction base="base:StringMaxLength3Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="HardwareCodeType">
+        <xs:restriction base="base:StringMaxLength25Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="SendItemisedBillType">
+        <xs:restriction base="base:StringMaxLength25Type"/>
+    </xs:simpleType> 
+	
+	<xs:complexType name="SimProfileInformationsType">
+	    <xs:sequence>
+			<xs:element name="SimProfileInformation" type="target:SimProfileInformationType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SimProfileInformationType">
+	    <xs:all>
+			<xs:element name="ICCID" type="xs:string" minOccurs="1"/>
+			<xs:element name="PUK1" type="xs:string" minOccurs="1" />
+			<xs:element name="PUK2" type="xs:string" minOccurs="1" />
+		</xs:all>
+	</xs:complexType>	
+    
+    <xs:complexType name="LinkTargetReferenceType">
+	    <xs:annotation>
+     	  <xs:documentation>Defined with a choice constraint to allow for future expansion</xs:documentation>
+        </xs:annotation>
+		<xs:choice>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="LinkedSubscriptionsType">
+	    <xs:annotation>
+     	  <xs:documentation>Defined with a choice constraint to allow for future expansion</xs:documentation>
+        </xs:annotation>
+		<xs:choice>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+
+    <xs:simpleType name="SubscriptionLinkTypeType">
+   	    <xs:annotation>
+     	  <xs:documentation>
+     	  	Defined as an enumeration to allow for future expansion
+     	  </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Parent-Child"/>
+        </xs:restriction>
+    </xs:simpleType> 
+    	
+<xs:complexType name="UpdateManagedSerialNumbersType">
+        <xs:sequence>
+            <xs:element name="ManagedSerialNumber" type="target:UpdateManagedSerialNumberType"
+                minOccurs="0" maxOccurs="5"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+    <xs:complexType name="UpdateManagedSerialNumberType">
+        <xs:sequence>
+            <xs:element name="Id" type="target:NetworkSerialNumberIDType"
+                minOccurs="1"/>
+            <xs:element name="SerialNumber" type="target:UpdateManagedSerialNumberChoiceType"
+                minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="UpdateManagedSerialNumberChoiceType">
+		<xs:choice>
+			<xs:element name="Value" type="base:NetworkSerialNumberType" minOccurs="0" maxOccurs="1"/>
+			<!-- The auto select element does not have any content as such.  
+			Its presence indicates an instruction to use the auto select feature of CMP -->
+			<xs:element name="AutoSelect" type="target:AutoSelectType" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>    	
+
+	<xs:complexType name ="SubscriptionDonorLedPortDetailsType">
+	    <xs:sequence>
+	        <xs:element name="PacCode" type="porting:PacCodeType"/>
+			<xs:element name="PortDate" type="porting:PortDateType"/>
+			<xs:element name="UseSuggestedDateOnConflict" type="porting:UseSuggestedDateOnConflictType" minOccurs="0"/>
+	    </xs:sequence>
+	</xs:complexType> 
+	
+	<xs:complexType name="PostPayCapsType">
+        <xs:sequence>
+			<xs:element name="Cap" type="target:CapType" minOccurs="1"  maxOccurs="unbounded"/>  
+		</xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="PostPayCapsWithUnBarType">
+        <xs:sequence>
+			<xs:element name="Cap" type="target:CapWithUnBarType" minOccurs="1"  maxOccurs="unbounded"/>  
+		</xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="CapType">
+        <xs:sequence>
+            <xs:element name="CapCode" type="target:CapCodeType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="EffectiveDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="ExpiryDate" type="xs:date" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Value" type="target:CapValueType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="PermanentAdjustment" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="CapWithUnBarType">
+		<xs:complexContent>
+			<xs:extension base="target:CapType">
+		        <xs:sequence>
+		            <xs:element name="UnBar" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+		        </xs:sequence>
+        	</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+
+	<xs:simpleType name="CapCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+	
+	<xs:simpleType name="CapValueType">
+        <xs:restriction base="base:SignedDecimal17_2Type"/>
+    </xs:simpleType>
+
+    <xs:complexType name="RecordAccountBondType">
+        <xs:annotation>
+            <xs:documentation>Details required to record a Bond against an account during subscription creation</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="PaymentType" type="base:PaymentTypeType" minOccurs="1"/>
+            <xs:element name="BondOrigin" type="base:BondOriginType" minOccurs="1"/>
+            <xs:element name="BondAmount" type="base:BondAmountType" minOccurs="1"/>
+			<xs:element name="ExpectedRefundDate" type="xs:date" minOccurs="1"/>
+			<xs:element name="PaymentDetails" type="recordpayment:BondPaymentDetailsType" minOccurs="0"/>	
+        </xs:all>
+    </xs:complexType>
+	
+
+    <xs:simpleType name="CapDescriptionType">
+        <xs:restriction base="base:StringMaxLength35Type"/>
+    </xs:simpleType>
+	
+    <xs:simpleType name="CapTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FULL"/>
+			<xs:enumeration value="PARTIAL"/>
+			<xs:enumeration value="MIN SERVICE SPEND"/>
+			<xs:enumeration value="MAX SERVICE SPEND"/>
+			<xs:enumeration value="OVERAGE"/>
+		</xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="CapDataTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VALUE"/>
+			<xs:enumeration value="VOLUME"/>
+			<xs:enumeration value="DURATION"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="QueryNotificationsType">
+        <xs:sequence>
+            <xs:element name="Notification" type="target:QueryNotificationType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="QueryNotificationType">
+        <xs:sequence>
+            <xs:element name="NotificationNumber" type="base:StringMaxLength11Type" minOccurs="1"/>
+            <xs:element name="SentOnDate" type="xs:dateTime" minOccurs="1"/>
+            <xs:element name="NotificationMessage" type="target:NotificationMessageType" minOccurs="1"/>
+            <xs:element name="NotificationStatus" type="target:NotificationStatus" minOccurs="1"/>
+            <xs:element name="NotificationType" type="target:NotificationType" minOccurs="1"/>
+            <xs:element name="NotificationSource" type="base:StringMaxLength25Type" minOccurs="1"/>
+            <xs:element name="NotificationPriority" type="base:StringMaxLength1Type" minOccurs="1"/>
+            <xs:element name="NotificationCategoryCode" type="base:StringMaxLength6Type"/>
+            <xs:element name="NotificationCategory" type="base:StringMaxLength30Type"/>
+            <xs:element name="ExpireOnDate" type="xs:dateTime" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+     <xs:simpleType name="CustomerLevelType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Subscription"/>
+            <xs:enumeration value="Account"/>
+            <xs:enumeration value="Corporate"/>
+            <xs:enumeration value="Group"/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name="NotificationMessageType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="200"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	
+		<xs:simpleType name="NotificationType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Realtime"/>
+            <xs:enumeration value="Persistant"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    		<xs:simpleType name="NotificationStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Awaiting Format"/>
+            <xs:enumeration value="New"/>
+            <xs:enumeration value="Published"/>
+            <xs:enumeration value="Read"/>
+            <xs:enumeration value="Sent"/>
+            <xs:enumeration value="Error"/>
+            <xs:enumeration value="Sent By Email"/>
+            <xs:enumeration value="Delivery Failure"/>
+            <xs:enumeration value="Closed"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="NotificationCategory">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Temp1"/>
+            <xs:enumeration value="Temp2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    
+    <xs:complexType name="UpgradeEligibleType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Eligible" type="xs:boolean" minOccurs="1"/>
+            <xs:element name="UpgradePossibleDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="EarlyUpgradePossibleDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="EarlyUpgradeCharge" type="base:Currency9_2NotRequiredType" minOccurs="0"/>
+			<xs:element name="RemainingContractTerm" type="base:EightDigitNumberType" minOccurs="1"/>	
+            <xs:element name="ReasonCodes" type="target:FailureReasonsType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="FailureReasonsType">
+        <xs:sequence>	
+			<xs:element name="ReasonCode" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+    </xs:complexType>
+	<xs:complexType name="RewardEntitlementsTypes">
+	    <xs:sequence>
+			<xs:element name="RewardEntitlement" type="target:RewardEntitlementType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RewardEntitlementType">
+	    <xs:all>
+			<xs:element name="RewardIdentifier" type="base:RewardIdentifierType" minOccurs="1"/>
+			<xs:element name="RewardType" type="xs:string" minOccurs="1"/>
+			<xs:element name="RewardTypeDescription" type="xs:string" minOccurs="1" />
+			<xs:element name="RewardLevel" type="base:RewardLevelType" minOccurs="1" />
+			<xs:element name="RewardLevelDescription" type="xs:string" minOccurs="1"/>
+			<xs:element name="RewardCategory" type="xs:string" minOccurs="1" />
+			<xs:element name="RewardCategoryDescription" type="xs:string" minOccurs="1" />
+			<xs:element name="AwardedOnDate" type="xs:dateTime" minOccurs="1"/>			
+			<xs:element name="ExpiresOnDate" type="xs:dateTime" minOccurs="1" />			
+			<xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="DefaultRewardCategoryType">
+	    <xs:all>
+			<xs:element name="RewardCategory" type="xs:string" minOccurs="1"/>
+			<xs:element name="RewardCategoryDescription" type="xs:string" minOccurs="1" />
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="FeatureTypes">
+	    <xs:sequence>
+			<xs:element name="Feature" type="target:FeatureType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="FeatureType">
+	    <xs:all>
+			<xs:element name="FeatureCode" type="base:StringMaxLength6Type" minOccurs="1"/>
+			<xs:element name="FeatureDescription" type="xs:string" minOccurs="1" />
+			<xs:element name="FeatureEnabled" type="xs:boolean" minOccurs="1" />
+			<xs:element name="FeatureActivityPending" type="xs:boolean" minOccurs="1" />
+			<xs:element name="FeatureCategoryCode" type="base:StringMaxLength6Type" minOccurs="1" />
+			<xs:element name="FeatureCategoryDescription" type="xs:string" minOccurs="1" />						
+			<xs:element name="AllowEnable" type="xs:boolean" minOccurs="1" />
+			<xs:element name="AllowDisable" type="xs:boolean" minOccurs="1" />
+		</xs:all>
+	</xs:complexType>	
+    
+   <xs:complexType name="NotificationPreferencesType">
+	    <xs:annotation>
+     	  <xs:documentation>This structure is returned as part of the Subscription Query response
+                when Notification_Preferences dataset is specified</xs:documentation>
+        </xs:annotation>
+			<xs:sequence>
+				<xs:element name="NotificationPreference" type="target:NotificationPreferenceType" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="ExclusionPeriod" type="target:ExclusionPeriodType" minOccurs="0" />
+			</xs:sequence>
+	</xs:complexType> 
+
+	<xs:complexType name="NotificationPreferenceType">
+		<xs:all>
+				<xs:element name="NotificationPreferenceCode" type="xs:string" minOccurs="1"/>
+				<xs:element name="NotificationTypeDescription" type="base:StringMaxLength35Type" minOccurs="1"/>
+				<xs:element name="OptedIn" type="xs:boolean" minOccurs="1"/>
+			</xs:all>	
+	</xs:complexType> 
+
+	<xs:complexType name="ExclusionPeriodType">
+		<xs:all>
+				<xs:element name="ExclusionStartTime" type="base:StringMaxLength8Type" minOccurs="0"/>
+				<xs:element name="ExclusionEndTime" type="base:StringMaxLength8Type" minOccurs="0"/>
+			</xs:all>	
+	</xs:complexType>
+
+
+	<xs:complexType name="RefreshesType">		
+		<xs:sequence>			
+            <xs:element name="Refresh" type="target:RefreshType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AsOfDateType">
+		<xs:annotation>
+            <xs:documentation>This specifies the date on which the Tariff change occurs.
+                If Date is selected, the change takes place on the date entered.
+				If OnBillCycle is selected and set to true, the change will occur on the
+				original Bill Cycle date.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+		  <xs:element name="Date" type="xs:date" minOccurs="0"/>
+		  <xs:element name="OnBillCycle" type="xs:boolean" minOccurs="0"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="UpdateBoltOnPackagesType">
+        <xs:sequence>
+            <xs:element name="CreateBoltOnPackages" type="target:UpdatePackageCodeType" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="EligibilityRulesType">
+        <xs:sequence>
+            <xs:element name="SalesChannel" type="base:StringMaxLength30Type" minOccurs="1"/>
+			<xs:element name="Parameters" type="base:ParameterType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="RefreshType">
+		<xs:sequence>
+			<xs:element name="RefreshSequence" type="base:ThreeDigitNumberType" minOccurs="1"/>			
+			<xs:element name="RefreshType" type="target:RefreshTypeType" minOccurs="1"/>
+			<xs:element name="StartDate" type="xs:date" minOccurs="1"/>	
+			<xs:element name="Description" type="xs:string" minOccurs="1"/>	
+			<xs:element name="Price" type="xs:decimal" minOccurs="1"/>
+		</xs:sequence>	
+	</xs:complexType>
+	
+	<xs:complexType name="RefreshTypeType">
+		<xs:choice>
+			<xs:element name="Automatic" type="target:RefreshAutomaticType"/>
+			<xs:element name="Recurring" type="target:RefreshRecurringType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="RefreshAutomaticType">
+		<xs:sequence>
+			<xs:element name="ReloadMethod" type="base:StringMaxLength6Type" minOccurs="1"/>
+			<xs:element name="ReloadOption" type="base:StringMaxLength6Type" minOccurs="1"/>
+			<xs:element name="LowThresholdValue" type="xs:string" minOccurs="1"/>
+			<xs:element name="RefreshStatus" type="target:RefreshStatusType" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="RefreshStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DISABLED"/>
+            <xs:enumeration value="ENABLED"/>              
+			<xs:enumeration value="ERROR"/>
+            <xs:enumeration value="NEW"/>          
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="RefreshRecurringType">
+    	<xs:sequence>
+			<xs:element name="ServiceCode" type="base:ServiceCodeType" minOccurs="1"/>
+			<xs:element name="ExpiryDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="NextPaymentDueDate" type="xs:date" minOccurs="1"/>
+		</xs:sequence>	
+	</xs:complexType>    
+
+	<xs:complexType name="SubscriptionUpgradeType">
+    	<xs:sequence>
+    		<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>
+    		<xs:element name="PricePlanCode" type="base:PricePlanCodeType" minOccurs="0"/>
+    		<xs:element name="TariffCode" type="target:TariffCodeType" minOccurs="0"/>
+    		<xs:element name="PackageCode" type="target:PackageCodeType" minOccurs="0"/>
+    		<xs:element name="IgnoreDefaultPackage" type="xs:boolean" minOccurs="0"/>
+    		<xs:element name="NonNetworkChange" type="xs:boolean" minOccurs="1"/>
+    		<xs:element name="EndBars" type="xs:boolean" minOccurs="0"/>
+    		<xs:element name="EndEventBarCode" type="base:StringMaxLength4Type" minOccurs="0"/>
+    		<xs:element name="EndDialledOverrides" type="xs:boolean" minOccurs="0"/>
+    		<xs:element name="EndCallClassOverrides" type="xs:boolean" minOccurs="0"/>
+    		<xs:element name="ManagedSerialNumbers" type="target:ManagedSerialNumbersType" minOccurs="0"/>
+    		<xs:element name="NonManagedSerialNumbers" type="target:NonManagedSerialNumbersType" minOccurs="0"/>
+    		<xs:element name="NetworkSubCodes" type="target:NetworkSubCodesType" minOccurs="0"/>
+    		<xs:element name="SalesAccountIdentifier" type="target:SalesAccountIdentifierType" minOccurs="0"/>
+    		<xs:element name="UpdateContractAndSales" type="target:UpdateContractAndSalesType" minOccurs="0"/>
+    		<xs:element name="BoltOnPackages" type="target:UpdateBoltOnPackagesType" minOccurs="0"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+   <xs:complexType name="PackagesToExpireType">
+    	<xs:sequence>
+    		<xs:element name="BasePackage" type="target:ExpirePackageType" minOccurs="0"/>
+    		<xs:element name="BoltOnPackages" type="target:ExpireBoltOnPackagesType" minOccurs="0"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PackagesToCreateType">
+    	<xs:sequence>
+    		<xs:element name="BasePackage" type="target:BasePackageType" minOccurs="0"/>
+    		<xs:element name="BoltOnPackages" type="target:BoltOnPackageType" minOccurs="0"/>
+    		<xs:element name="ExpireOverlappingServices" type="xs:boolean" minOccurs="0"/>    		
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CUGNumbersType">
+    	<xs:sequence>
+    		<xs:element name="CUG" type="target:CUGDatasetType" minOccurs="1" maxOccurs="unbounded"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CUGDatasetType">
+    	<xs:sequence>
+    		<xs:element name="ServiceCode" type="target:ServiceCodeType" minOccurs="1"/>
+    		<xs:element name="CUGType" type="target:CUGEnumType" minOccurs="1"/>
+    		<xs:element name="Numbers" type="target:NumbersType" minOccurs="1"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="CUGEnumType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SHARED"/>
+			<xs:enumeration value="PRIVATE"/>			
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="NumbersType">
+		<xs:sequence>
+			<xs:element name="Number" type="base:StringMaxLength25Type" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Description" type="base:StringMaxLength40Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="UpdatePackageCodeType">
+		<xs:sequence>
+			<xs:element name="PackageCode" type="target:PackageCodeType" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="PendingTariffChangeDatasetType">
+    	<xs:sequence>    		
+    		<xs:element name="PricePlanCode" type="base:PricePlanCodeType" minOccurs="0"/>
+            <xs:element name="TariffCode" type="target:TariffCodeType" minOccurs="1"/>
+            <xs:element name="PackageCode" type="target:PackageCodeType" minOccurs="0"/>
+            <xs:element name="EffectiveDate" type="xs:date" minOccurs="1"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="CallClassOverridesDatasetsType">
+        <xs:sequence>
+            <xs:element name="CallClassOverride" type="target:CallClassOverrideDatasetType" minOccurs="0" maxOccurs="unbounded"/>           
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CallClassOverrideDatasetType">
+    	<xs:sequence>
+    		<xs:element name="Network" type="base:NetworkCodeType" minOccurs="1"/>
+    		<xs:element name="CallClassification" type="base:StringMaxLength12Type" minOccurs="1"/>
+    		<xs:element name="PeriodTable" type="base:StringMaxLength6NotRequiredType" minOccurs="0"/>
+    		<xs:element name="VolumeTable" type="base:StringMaxLength6NotRequiredType" minOccurs="0"/>
+			<xs:element name="Level" type="target:OverrideLevelType" minOccurs="1"/>
+            <xs:element name="EffectiveDate" type="xs:date" minOccurs="1"/>
+            <xs:element name="ExpiryDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+    	</xs:sequence>
+    </xs:complexType>
+	
+    <xs:simpleType name="OverrideLevelType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Group"/>
+            <xs:enumeration value="Corporate"/>
+            <xs:enumeration value="Account"/>
+            <xs:enumeration value="Agreement"/>
+            <xs:enumeration value="Subscription"/>
+        </xs:restriction>
+    </xs:simpleType>
+	
+</xs:schema>

@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/billing/billingservice.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/billing/billingservice.wsdl#1 $
+    $DateTime: $
+    $Author: $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/billing/billingservice.wsdl $
+    $Revision: $
+    (c) Copyright 2008 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/billing/service"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:target="http://mdsuk.com/ws/dise3g/billing/service"
+	xmlns:definition="http://mdsuk.com/ws/dise3g/billing/definition"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://mdsuk.com/ws/dise3g/billing/definition" location="billing.wsdl"></import>
+
+	<binding name="BillingSoapBinding" type="definition:BillingPortType">
+		<documentation> This Webservice binding encompasses all operations relating to Billing
+			management. </documentation>
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"></soap:binding>
+		<operation name="CreateDiscount">
+			<documentation>Creates a Discount (allocation). </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+		<operation name="UpdateDiscount">
+			<documentation>Updates a Discount (allocation). </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+
+		<operation name="QueryCUGNumbers">
+			<documentation>Queries CUG Numbers within Dise.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+
+		<operation name="CreateCUGNumbers">
+			<documentation> Create Shared Numbers within Dise. </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+
+		<operation name="QueryBundle">
+			<documentation> Queries Bundle Balance within Dise. </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+
+		<operation name="QueryUnbilledUnits">
+			<documentation>Queries unbilled units.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+
+		<operation name="QueryUnbilledUnitAttributes">
+			<documentation>Queries additional attributes for an unbilled unit.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+
+		<operation name="QueryCUGs">
+			<documentation>Queries CUGs within Dise.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+
+		<operation name="QueryCUG">
+			<documentation>Queries Numbers for a CUG within Dise.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+		<operation name="QueryBillableAssets">
+			<documentation>Queries for account billable assets.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+		<operation name="CreateBillableAsset">
+			<documentation>create account billable assets.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+		
+	
+		<operation name="QueryBillableAsset">
+			<documentation>query account billable asset lines.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+		
+		<operation name="UpdateBillableAssetLine">
+			<documentation>update account billable asset lines.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+		
+		<operation name="DeleteBillableAssetLines">
+			<documentation>delete account billable asset lines.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+		
+		<operation name="SetAttributes">
+			<documentation>Set attributes for Account or Subscription within Dise.</documentation>
+			<soap:operation/>
+			<input>
+		         <soap:body use="literal"></soap:body>
+			</input>
+			<output>
+		         <soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+			      <soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+		
+		<operation name="CreateBundle">
+			<documentation>Creates a Bundle. </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+		
+		<operation name="CreateBundleLink">
+			<documentation>Creates a Bundle Link. </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+		<operation name="UpdateBundle">
+			<documentation>Updates a Bundle. </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+
+	<operation name="QueryRecentUsage">
+			<documentation>Queries recent usage.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+
+				
+		<operation name="QuerySubscriptionBundles">
+			<documentation>Queries Subscriber Bundles</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault" />
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault" />
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault" />
+			</fault>
+		</operation>
+		
+		<operation name="QueryResourceAttributes">
+			<documentation> Set a Resource Attribute within Dise3G. </documentation>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"/>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"/>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"/>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"/>
+			</fault>
+		</operation>
+		
+		<operation name="SetResourceAttributes">
+			<documentation> Set a Resource Attribute within Dise3G. </documentation>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"/>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"/>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"/>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"/>
+			</fault>
+		</operation>
+		
+	</binding>
+
+
+
+	<service name="BillingPort">
+		<documentation>This is the webservice for DISE billing/discount processing.</documentation>
+		<port name="BillingPort" binding="target:BillingSoapBinding">
+			<soap:address location="http://localhost:9082/ws/dise3g/services/BillingPort"
+			></soap:address>
+		</port>
+	</service>
+</definitions>

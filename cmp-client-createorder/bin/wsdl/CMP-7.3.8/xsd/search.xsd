@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/search.xsd#7 $
+    $Header: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/search.xsd#7 $
+    $DateTime: 2008/04/29 18:58:27 $
+    $Author: Malgorzata.Grzybowska $
+    $File: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/search.xsd $
+    $Revision: #7 $
+    (c) Copyright 2008 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema contains data types used to describe Search -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/search/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+	xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+	xmlns:account="http://mdsuk.com/ws/dise3g/account/dto/business"
+	xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+	xmlns:tariff="http://mdsuk.com/ws/dise3g/tariff/dto/business"
+	xmlns:billing="http://mdsuk.com/ws/dise3g/billing/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/search/dto/business"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business" schemaLocation="subscription.xsd"/>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/account/dto/business" schemaLocation="account.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business" schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/tariff/dto/business" schemaLocation="tariff.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/billing/dto/business" schemaLocation="billing.xsd"/>
+    
+    <xs:complexType name="SearchResultsType">
+        <xs:sequence>
+            <xs:element name="SearchResult" type="target:SearchResultType" minOccurs="0"
+                maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+   	<!--
+		This type contains:
+			- the customer reference (e.g. subscription number)
+			- the address summary (similiar to the GUI)
+		for each search result returned
+	-->
+    <xs:complexType name="SearchResultType">
+        <xs:sequence>
+            <xs:element name="CustomerReference" type="xs:string" minOccurs="1"/>
+            <xs:element name="Description" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+     <!-- Search Subscriptions By Serial Number related types -->
+     <xs:complexType name="SearchSubscriptionsResultsType">
+        <xs:sequence>
+            <xs:element name="SearchSubscriptionsResult" type="target:SearchSubscriptionsResultType" minOccurs="0"
+                maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SearchSubscriptionsResultType">
+        <xs:sequence>
+          	<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>
+        	<xs:element name="NetworkSerialNumber" type="base:NetworkSerialNumberType" minOccurs="1"/>
+        	<xs:element name="NetworkSerialNumberID" type="subscription:NetworkSerialNumberIDType" minOccurs="1"/>
+        	<xs:element name="NetworkCode" type="base:NetworkCodeType" minOccurs="1"/>
+        	<xs:element name="NetworkSerialStatus" type="subscription:NetworkSerialStatusType" minOccurs="1"/>
+        	<xs:element name="ConnectedDate" type="xs:date" minOccurs="0"/>
+        	<xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+            <xs:element name="DisconnectedDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="Terminated" type="xs:boolean" minOccurs="0"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+
+ 	<!-- Search Account By Serial Number related types -->
+     <xs:complexType name="SearchAccountsResultsType">
+        <xs:sequence>
+            <xs:element name="SearchAccountsResult" type="target:SearchAccountsResultType" minOccurs="0"
+                maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+	<xs:complexType name="SearchAccountsResultType">
+        <xs:all>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="AccountSerialNumber" type="base:NetworkSerialNumberType" minOccurs="1"/>
+	        <xs:element name="SerialNumberStatus" type="subscription:NetworkSerialStatusType" minOccurs="1"/>
+	        <xs:element name="AccountSerialNumberID" type="account:AccountSerialNumberIdType" minOccurs="1"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType" minOccurs="0"/>
+            <xs:element name="GroupCode" type="base:GroupCodeType" minOccurs="0"/>    
+            <xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+            <xs:element name="AccountType" type="account:AccountTypeType" minOccurs="0"/>
+            <xs:element name="AccountUsage" type="account:AccountUsageType" minOccurs="0"/>            
+        </xs:all>
+    </xs:complexType>
+
+	<xs:complexType name="AttributeSearchResultsType">
+	        <xs:sequence>
+	            <xs:element name="Attributes" type="target:AttributeSearchResultType" minOccurs="0" maxOccurs="1"/>
+	        </xs:sequence>
+	    </xs:complexType>
+		
+	    <xs:complexType name="AttributeSearchResultType">
+	        <xs:sequence>
+	            <xs:element name="Attribute" type="target:AttributeSearchResultDetailType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+	    </xs:complexType>
+	
+		<xs:complexType name="AttributeSearchResultDetailType">
+	        <xs:sequence>
+				<xs:element name="Account" type="target:AttributeAccountSearchResultDetailType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Subscription" type="target:AttributeSubscriptionSearchResultDetailType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+	    </xs:complexType>
+	    
+	<xs:complexType name="AttributeAccountSearchResultDetailType">
+        <xs:sequence>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="AttribteValue" type="target:AttributeDetailType" minOccurs="0"/>
+            <xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+            <xs:element name="AccountType" type="account:AccountTypeType" minOccurs="0"/>
+            <xs:element name="AccountUsage" type="account:AccountUsageType" minOccurs="0"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType" minOccurs="0"/>
+            <xs:element name="GroupCode" type="base:GroupCodeType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>	
+    
+    <xs:complexType name="AttributeSubscriptionSearchResultDetailType">
+        <xs:sequence>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>
+            <xs:element name="AgreementNumber" type="base:AgreementNumberType" minOccurs="1"/>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="0"/>
+            <xs:element name="AttribteValue" type="target:AttributeDetailType" minOccurs="0"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType" minOccurs="0"/>
+            <xs:element name="GroupCode" type="base:GroupCodeType" minOccurs="0"/>
+			<xs:element name="CompanyNumber" type="base:CompanyNumberType"/>
+            <xs:element name="TariffCode" type="tariff:TariffCodeType" minOccurs="1"/>
+			<xs:element name="NetworkCode" type="base:NetworkCodeType" minOccurs="0"/>
+            <xs:element name="DisconnectedDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="ConnectedDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="TerminateOn" type="xs:date" minOccurs="0"/>
+			<xs:element name="ConnectionReason" type="subscription:ConnectionReasonType" minOccurs="0"/>
+			<xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+			<xs:element name="EmailAddress" type="address:EmailAddressType" minOccurs="0"/>
+       </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AttributeDetailType">
+        <xs:sequence>
+            <xs:element name="AttributeGroupCode" type="billing:AttributeGroupIdType" minOccurs="0"/>
+            <xs:element name="AttributeID" type="billing:AttributeIdType" minOccurs="0"/>
+		    <xs:element name="AttributeValue" type="billing:AttributeValueType" minOccurs="0"/>
+            <xs:element name="AttributeStatus" type="target:AttributeStatusType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+	<!--
+		This type is used to indicate the type of customer level we are searching for
+	-->
+    <xs:simpleType name="CustomerLevelType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SUBSCRIPTION"/>
+            <xs:enumeration value="AGREEMENT"/>
+            <xs:enumeration value="ACCOUNT"/>
+            <xs:enumeration value="CORPORATE"/>
+            <xs:enumeration value="GROUP"/>
+        </xs:restriction>
+    </xs:simpleType>
+	
+	<xs:simpleType name="AccountSerialNumberFilterType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CURRENT"/>
+            <xs:enumeration value="ALL"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="StatusFilterType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CURRENT"/>
+            <xs:enumeration value="ALL"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AttributeStatusType">
+        <xs:restriction base="xs:string">
+             <xs:enumeration value="ACTIVE"/>
+            <xs:enumeration value="INACTIVE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AttributeCustomerLevelType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SUBSCRIPTION"/>
+            <xs:enumeration value="ACCOUNT"/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+</xs:schema>

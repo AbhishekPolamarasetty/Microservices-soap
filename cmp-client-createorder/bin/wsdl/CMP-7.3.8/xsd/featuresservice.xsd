@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- This schema describes the API data types for the Features service -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/features/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:features="http://mdsuk.com/ws/dise3g/features/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:target="http://mdsuk.com/ws/dise3g/features/dto/service"
+    xmlns:service="http://mdsuk.com/ws/dise3g/services/dto/business" >
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/features/dto/business"
+        schemaLocation="features.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>        
+
+    <xs:complexType name="SetFeatureType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="TargetIdentifier" type="features:TargetIdentifierType" minOccurs="1"/>    
+            <xs:element name="FeatureActions" type="features:FeatureActionsType" minOccurs="1"/>
+            <xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+	<xs:complexType name="SetFeatureResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="QueryFeatureHistoryType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="TargetIdentifier" type="features:TargetIdentifierType" minOccurs="1"/>    
+            <xs:element name="FeatureCode" type="features:FeatureCodeType" minOccurs="1"/>            
+        </xs:all>
+    </xs:complexType>
+
+	<xs:complexType name="QueryFeatureHistoryResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="FeatureCode" type="features:FeatureCodeType" minOccurs="1"/>
+            <xs:element name="FeatureDescription" type="xs:string" minOccurs="1"/>
+            <xs:element name="Histories" type="features:HistoriesType" minOccurs="1"/>            
+        </xs:all>
+    </xs:complexType>	
+
+</xs:schema>

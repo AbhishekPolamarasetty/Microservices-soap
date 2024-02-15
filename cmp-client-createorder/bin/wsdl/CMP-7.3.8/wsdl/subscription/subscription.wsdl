@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/subscription/subscription.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/subscription/subscription.wsdl#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/subscription/subscription.wsdl $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/subscription/definition"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:target="http://mdsuk.com/ws/dise3g/subscription/definition"
+    xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition">
+
+    <documentation>This Webservice definition encompasses all operations relating to Subscription
+        management. </documentation>
+
+    <import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://mdsuk.com/ws/dise3g/subscription/definition"
+            xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/service"
+            elementFormDefault="qualified">
+            <import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/service"
+                schemaLocation="../../xsd/subscriptionservice.xsd"/>
+            
+            <element name="QuerySubscription">
+                <annotation>
+                    <documentation> The response payload definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:SubscriptionQueryType"/>
+                    </sequence>
+                </complexType>
+            </element>
+                
+            <element name="QuerySubscriptionResponse">
+                <annotation>
+                    <documentation> The response payload definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:SubscriptionQueryResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="CreateSubscription">
+                <annotation>
+                    <documentation> The request payload definition </documentation>
+                </annotation>      
+                <complexType>
+                    <sequence>
+                        <element name="CreationData" type="subscription:CreateSubscriptionType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="CreateSubscriptionResponse">
+                <annotation>
+                    <documentation> The response payload definition </documentation>
+                </annotation>     
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:CreateSubscriptionResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="ActivateSubscription">
+                <annotation>
+                    <documentation> The request payload definition </documentation>
+                </annotation>      
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:ActivateSubscriptionType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="ActivateSubscriptionResponse">
+                <annotation>
+                    <documentation> The response payload definition </documentation>
+                </annotation>     
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:ActivateSubscriptionResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="UpdateSubscription">
+                <annotation>
+                    <documentation> The request Update Subscription definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:UpdateSubscriptionType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="UpdateSubscriptionResponse">
+                <annotation>
+                    <documentation> The response Update Subscription definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:UpdateSubscriptionResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="UpdateTariff">
+                <annotation>
+                    <documentation> The request Update Tariff definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:UpdateTariffType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="UpdateTariffResponse">
+                <annotation>
+                    <documentation> The response Update Tariff definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:UpdateTariffResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+   
+            <element name="RevertLastUpgrade">
+                <annotation>
+                    <documentation> The request Revert last upgrade definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:RevertLastUpgradeType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="RevertLastUpgradeResponse">
+                <annotation>
+                    <documentation> The response revert last upgrade definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:RevertLastUpgradeResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="LinkSubscriptions">
+                <annotation>
+                    <documentation> The request Update Subscription definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:LinkSubscriptionsType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="LinkSubscriptionsResponse">
+                <annotation>
+                    <documentation> The response Update Subscription definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:LinkSubscriptionsResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>         
+            
+			<element name="UpdateSubscriptionSerialNumbers">
+                <annotation>
+                    <documentation> The request Update Subscription Serial Numbers definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                       <element name="Request" type="subscription:UpdateSubscriptionSerialNumbersType"/>
+					</sequence>
+                </complexType>
+            </element>
+            
+            <element name="UpdateSubscriptionSerialNumbersResponse">
+                <annotation>
+                    <documentation> The response Update Subscription Serial Numbers definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:UpdateSubscriptionSerialNumbersResponseType"/>
+                    </sequence>
+                </complexType>
+            </element> 
+            <element name="CreatePackage">
+                <annotation>
+                    <documentation> The request Create Package definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:CreatePackageType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="CreatePackageResponse">
+                <annotation>
+                    <documentation> The response Create Package definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:CreatePackageResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="ExpirePackage">
+                <annotation>
+                    <documentation> The request Expire Package definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:ExpirePackageType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="ExpirePackageResponse">
+                <annotation>
+                    <documentation> The response Expire package definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:ExpirePackageResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+			
+            <element name="ManagePackages">
+                <annotation>
+                    <documentation> The request Manage Package definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:ManagePackagesType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="ManagePackagesResponse">
+                <annotation>
+                    <documentation> The response Manage Package definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:ManagePackagesResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+			
+			<element name="IsEligibleForUpgrade">
+                <annotation>
+                    <documentation> The request payload definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:IsEligibleForUpgradeType"/>
+                    </sequence>
+                </complexType>
+            </element>
+                
+            <element name="IsEligibleForUpgradeResponse">
+                <annotation>
+                    <documentation> The response payload definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:IsEligibleForUpgradeResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+			<element name="SetPostPayCaps">
+                <annotation>
+                    <documentation> The request SetPostPayCaps definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:SetPostPayCapsType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="SetPostPayCapsResponse">
+                <annotation>
+                    <documentation> The response SetPostPayCaps definition </documentation>
+                </annotation>
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:SetPostPayCapsResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+			
+			<element name="ProcessM2MSIM">
+                <annotation>
+                    <documentation> Process SIM  request from the Jasper Push API</documentation>
+                </annotation>      
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="subscription:ProcessM2MSIMType"/>
+                    </sequence>
+                </complexType>
+      		</element>
+	   		<element name="ProcessM2MSIMResponse">
+                <annotation>
+                    <documentation> The response for Jasper API SIM requests</documentation>
+                </annotation>     
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="subscription:ProcessM2MSIMResponseType"/>
+                    </sequence>
+                </complexType>
+      		 </element>
+        </schema>
+    </types>
+
+    <message name="QuerySubscriptionRequest">
+        <part name="Parameters" element="target:QuerySubscription"/>
+    </message>
+
+    <message name="QuerySubscriptionResponse">
+        <part name="Parameters" element="target:QuerySubscriptionResponse"/>
+    </message>
+
+    <message name="CreateSubscriptionRequest">
+        <part name="Parameters" element="target:CreateSubscription"/>
+    </message>
+    
+    <message name="CreateSubscriptionResponse">
+        <part name="Parameters" element="target:CreateSubscriptionResponse"/>
+    </message>
+    
+    <message name="ActivateSubscriptionRequest">
+        <part name="Parameters" element="target:ActivateSubscription"/>
+    </message>
+    
+    <message name="ActivateSubscriptionResponse">
+        <part name="Parameters" element="target:ActivateSubscriptionResponse"/>
+    </message>
+
+    <message name="UpdateSubscriptionRequest">
+        <part name="Parameters" element="target:UpdateSubscription"/>
+    </message>
+    
+    <message name="UpdateSubscriptionResponse">
+        <part name="Parameters" element="target:UpdateSubscriptionResponse"/>
+    </message>
+    
+   <message name="UpdateTariffRequest">
+        <part name="Parameters" element="target:UpdateTariff"/>
+    </message>
+    
+    <message name="UpdateTariffResponse">
+        <part name="Parameters" element="target:UpdateTariffResponse"/>
+    </message>
+    
+   <message name="RevertLastUpgradeRequest">
+        <part name="Parameters" element="target:RevertLastUpgrade"/>
+    </message>
+    
+    <message name="RevertLastUpgradeResponse">
+        <part name="Parameters" element="target:RevertLastUpgradeResponse"/>
+    </message>
+    
+    <message name="LinkSubscriptionsRequest">
+        <part name="Parameters" element="target:LinkSubscriptions"/>
+    </message>
+    
+    <message name="LinkSubscriptionsResponse">
+        <part name="Parameters" element="target:LinkSubscriptionsResponse"/>
+    </message>
+	
+	<message name="UpdateSubscriptionSerialNumbersRequest">
+        <part name="Parameters" element="target:UpdateSubscriptionSerialNumbers"/>
+    </message>
+    
+    <message name="UpdateSubscriptionSerialNumbersResponse">
+        <part name="Parameters" element="target:UpdateSubscriptionSerialNumbersResponse"/>
+    </message>
+    
+    <message name="CreatePackageRequest">
+        <part name="Parameters" element="target:CreatePackage"/>
+    </message>
+    
+    <message name="CreatePackageResponse">
+        <part name="Parameters" element="target:CreatePackageResponse"/>
+    </message>
+    
+    <message name="ExpirePackageRequest">
+        <part name="Parameters" element="target:ExpirePackage"/>
+    </message>
+    
+    <message name="ExpirePackageResponse">
+        <part name="Parameters" element="target:ExpirePackageResponse"/>
+    </message>
+	
+	<message name="ManagePackagesRequest">
+        <part name="Parameters" element="target:ManagePackages"/>
+    </message>
+    
+    <message name="ManagePackagesResponse">
+        <part name="Parameters" element="target:ManagePackagesResponse"/>
+    </message>
+
+    <message name="IsEligibleForUpgradeRequest">
+        <part name="Parameters" element="target:IsEligibleForUpgrade"/>
+    </message>
+
+    <message name="IsEligibleForUpgradeResponse">
+        <part name="Parameters" element="target:IsEligibleForUpgradeResponse"/>
+    </message>
+	
+	<message name="SetPostPayCapsRequest">
+        <part name="Parameters" element="target:SetPostPayCaps"/>
+    </message>
+    
+    <message name="SetPostPayCapsResponse">
+        <part name="Parameters" element="target:SetPostPayCapsResponse"/>
+    </message>
+	
+	<message name="ProcessM2MSIMRequest">
+		<part name="Parameters" element="target:ProcessM2MSIM"/>
+	</message>
+    
+	<message name="ProcessM2MSIMResponse">
+		<part name="Parameters" element="target:ProcessM2MSIMResponse"/>
+	</message>
+    
+    <portType name="SubscriptionPortType">
+        <operation name="QuerySubscription">
+            <input message="target:QuerySubscriptionRequest"/>
+            <output message="target:QuerySubscriptionResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="CreateSubscription">
+            <input message="target:CreateSubscriptionRequest"/>
+            <output message="target:CreateSubscriptionResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="ActivateSubscription">
+            <input message="target:ActivateSubscriptionRequest"/>
+            <output message="target:ActivateSubscriptionResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="UpdateSubscription">
+            <input message="target:UpdateSubscriptionRequest"/>
+            <output message="target:UpdateSubscriptionResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+
+        <operation name="UpdateTariff">
+            <input message="target:UpdateTariffRequest"/>
+            <output message="target:UpdateTariffResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>   
+        
+        <operation name="RevertLastUpgrade">
+            <input message="target:RevertLastUpgradeRequest"/>
+            <output message="target:RevertLastUpgradeResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>   
+        
+        <operation name="LinkSubscriptions">
+            <input message="target:LinkSubscriptionsRequest"/>
+            <output message="target:LinkSubscriptionsResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>       
+
+		<operation name="UpdateSubscriptionSerialNumbers">
+            <input message="target:UpdateSubscriptionSerialNumbersRequest"/>
+            <output message="target:UpdateSubscriptionSerialNumbersResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        
+        <operation name="CreatePackage">
+            <input message="target:CreatePackageRequest"/>
+            <output message="target:CreatePackageResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>  
+        
+        <operation name="ExpirePackage">
+            <input message="target:ExpirePackageRequest"/>
+            <output message="target:ExpirePackageResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+		
+		<operation name="ManagePackages">
+            <input message="target:ManagePackagesRequest"/>
+            <output message="target:ManagePackagesResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation> 
+		
+        <operation name="IsEligibleForUpgrade">
+            <input message="target:IsEligibleForUpgradeRequest"/>
+            <output message="target:IsEligibleForUpgradeResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        
+		<operation name="SetPostPayCaps">
+            <input message="target:SetPostPayCapsRequest"/>
+            <output message="target:SetPostPayCapsResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation> 
+		
+		<operation name="ProcessM2MSIM">
+            <input message="target:ProcessM2MSIMRequest"/>
+            <output message="target:ProcessM2MSIMResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+		</operation>
+		
+    </portType>
+
+</definitions>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/email/dto/service"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:target="http://mdsuk.com/ws/dise3g/email/dto/service"
+	xmlns:base="http://mdsuk.com/ws/dise3g/base"
+	xmlns:email="http://mdsuk.com/ws/dise3g/email/dto/business">
+	
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/email/dto/business" schemaLocation="email.xsd" />
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd" />
+
+	<xs:complexType name="EmailQueryType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="EmailQueryKey" type="target:QueryKeyType" minOccurs="1" />
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="QueryKeyType">
+		<xs:choice maxOccurs="1">
+			<xs:element name="DeliveryAddressNumber" type="email:DeliveryAddressNumberType" maxOccurs="1" />
+			<xs:element name="EmailNumber" type="email:EmailNumberType" maxOccurs="1" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="EmailQueryResponseType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="EmailDetails" type="email:EmailQueryResponseType" minOccurs="1" />
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="CreateEmailType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="EmailIdentifier" type="email:DeliveryAddressNumberType" minOccurs="1" />
+			<xs:element name="EmailData" type="email:EmailType" minOccurs="1" />
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="CreateEmailResponseType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="EmailIdentifier" type="email:DeliveryAddressNumberType" minOccurs="1" />
+		</xs:all>
+	</xs:complexType>
+
+</xs:schema>

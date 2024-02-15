@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/basket/service"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:target="http://mdsuk.com/ws/dise3g/basket/service"
+	xmlns:definition="http://mdsuk.com/ws/dise3g/basket/definition"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://mdsuk.com/ws/dise3g/basket/definition"
+		location="basket.wsdl" />
+
+	<!-- binding declns -->
+	<binding name="BasketSOAPBinding" type="definition:BasketPortType">
+		<documentation> This Web service binding encompasses all operations relating to Dise3G
+			Basket WebServices.
+		</documentation>
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="UpdateBasketCreditLimit">
+			<documentation>Updates credit limit for baskets. </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+		
+		<operation name="QuerySharedBasketBalance">
+			<documentation>Queries for shared basket balance by basket code.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+
+		<operation name="PurchaseProduct">
+			<documentation>Purchase Reloads for baskets. </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+
+		
+		<!-- CIF-3100 -->
+		<operation name="AdjustBasketBalance">
+			<documentation>Adjusting basket balances.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+		<!-- CIF-3736 -->
+		<operation name="QueryReloadHistory">
+			<documentation>Retrieves reload history by subscription number or by subscription network serial number. Supported data sets:
+			\nTOPUPS only Topup history information is returned. 
+			\nRELOADS Reload history is returned providing basket details with balances. 
+			</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+		
+		<!-- CIF-3913 -->
+		<operation name="CreateRefresh">
+			<documentation>Provides the ability to add a new Refresh for the Subscription. 
+			\nOnly one refresh can be added at a time</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+		
+		<operation name="UpdateRefresh">
+			<documentation>provides the ability to update or cancel an existing Refresh.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault name="SystemFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault name="SecurityFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal"></soap:fault>
+			</fault>
+		</operation>
+	</binding>
+
+	<!-- service declns -->
+	<service name="BasketPort">
+		<documentation> This is the Web Service for Dise3G customer baskets.
+		</documentation>
+		<port name="BasketPort" binding="target:BasketSOAPBinding">
+			<soap:address
+				location="http://localhost:63109/ws/dise3g/services/BasketPort" />
+		</port>
+	</service>
+
+</definitions>

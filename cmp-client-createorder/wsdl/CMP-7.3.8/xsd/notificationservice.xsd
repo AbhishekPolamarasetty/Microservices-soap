@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/notification/dto/service"
+	xmlns:target="http://mdsuk.com/ws/dise3g/notification/dto/service"
+	xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+	xmlns:notification="http://mdsuk.com/ws/dise3g/notification/dto/business"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://mdsuk.com/ws/dise3g/base">
+
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"></xs:import>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business" schemaLocation="subscription.xsd"></xs:import>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/notification/dto/business" schemaLocation="notification.xsd"></xs:import>
+
+	<xs:complexType name="CreateNotificationType">
+		<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"></xs:element>
+            <xs:element name="FilterType" type="notification:FilterType" minOccurs="1"/>
+            <xs:element name="NotificationType" type="notification:NotificationType" minOccurs="1"/>
+            <xs:element name="NotificationCategory" type="base:StringMaxLength6Type" minOccurs="0"/>
+            <xs:element name="CustomerLevel" type="base:LevelType" minOccurs="1"/>
+            <xs:element name="CompanyNumber" type="base:CompanyNumberType" minOccurs="1"/>
+            <xs:element name="Message" type="notification:MessageType" minOccurs="1"/>
+			<xs:element name="Source" type="base:StringMaxLength25Type" minOccurs="0"/>
+			<xs:element name="Priority" type="base:StringMaxLength1Type" minOccurs="0"/>
+			<xs:element name="ExpiryDateAndTime" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CreateNotificationResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SetNotificationPreferenceType">
+		<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"></xs:element>
+            <xs:element name="TargetIdentifier" type="notification:TargetIdentifier" minOccurs="1"/>
+            <xs:element name="NotificationTypeActions" type="notification:NotificationTypeActions" minOccurs="1"/>
+            <xs:element name="ExclusionPeriod" type="notification:ExclusionPeriod" minOccurs="0"/>
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SetNotificationPreferenceResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="QueryNotificationPreferenceHistoryType">
+		<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:choice>
+				<xs:element name="SubscriptionIdentifier" type="base:SubscriptionNumberType" minOccurs="1" /> 
+				<xs:element name="NetworkSerialNumber" type="base:NetworkSerialNumberType" minOccurs="1" /> 
+			</xs:choice>
+			<xs:element name="NotificationPreferenceCode" type="xs:string" minOccurs="1" /> 
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="QueryNotificationPreferenceHistoryResponseType">
+		<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="NotificationPreferenceCode" type="xs:string" minOccurs="1" maxOccurs="1" /> 
+			<xs:element name="NotificationPreferenceDescription" type="xs:string" minOccurs="1" maxOccurs="1" />			
+			<xs:element name="Histories" type="target:HistoriesType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="HistoriesType">
+		<xs:sequence>
+			<xs:element name="History" type="target:HistoryType" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="HistoryType">
+		<xs:sequence>
+			<xs:element name="EffectiveDateTime" type="xs:dateTime" minOccurs="1" maxOccurs="1" />
+			<xs:element name="OptedIn" type="xs:boolean" minOccurs="1" maxOccurs="1" />	
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+//Schema/BulkProcess/CreateCustomerStructure.xsd
+
+(c) Copyright 2006 Martin Dawes Systems Ltd
+
+Description
+	CreateCustomerStructure specifies the request and response for the 
+	Creation of Customer Structures (Accounts, Agreements, and Subscriptions) 
+	using the Bulk Process Application. Each CreateCustomerStructure request
+	has a corresponding CreateCustomerStructureResponse.
+ 
+Edit History
+    Date			Author        		Comment     
+	03/04/2006  	Mark Waters 		New Document SCR 34798
+	26/04/2006		Siobhan Madigan		Moved structure back to base/base.xsd
+-->
+<xs:schema targetNamespace="http://mdsuk.com/dise3g/bulkprocess/createCustomerStructure"
+	xmlns="http://mdsuk.com/dise3g/bulkprocess/createCustomerStructure"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:bulkbase="http://mdsuk.com/dise3g/bulkprocess/base">
+
+	<xs:import namespace="http://mdsuk.com/dise3g/bulkprocess/base"
+		schemaLocation="../BulkProcess/base/base.xsd"/>
+
+	<xs:annotation>
+		<xs:documentation> Basic schema for create customer structure and response</xs:documentation>
+	</xs:annotation>
+
+	<xs:complexType name="CreateCustomerStructureType">
+		<xs:sequence>
+			<xs:element name="Accounts" type="bulkbase:AccountsType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CreateCustomerStructureResponseType">
+		<xs:sequence>
+			<xs:element name="AccountsResponse" type="bulkbase:AccountsResponseType" minOccurs="0"/>
+			<xs:element name="AgreementsResponse" type="bulkbase:AgreementsResponseType" minOccurs="0"/>
+			<xs:element name="SubscriptionsResponse" type="bulkbase:SubscriptionsResponseType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

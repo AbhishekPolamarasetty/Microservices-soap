@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/bundle.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/bundle.xsd#1 $
+    $DateTime: 2008/01/06 10:20:44 $
+    $Author: Ken.Mullane $
+    $File: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/tariff.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema contains data types used to describe Tariffs -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/agreementtariff/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/agreementtariff/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+    <xs:complexType name="AgreementTariffType">
+        <xs:all>
+            <xs:element name="Company" type="base:CompanyCodeType" minOccurs="1"/>
+            <xs:element name="ATEffectiveDate" type="xs:date" minOccurs="1"/>
+            <xs:element name="TariffCode" type="target:TariffCodeType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:simpleType name="TariffCodeType">
+        <xs:restriction base="base:StringMaxLength6NotRequiredType"/>
+    </xs:simpleType>
+
+</xs:schema>

@@ -1,0 +1,951 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/base.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/base.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/base.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes common data types used throughout. -->
+
+<xs:schema xmlns:target="http://mdsuk.com/ws/dise3g/base"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mdsuk.com/ws/dise3g/base">
+
+	<!-- decimal types -->
+	<xs:simpleType name="Currency9_2Type">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.01"></xs:minInclusive>
+			<xs:maxInclusive value="999999999.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="Currency9_2NotRequiredType">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.00"></xs:minInclusive>
+			<xs:maxInclusive value="999999999.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Currency11_2NotRequiredType">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.00"></xs:minInclusive>
+			<xs:maxInclusive value="99999999999.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- new -->
+
+	<xs:simpleType name="QueryLimitExceededType">
+		<xs:restriction base="xs:boolean"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal2Type">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="2"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal3Type">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="3"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal5Type">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="5"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal6Type">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="6"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal7Type">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="7"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal8Type">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="8"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal9Type">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="9"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal11Type">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="11"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal14Type">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="14"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal8_2Type">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.01"></xs:minInclusive>
+			<xs:maxInclusive value="99999999.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="PercentType">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.01"></xs:minInclusive>
+			<xs:maxInclusive value="99.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="UnsignedDecimal9_2Type">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.00"></xs:minInclusive>
+			<xs:maxInclusive value="999999999.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="SignedDecimal9_2Type">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="-999999999.99"></xs:minInclusive>
+			<xs:maxInclusive value="999999999.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="SignedDecimal17_4Type">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="-99999999999999999.9999"></xs:minInclusive>
+			<xs:maxInclusive value="99999999999999999.9999"></xs:maxInclusive>
+			<xs:fractionDigits value="4"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="SignedDecimal17_2Type">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="-99999999999999999.99"></xs:minInclusive>
+			<xs:maxInclusive value="99999999999999999.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="UnsignedPercent5_2Type">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.00"></xs:minInclusive>
+			<xs:maxInclusive value="999.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength18Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="18"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength30NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength100NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength6NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength4NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength1NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Enum01Type">
+		<xs:restriction base="target:StringMaxLength1Type">
+			<xs:enumeration value="0"></xs:enumeration>
+			<xs:enumeration value="1"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- end new -->
+
+	<xs:simpleType name="DayOfMonthType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="31"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="DayOfMonthZeroType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="31"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:simpleType name="DayOfMonthIntType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="31"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="MonthOfYearIntType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="12"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="DayOfYearIntType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="365"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="MonthOfYearType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[0][1-9]"></xs:pattern>
+			<xs:pattern value="[1][0-2]"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TwoDigitYearType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[0-9][0-9]"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- identifiers -->
+	<xs:simpleType name="CompanyCodeType">
+		<xs:restriction base="target:StringMaxLength6Type"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EnquirySourceCodeType">
+		<xs:restriction base="target:StringMaxLength6Type"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CampaignCodeType">
+		<xs:restriction base="target:EightDigitNumber_NotZeroType"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="SalesAccountCodeType">
+		<xs:restriction base="target:EightDigitNumberType"></xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="ContractNumber">
+		<xs:restriction base="target:StringMaxLength12Type"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="PricePlanCodeType">
+		<xs:restriction base="target:StringMaxLength6Type"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="NetworkCodeType">
+		<xs:restriction base="target:StringMaxLength6Type"></xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="LastAmendedDateType">
+		<xs:restriction base="xs:dateTime"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CreationDateType">
+		<xs:restriction base="xs:dateTime"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ProcessDateType">
+		<xs:restriction base="xs:dateTime"></xs:restriction>
+	</xs:simpleType>
+
+	<!-- Integer types -->
+	<xs:simpleType name="OneOrTwoDigitNumberType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-3]?[0-9]"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TwoDigitNumberType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-3][0-9]"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ThreeDigitNumberType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="FourDigitNumberType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="9999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FourDigitNumber_NotZeroType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="9999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FiveDigitNumberType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="99999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:simpleType name="ThreeDigitNumber_NotZeroType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="SevenDigitNumberType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="9999999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="EightDigitNumberType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="99999999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="EightDigitNumber_NotZeroType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="99999999"></xs:maxInclusive>
+		</xs:restriction>
+
+	</xs:simpleType>
+	<xs:simpleType name="NineDigitNumberType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="999999999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+		<xs:simpleType name="TenDigitNumberType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="9999999999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NineDigitNumberType_NotZeroType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="999999999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="ElevenDigitNumberType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="99999999999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="FifteenDigitNumber_NonZeroType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="999999999999999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- String types -->
+	<xs:simpleType name="StringMaxLength0Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="0"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="StringMaxLength1Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="1"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!--  Changed minLength 1 to 0 for Dise-19177 fixed  -->
+	<xs:simpleType name="StringMaxLength2Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="2"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength3Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="3"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength4Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="4"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength6Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="6"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength8Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="8"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength8NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength9Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="9"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength10Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="10"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength10NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="StringMaxLength11Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="11"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength5Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="5"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="StringMaxLength12Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="12"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength15Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="15"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength19Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="19"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength20Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="StringMaxLength20NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength25Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="25"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength25NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength30Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="30"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+    <xs:simpleType name="StringMaxLength34Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="34"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringMaxLength35Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="35"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength40Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"></xs:minLength>
+			<xs:maxLength value="40"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength40NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength50Type">
+	    <xs:restriction base="xs:string">
+	         <xs:minLength value="0"></xs:minLength>
+	         <xs:maxLength value="50"></xs:maxLength>
+	    </xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength56NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="56"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="StringMaxLength60Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="60"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength60NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength69Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="69"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength70Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="70"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength120NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="120"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="StringMaxLength120RequiredType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="120"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>	
+	
+		<xs:simpleType name="StringMaxLength240NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="240"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringMaxLength300NotRequiredType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="300"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>	
+
+	<xs:simpleType name="StringMaxLength300RequiredType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="300"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringFixedLength2Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"></xs:minLength>
+			<xs:maxLength value="2"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="StringFixedLength10Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="10"></xs:minLength>
+			<xs:maxLength value="10"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Account hierarchy levels -->
+	<xs:simpleType name="LevelType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Group"></xs:enumeration>
+			<xs:enumeration value="Corporate"></xs:enumeration>
+			<xs:enumeration value="Account"></xs:enumeration>
+			<xs:enumeration value="Subscription"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="PhoneNumberType">
+		<xs:restriction base="target:StringMaxLength15Type"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ExternalReferenceType">
+		<xs:restriction base="target:StringMaxLength69Type"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="MessageType">
+		<xs:restriction base="xs:string"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ThreeDigitInt_NotZeroType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="EightDigitIntType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="99999999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="EightDigitInt_NotZeroType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"></xs:minInclusive>
+			<xs:maxInclusive value="99999999"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+    <xs:simpleType name="ClearType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CLEAR_FIELD"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ClearableDateType">
+	    <xs:choice>
+	        <xs:element name="Value" type= "xs:date" minOccurs="1"/>
+	        <xs:element name="Clear" type= "target:ClearType" minOccurs="1"/>
+	    </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="ClearableDateTimeType">
+	    <xs:choice>
+	        <xs:element name="Value" type= "xs:dateTime" minOccurs="1"/>
+	        <xs:element name="Clear" type= "target:ClearType" minOccurs="1"/>
+	    </xs:choice>
+    </xs:complexType>
+
+
+<!-- Attributes placed in the base.xsd (not specific xsds) to avoid circular dependencies -->
+    <xs:simpleType name="GroupCodeType">
+        <xs:restriction base="target:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="CorporateCodeType">
+        <xs:restriction base="target:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="CompanyNumberType">
+        <xs:restriction base="target:StringMaxLength3Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AccountNumberType">
+        <xs:restriction base="target:EightDigitNumberType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="SubscriptionNumberType">
+        <xs:restriction base="target:EightDigitNumberType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ServiceCodeType">
+        <xs:restriction base="target:StringMaxLength6Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="NetworkSerialNumberType">
+        <xs:restriction base="target:StringMaxLength25Type"/>
+    </xs:simpleType>
+    
+     <xs:simpleType name="RewardIdentifierType">
+        <xs:restriction base="target:NineDigitNumberType"/>
+    </xs:simpleType>
+    
+      <xs:simpleType name="RewardLevelType">
+        <xs:restriction base="target:ThreeDigitNumberType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AgreementNumberType">
+        <xs:restriction base="target:EightDigitNumberType"/>
+    </xs:simpleType>
+
+	<xs:simpleType name="InvoiceNumberType">
+        <xs:restriction base="target:EightDigitNumberType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="PaymentTypeType">
+        <xs:restriction base="target:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="PaymentTermType">
+        <xs:restriction base="target:StringMaxLength3Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="BankAccountNumberType">
+        <xs:restriction base="target:StringMaxLength20Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="BankSortCodeType">
+        <xs:restriction base="target:StringMaxLength20Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="BankNameType">
+        <xs:restriction base="target:StringMaxLength30Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ControlDigitType">
+        <xs:restriction base="target:StringMaxLength2Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="NameOfPayerType">
+        <xs:restriction base="target:StringMaxLength30Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="DDSetupMethodCodeType">
+        <xs:restriction base="target:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+	<xs:simpleType name="IBANType">
+        <xs:restriction base="target:StringMaxLength34Type"/>
+    </xs:simpleType>
+	<xs:simpleType name="BICType">
+        <xs:restriction base="target:StringMaxLength11Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="MandateReferenceType">
+        <xs:restriction base="target:StringMaxLength35Type"/>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="CCDCCardNumberType">
+        <xs:restriction base="target:StringMaxLength20Type"/>
+    </xs:simpleType>
+    <xs:simpleType name="PCI_CCDCCardNumberType">
+        <xs:restriction base="target:StringMaxLength4Type"/>
+    </xs:simpleType>
+    <xs:simpleType name="PCI_CardOnFileReferenceType">
+        <xs:restriction base="target:StringMaxLength20Type"/>
+    </xs:simpleType>
+	
+    <xs:simpleType name="NameOnCardType">
+        <xs:restriction base="target:StringMaxLength20Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="YearNumberType">
+        <xs:restriction base="target:TwoDigitYearType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="CreditSecurityCodeType">
+        <xs:restriction base="target:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="MonthNumberType">
+        <xs:restriction base="target:MonthOfYearType"/>
+    </xs:simpleType>
+	
+	<xs:simpleType name="StatusFilterAllActiveType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ALL"/>
+			<xs:enumeration value="ACTIVE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+ 	<xs:simpleType name="StatusSuccessFailureType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="FAILURE"/>
+		</xs:restriction>
+	</xs:simpleType>
+ 
+    <xs:simpleType name="ChargetoNominalCodeType">
+        <xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="29"></xs:maxLength>
+		</xs:restriction>			
+    </xs:simpleType>
+	
+    <xs:complexType name="MessageDetailsType">
+        <xs:sequence>
+            <xs:element name="MessageId" type="xs:string"/>
+            <xs:element name="MessageText" type="xs:string" minOccurs="0"/>
+            <xs:element name="ExtraInfo" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="MessageListType">
+        <xs:sequence>
+            <xs:element name="Message" type="target:MessageDetailsType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:simpleType name="StringMaxLength100Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="100"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="OriginalRequestType">
+        <xs:restriction base="target:EightDigitNumber_NotZeroType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="OriginalRequestSequenceType">
+        <xs:restriction base="target:SevenDigitNumberType"/>
+    </xs:simpleType>
+	
+	<xs:complexType name="AuditRecordType">
+        <xs:sequence>
+            <xs:element name="UserID" type="target:UserIdType"/>
+            <xs:element name="Program" type="target:ProgramType"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:simpleType name="UserIdType">
+        <xs:restriction base="target:StringMaxLength10Type"/>
+    </xs:simpleType>
+	
+	<xs:simpleType name="ProgramType">
+        <xs:restriction base="target:StringMaxLength10Type"/>
+    </xs:simpleType>
+    
+	<xs:simpleType name="BondNumberType">
+		<xs:restriction base="target:EightDigitNumberType"/>
+    </xs:simpleType>
+    
+	<xs:simpleType name="BondOriginType">
+        <xs:restriction base="target:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="BondAmountType">
+        <xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.00"></xs:minInclusive>
+			<xs:maxInclusive value="999999999.99"></xs:maxInclusive>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="SuspendedFromInvoicingType">
+		<xs:restriction base="xs:boolean"></xs:restriction>
+	</xs:simpleType>  
+    
+    <xs:complexType name="CustomerReferenceType">
+        <xs:sequence>
+            <xs:element name="SubscriptionID" type="target:SubscriptionNumberType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="AccountID" type="target:AccountNumberType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="AttributeDetailsType">
+		<xs:sequence>
+			<xs:element name="Group" type="target:StringMaxLength6Type"/>
+			<xs:element name="Name" type="target:StringMaxLength30Type"/>
+			<xs:element name="Value" type="target:StringMaxLength120RequiredType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AttributesType">
+		<xs:sequence>
+		    <xs:element name="Attribute" type="target:AttributeDetailsType" maxOccurs="unbounded" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CompatibilityRulesType">
+        <xs:sequence>
+            <xs:element name="SalesChannel" type="target:StringMaxLength30Type" minOccurs="1"/>
+			<xs:element name="Parameters" type="target:ParameterType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="ParameterType">
+		<xs:sequence>
+			<xs:element name="Name" type="target:StringMaxLength30Type"/>
+			<xs:element name="Value" type="target:StringMaxLength120RequiredType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

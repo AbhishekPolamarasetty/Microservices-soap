@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/financialsservice.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/financialsservice.xsd#1 $
+    $DateTime: 2007/07/19 11:36:52 $
+    $Author: Kevin Grindley $
+    $File: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/financialsservice.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Financials service -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/financials/dto/service"
+    xmlns:target="http://mdsuk.com/ws/dise3g/financials/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:financials="http://mdsuk.com/ws/dise3g/financials/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+	xmlns:porting="http://mdsuk.com/ws/dise3g/porting/dto/business">
+	
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/financials/dto/business" schemaLocation="financials.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+ 	<xs:import namespace="http://mdsuk.com/ws/dise3g/porting/dto/business" schemaLocation="porting.xsd"/>
+
+    <xs:complexType name="QueryTransactionsType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="TransactionFilter" type="target:TransactionsFilterType"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="QueryTransactionsResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="TransactionData" type="target:TransactionsListType"/>
+            <xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="TransactionsListType">
+        <xs:sequence>
+            <xs:element name="Transaction" type="financials:TransactionsType" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="TransactionsFilterType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="POSTED_UNMATCHED"/>
+            <xs:enumeration value="POSTED_ALL"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="QueryAccountBalanceType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="QueryAccountBalanceResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="BalanceDetails" type="financials:BalanceDetailsType"/>
+        </xs:all>
+    </xs:complexType>   
+    
+    <xs:complexType name="QueryInvoiceQueryAmountsType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="InvoiceNumber" type="base:EightDigitNumber_NotZeroType" minOccurs="0"/>
+            <xs:element name="StatusFilter" type="financials:StatusFilterType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType  name="QueryInvoiceQueryAmountsResponseType">
+       	<xs:sequence>
+       	    <xs:element name="ExternalReference" type="base:ExternalReferenceType"  minOccurs="0"/>
+          	<xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+          	<xs:element name="QueryAmounts" type="financials:InvoiceQueryAmountsDataType" minOccurs="0"/>
+       	</xs:sequence>
+   </xs:complexType>  
+
+	<xs:complexType name="CreateInvoiceQueryAmountType">
+       	<xs:sequence>
+       	   	<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="InvoiceNumber" type="base:EightDigitNumber_NotZeroType" minOccurs="1"/>
+            <xs:element name="AmountInQuery" type="base:Currency9_2Type" minOccurs="1"/>
+            <xs:element name="QueryType" type="base:StringMaxLength4Type" minOccurs="0"/>
+       </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CreateInvoiceQueryAmountResponseType">
+       	<xs:sequence>
+         	<xs:element name="ExternalReference" type="base:ExternalReferenceType"  minOccurs="0"/>
+         	<xs:element name="WorkFlowEventNumber" type="base:NineDigitNumberType_NotZeroType" minOccurs="1"/>
+         	<xs:element name="QueryNumber" type="base:EightDigitInt_NotZeroType" minOccurs="1"/>
+      	</xs:sequence>  
+    </xs:complexType>
+
+	<xs:complexType name="QueryInvoicesType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="FromDate" type="xs:date" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType  name="QueryInvoicesResponseType">
+       	<xs:sequence>
+       	    <xs:element name="ExternalReference" type="base:ExternalReferenceType"  minOccurs="0"/>
+          	<xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+			<xs:element name="CommunicationMethod" type="base:StringMaxLength10NotRequiredType" minOccurs="0"/>
+			<xs:element name="ParticularRequirement" type="base:StringMaxLength10NotRequiredType" minOccurs="0"/>
+          	<xs:element name="Invoices" type="financials:InvoicesType" minOccurs="0"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>
+       	</xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="QueryInvoiceDetailType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="InvoiceNumber" type="base:InvoiceNumberType" minOccurs="1"/>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>
+			<xs:element name="DataSets" type="financials:InvoiceDetailDatasetsType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType  name="QueryInvoiceDetailResponseType">
+       	<xs:sequence>
+       	    <xs:element name="ExternalReference" type="base:ExternalReferenceType"  minOccurs="0"/>
+          	<xs:element name="InvoiceNumber" type="base:InvoiceNumberType" minOccurs="1"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType" minOccurs="0"/>
+          	<xs:element name="InvoiceLines" type="financials:InvoiceLinesType" minOccurs="0"/>
+			<xs:element name="BundleUsages" type="financials:BundleUsagesType" minOccurs="0"/>
+			<xs:element name="Definitions" type="financials:DefinitionsType" minOccurs="0"/>
+       	</xs:sequence>
+   </xs:complexType>
+   
+ 	<xs:complexType name="QueryETCType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:choice>
+			    <xs:element name="Subscriptions" type="porting:SubscriptionListType" maxOccurs="1"/>
+				<xs:element name="PacCode" type="porting:PacCodeType" maxOccurs="1"/>
+				<xs:element name="ETCRef" type="base:StringMaxLength10NotRequiredType" maxOccurs="1"/>
+			</xs:choice>
+			<xs:element name="PortOutReasonCode" type="porting:ReasonCodeType" minOccurs="0"/>			
+			<xs:element name="SuppressNotificationWorkflow" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="ETCInfo" type="porting:ETCInfoType" minOccurs="0"/>			
+            <xs:element name="Datasets" type="financials:QueryETCDatasetsType" minOccurs="1"/>			
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType  name="QueryETCResponseType">
+       	<xs:all>
+       	    <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="ETCOverrideFlag" type="xs:boolean" minOccurs="0"/>			
+            <xs:element name="ETCBasic" type="financials:ETCBasicDatasetType" minOccurs="0"/>
+			<xs:element name="Subscriptions" type="financials:SubscriptionsDatasetType" minOccurs="0"/>
+        	<xs:element name="Definitions" type="financials:DefinitionsDatasetType" minOccurs="0"/>
+			<xs:element name="ETCCalculationComplete" type="xs:boolean" minOccurs="0"/>			
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>			
+       	</xs:all>
+    </xs:complexType>
+						
+</xs:schema>

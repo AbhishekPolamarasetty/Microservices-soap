@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	$Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/workflow/workflow.wsdl#1 $
+	$Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/workflow/workflow.wsdl#1 $
+	$DateTime: 2021/03/22 14:14:36 $
+	$Author: BuildMaster $
+	$File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/workflow/workflow.wsdl $
+	$Revision: #1 $
+	(c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/workflow/definition" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:target="http://mdsuk.com/ws/dise3g/workflow/definition" xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition">
+
+	<documentation>This Webservice definition encompasses all operations relating to Workflow (Diary Event) management.</documentation>
+
+	<import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+			targetNamespace="http://mdsuk.com/ws/dise3g/workflow/definition" 
+			xmlns:workflow="http://mdsuk.com/ws/dise3g/workflow/dto/service" 
+			elementFormDefault="qualified">
+			<import namespace="http://mdsuk.com/ws/dise3g/workflow/dto/service" 
+				schemaLocation="../../xsd/workflowservice.xsd" />
+
+			<element name="CreateWorkflow">
+				<complexType>
+					<sequence>
+						<element name="WorkflowData" type="workflow:CreateWorkflowType" />
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="CreateWorkflowResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="workflow:CreateWorkflowResponseType" />
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="UpdateWorkflowRequest">
+				<complexType>
+					<sequence>
+						<element name="UpdateData" type="workflow:UpdateWorkflowType" />
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="UpdateWorkflowResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="workflow:UpdateWorkflowResponseType" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryWorkflow">
+				<complexType>
+	                <sequence>
+	                    <element name="Request" type="workflow:QueryWorkflowType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryWorkflowResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="workflow:QueryWorkflowResponseType" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryWorkflows">
+				<complexType>
+	                <sequence>
+	                    <element name="Request" type="workflow:QueryWorkflowsType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryWorkflowsResponse">
+				<complexType>
+	                <sequence>
+	                    <element name="Result" type="workflow:QueryWorkflowsResponseType"/>
+					</sequence>
+				</complexType>
+			</element>
+						
+			<element name="CreateSalesLedgerAdjustment">
+				<complexType>
+	                <sequence>
+	                    <element name="Request" type="workflow:CreateSalesLedgerAdjustmentType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="CreateSalesLedgerAdjustmentResponse">
+				<complexType>
+	                <sequence>
+	                    <element name="Result" type="workflow:CreateSalesLedgerAdjustmentResponseType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="DeleteSalesLedgerAdjustment">
+				<complexType>
+	                <sequence>
+	                    <element name="Request" type="workflow:DeleteSalesLedgerAdjustmentType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="DeleteSalesLedgerAdjustmentResponse">
+				<complexType>
+	                <sequence>
+	                    <element name="Result" type="workflow:DeleteSalesLedgerAdjustmentResponseType"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="QueryWorklists">
+				<complexType>
+	                <sequence>
+	                    <element name="Request" type="workflow:QueryWorklistsType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryWorklistsResponse">
+				<complexType>
+	                <sequence>
+	                    <element name="Result" type="workflow:QueryWorklistsResponseType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryWorklist">
+				<complexType>
+	                <sequence>
+	                    <element name="Request" type="workflow:QueryWorklistType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryWorklistResponse">
+				<complexType>
+	                <sequence>
+	                    <element name="Result" type="workflow:QueryWorklistResponseType"/>
+					</sequence>
+				</complexType>
+			</element>
+		</schema>
+	</types>
+
+	<message name="CreateWorkflowRequest">
+		<part name="Parameters" element="target:CreateWorkflow" />
+	</message>
+
+	<message name="CreateWorkflowResponse">
+		<part name="Parameters" element="target:CreateWorkflowResponse" />
+	</message>
+
+	<message name="QueryWorkflowRequest">
+		<part name="Parameters" element="target:QueryWorkflow" />
+	</message>
+
+	<message name="QueryWorkflowResponse">
+		<part name="Parameters" element="target:QueryWorkflowResponse" />
+	</message>
+
+	<message name="UpdateWorkflowRequest">
+		<part name="Parameters" element="target:UpdateWorkflowRequest" />
+	</message>
+
+	<message name="UpdateWorkflowResponse">
+		<part name="Parameters" element="target:UpdateWorkflowResponse" />
+	</message>
+	
+	<message name="QueryWorkflowsRequest">
+		<part name="Parameters" element="target:QueryWorkflows" />
+	</message>
+
+	<message name="QueryWorkflowsResponse">
+		<part name="Parameters" element="target:QueryWorkflowsResponse" />
+	</message>
+		
+	<message name="CreateSalesLedgerAdjustmentRequest">
+		<part name="Parameters" element="target:CreateSalesLedgerAdjustment" />
+	</message>
+	
+	<message name="CreateSalesLedgerAdjustmentResponse">
+		<part name="Parameters" element="target:CreateSalesLedgerAdjustmentResponse" />
+	</message>
+
+	<message name="DeleteSalesLedgerAdjustmentRequest">
+		<part name="Parameters" element="target:DeleteSalesLedgerAdjustment" />
+	</message>
+	
+	<message name="DeleteSalesLedgerAdjustmentResponse">
+		<part name="Parameters" element="target:DeleteSalesLedgerAdjustmentResponse" />
+	</message>
+	
+	<message name="QueryWorklistsRequest">
+		<part name="Parameters" element="target:QueryWorklists" />
+	</message>
+	
+	<message name="QueryWorklistsResponse">
+		<part name="Parameters" element="target:QueryWorklistsResponse" />
+	</message>
+	
+	<message name="QueryWorklistRequest">
+		<part name="Parameters" element="target:QueryWorklist" />
+	</message>
+	
+	<message name="QueryWorklistResponse">
+		<part name="Parameters" element="target:QueryWorklistResponse" />
+	</message>
+
+	<portType name="WorkflowPortType">
+		<operation name="CreateWorkflow">
+			<input message="target:CreateWorkflowRequest" />
+			<output message="target:CreateWorkflowResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+		<operation name="QueryWorkflow">
+			<input message="target:QueryWorkflowRequest" />
+			<output message="target:QueryWorkflowResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+		<operation name="UpdateWorkflow">
+			<input message="target:UpdateWorkflowRequest" />
+			<output message="target:UpdateWorkflowResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+		<operation name="QueryWorkflows">
+			<input message="target:QueryWorkflowsRequest"></input>
+			<output message="target:QueryWorkflowsResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+		<operation name="CreateSalesLedgerAdjustment">
+			<input message="target:CreateSalesLedgerAdjustmentRequest"></input>
+			<output message="target:CreateSalesLedgerAdjustmentResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+		<operation name="DeleteSalesLedgerAdjustment">
+			<input message="target:DeleteSalesLedgerAdjustmentRequest"></input>
+			<output message="target:DeleteSalesLedgerAdjustmentResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+				<operation name="QueryWorklists">
+			<input message="target:QueryWorklistsRequest"></input>
+			<output message="target:QueryWorklistsResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+		<operation name="QueryWorklist">
+			<input message="target:QueryWorklistRequest"></input>
+			<output message="target:QueryWorklistResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+	</portType>
+
+</definitions>

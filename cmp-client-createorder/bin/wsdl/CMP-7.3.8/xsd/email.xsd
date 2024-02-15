@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/email/dto/business"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:target="http://mdsuk.com/ws/dise3g/email/dto/business">
+
+	<xs:complexType name="EmailType">
+		<xs:all>
+			<xs:element name="DeliveryAddressNumber" type="target:DeliveryAddressNumberType" minOccurs="1" />
+			<xs:element name="EmailNumber" type="target:EmailNumberType" minOccurs="1" />
+		</xs:all>
+	</xs:complexType>
+
+
+	<xs:complexType name="EmailQueryResponseType">
+		<xs:all>
+			<xs:element name="DeliveryAddressNumber" type="target:DeliveryAddressNumberType" minOccurs="1" />
+			<xs:element name="EmailNumber" type="target:EmailNumberType" minOccurs="1" />
+		</xs:all>
+	</xs:complexType>
+
+	<xs:simpleType name="EmailNumberType">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+	
+	<xs:simpleType name="DeliveryAddressNumberType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+</xs:schema>

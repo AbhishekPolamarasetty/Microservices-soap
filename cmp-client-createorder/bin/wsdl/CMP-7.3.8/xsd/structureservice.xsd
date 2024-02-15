@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	$$Id$$
+	$$Header$$
+	$$DateTime$$
+	$$Author$$
+	$$File$$
+	$$Revision$$
+	(c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/structure/dto/service" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:structure="http://mdsuk.com/ws/dise3g/structure/dto/business" 
+	xmlns:base="http://mdsuk.com/ws/dise3g/base" 
+	xmlns:target="http://mdsuk.com/ws/dise3g/structure/dto/service"
+	xmlns:agreement="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+	xmlns:workflow="http://mdsuk.com/ws/dise3g/workflow/dto/business"
+	xmlns:subscriptionservice="http://mdsuk.com/ws/dise3g/subscription/dto/service">
+
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/structure/dto/business" schemaLocation="structure.xsd" />
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd" />
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/agreement/dto/business" schemaLocation="agreement.xsd" />
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/workflow/dto/business" schemaLocation="workflow.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/service" schemaLocation="subscriptionservice.xsd"/>
+
+	<xs:complexType name="CustomerStructureQueryType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="CustomerLevel" type="structure:CustomerLevelType" />
+			<xs:element name="CustomerLevelId" type="structure:CustomerLevelIdType" />
+			<xs:element name="TreeFilter" type="structure:TreeFilterType" minOccurs="0" />
+			<xs:element name="SubscriptionStatusFilter" type="base:StatusFilterAllActiveType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+ 	<xs:complexType name="CreateDataAPNSRequestType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="TargetIdentifier" type="workflow:TargetIdentifierType" minOccurs="1"  maxOccurs="1"/>
+			<xs:element name="ApnsToCreate" type="target:APNSToCreateType" minOccurs="1"/>
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="CreateDataAPNSResponseType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="ManageDataAPNSResponseType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="ManageDataAPNSRequestType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="TargetIdentifier" type="subscriptionservice:SubscriptionQueryDataType" minOccurs="1"  maxOccurs="1"/>
+			<xs:element name="ApnsToAdd" type="target:APNSToAddType" minOccurs="1"/>
+			<xs:element name="ApnsToDelete" type="target:APNSToDeleteType" minOccurs="1"/>			
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="APNType">
+		<xs:all>
+			<xs:element name="APNID" type="base:StringMaxLength30Type" minOccurs="1" />
+			<xs:element name="APNDescription" type="base:StringMaxLength30Type" minOccurs="1"  />
+			<xs:element name="WithInternet" type="target:WithInternetType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="APNSToCreateType">
+		<xs:sequence>
+			<xs:element name="StructureAPNS" type="target:APNType" minOccurs="0" maxOccurs="999"/>
+			<xs:element name="SubscriptionAPNS" type="target:SubscriptionAPNType" minOccurs="0" maxOccurs="5"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="APNSToAddType">
+		<xs:sequence>
+			<xs:element name="SubscriptionAPNS" type="target:SubscriptionAPNType" minOccurs="0" maxOccurs="5"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="APNSToDeleteType">
+		<xs:sequence>
+			<xs:element name="SubscriptionAPNS" type="target:SubscriptionAPNType" minOccurs="0" maxOccurs="5"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="SubscriptionAPNType">
+		<xs:restriction base="base:StringMaxLength25Type" />
+	</xs:simpleType>
+	
+	<xs:simpleType name="WithInternetType">
+		<xs:restriction base="xs:boolean"></xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="CustomerStructureResponseType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>
+			<xs:element name="CustomerLevel" type="structure:CustomerLevelType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="CustomerNode">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="Group" type="structure:GroupCustomerNodeType" />
+						<xs:element name="Corporate" type="structure:CorporateCustomerNodeType" />
+						<xs:element name="Account" type="structure:AccountCustomerNodeType" />
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerAgreementQueryType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="AgreementNumber" type="base:AgreementNumberType" />
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="CustomerAgreementResponseType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" />
+			<xs:element name="CustomerLevel" type="structure:CustomerLevelType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>
+			<xs:element name="CustomerNode">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="Group" type="structure:GroupCustomerNodeType" />
+						<xs:element name="Corporate" type="structure:CorporateCustomerNodeType" />
+						<xs:element name="Account" type="structure:AccountCustomerNodeType" />
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+</xs:schema>

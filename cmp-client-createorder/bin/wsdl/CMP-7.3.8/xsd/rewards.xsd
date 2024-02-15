@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/rewards.xsd#0 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/rewards.xsd#0 $
+	$DateTime: 2015/01/23 14:00:00 $
+    $Author: David Hallinan $
+	$File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/rewards.xsd $
+    $Revision: #0 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes data types used by the Rewards service -->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/rewards/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/rewards/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+    <xs:simpleType name="RewardIdentifierType">
+        <xs:restriction base="base:NineDigitNumberType"/>
+    </xs:simpleType>
+	
+	<xs:complexType name="SetCategoryType">
+		<xs:all>
+			<xs:element name="RewardCategory" type="xs:string" minOccurs="1"/>
+			<xs:element name="SetAsDefaultCategory" type="xs:boolean" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	
+</xs:schema>

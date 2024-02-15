@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $$Id$$
+    $$Header$$
+    $$DateTime$$
+    $$Author$$
+    $$File$$
+    $$Revision$$
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/address/service"
+    xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:target="http://mdsuk.com/ws/dise3g/address/service"
+    xmlns:definition="http://mdsuk.com/ws/dise3g/address/definition"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+    <import namespace="http://mdsuk.com/ws/dise3g/address/definition" location="address.wsdl"/>
+
+    <!-- binding declns -->
+
+    <binding name="AddressSoapBinding" type="definition:AddressPortType">
+        <documentation> This Webservice binding encompasses all operations relating to Dise Address
+            structure. </documentation>
+
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="UpdateAddress">
+            <documentation> Update an address within Dise. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+        
+        <operation name="CreateAddress">
+		<documentation> Create a delivery Addresses </documentation>
+		<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+       </operation>
+       
+         <operation name="CreateEmailAddress">
+       <documentation> Create email an address within Dise. </documentation>
+	   <soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+       </operation>
+	   <operation name="QueryEmails">
+       <documentation> Set Customer Email Addresses </documentation>
+	   <soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+       </operation>
+       
+       <operation name="RemoveEmail">
+       <documentation> Set Customer Email Addresses </documentation>
+	   <soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+       </operation>
+      
+    </binding>
+
+    <!-- service declns -->
+    <service name="AddressPort">
+        <documentation>This is the webservice for DISE Address operations.</documentation>
+        <port name="AddressPort" binding="target:AddressSoapBinding">
+            <soap:address location="http://localhost:9082/ws/dise3g/services/AddressPort"/>
+        </port>
+    </service>
+</definitions>

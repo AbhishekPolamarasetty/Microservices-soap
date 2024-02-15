@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/services/services.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/services/services.wsdl#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/services/services.wsdl $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/services/definition"
+    xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition"
+    xmlns:target="http://mdsuk.com/ws/dise3g/services/definition">
+
+    <documentation>This Webservice definition encompasses all operations relating to Services
+        management. </documentation>
+
+    <import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://mdsuk.com/ws/dise3g/services/definition"
+            xmlns:service="http://mdsuk.com/ws/dise3g/services/dto/service"
+            elementFormDefault="qualified">
+            <import namespace="http://mdsuk.com/ws/dise3g/services/dto/service"
+                schemaLocation="../../xsd/servicesservice.xsd"/>
+
+            <element name="CreateService">
+                <complexType>
+                    <sequence>
+                        <element name="ServiceData" type="service:CreateServiceType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="CreateServiceResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="service:CreateServiceResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="UpdateService">
+            	<complexType>
+            		<sequence>
+            			<element name="UpdateServiceData" type="service:UpdateServiceType" />
+            		</sequence>
+            	</complexType>
+            </element>
+
+            <element name="UpdateServiceResponse">
+            	<complexType>
+            		<sequence>
+            			<element name="Result" type="service:UpdateServiceResponseType" />
+            		</sequence>
+            	</complexType>
+            </element>
+			
+			<element name="QuerySubscriptionServices">
+				<complexType>
+					<sequence>
+						<element name="Request" type="service:QuerySubscriptionServicesRequestType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QuerySubscriptionServicesResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="service:QuerySubscriptionServicesResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryAccountServices">
+				<complexType>
+					<sequence>
+						<element name="Request" type="service:QueryAccountServicesRequestType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryAccountServicesResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="service:QueryAccountServicesResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+
+        </schema>
+    </types>
+
+    <message name="CreateServiceRequest">
+        <part name="ServiceData" element="target:CreateService"/>
+    </message>
+
+    <message name="CreateServiceResponse">
+        <part name="Result" element="target:CreateServiceResponse"/>
+    </message>
+
+    <message name="UpdateServiceRequest">
+	    <part name="UpdateServiceData" element="target:UpdateService"/>
+	</message>
+
+	<message name="UpdateServiceResponse">
+	    <part name="Result" element="target:UpdateServiceResponse"/>
+	</message>
+	
+	<message name="QuerySubscriptionServicesRequest">
+		<part name="Parameters" element="target:QuerySubscriptionServices"></part>
+	</message>
+
+	<message name="QuerySubscriptionServicesResponse">
+		<part name="Parameters" element="target:QuerySubscriptionServicesResponse"></part>
+	</message>
+	
+	<message name="QueryAccountServicesRequest">
+		<part name="Parameters" element="target:QueryAccountServices"></part>
+	</message>
+
+	<message name="QueryAccountServicesResponse">
+		<part name="Parameters" element="target:QueryAccountServicesResponse"></part>
+	</message>
+
+    <portType name="ServicePortType">
+        <operation name="CreateService">
+            <input message="target:CreateServiceRequest"/>
+            <output message="target:CreateServiceResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="UpdateService">
+		    <input message="target:UpdateServiceRequest"/>
+		    <output message="target:UpdateServiceResponse"/>
+		    <fault message="fault:SystemFault" name="SystemFault"/>
+		    <fault message="fault:SecurityFault" name="SecurityFault"/>
+		    <fault message="fault:ValidationFault" name="ValidationFault"/>
+		    <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+		</operation>   
+		<operation name="QuerySubscriptionServices">
+			<input message="target:QuerySubscriptionServicesRequest"></input>
+			<output message="target:QuerySubscriptionServicesResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="QueryAccountServices">
+			<input message="target:QueryAccountServicesRequest"></input>
+			<output message="target:QueryAccountServicesResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>		
+    </portType>
+</definitions>

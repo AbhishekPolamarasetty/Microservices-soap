@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/agreement.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/agreement.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/agreement.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes data types used by the agreement service and others -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+    xmlns:account="http://mdsuk.com/ws/dise3g/account/dto/business"
+    xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:bundle="http://mdsuk.com/ws/dise3g/bundle/dto/business"
+    xmlns:agreementtariff="http://mdsuk.com/ws/dise3g/agreementtariff/dto/business"
+    xmlns:discount="http://mdsuk.com/ws/dise3g/discount/dto/business"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/account/dto/business" schemaLocation="account.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business" schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/bundle/dto/business" schemaLocation="bundle.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/agreementtariff/dto/business" schemaLocation="agreementtariff.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/discount/dto/business" schemaLocation="discount.xsd"></xs:import>
+
+    <xs:complexType name="AgreementType">
+        <xs:annotation>
+            <xs:documentation>Data structure used by Create Agreement.</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="BillingCycle" type="base:DayOfMonthType" minOccurs="0"/>
+            <xs:element name="InvoiceConsolidationLevel" type="base:LevelType" minOccurs="0"/>
+            <xs:element name="InvoiceReceiptAddress" type="target:InvoiceAddressType" minOccurs="0"/>
+            <xs:element name="NextExpectedInvoiceDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType" minOccurs="0"/>
+            <xs:element name="GroupCode" type="base:GroupCodeType" minOccurs="0"/>
+            <xs:element name="AccountCode" type="base:AccountNumberType" minOccurs="0"/>
+            <xs:element name="AutoContractRenewal" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="ContractTemplateID" type="xs:string" minOccurs="0"/>
+            <xs:element name="BillingMedia" type="target:BillingMediaType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="AgreementBasicType">
+        <xs:annotation>
+            <xs:documentation>Data structure  returned by Agreement Query Response when BASIC dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="AgreementNumber" type="base:AgreementNumberType" minOccurs="0"/>
+            <xs:element name="AgreementLoggedAt" type="account:TargetIdentifierType" minOccurs="0"/>
+            <xs:element name="Company" type="base:CompanyCodeType" minOccurs="0"/>
+            <xs:element name="BillingCycle" type="base:DayOfMonthType" minOccurs="0"/>
+            <xs:element name="InvoiceFrequency" type="target:InvoiceFrequencyType" minOccurs="0"/>
+            <xs:element name="TerminatedDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="InvoiceConsolidationLevel" type="base:LevelType" minOccurs="0"/>
+            <xs:element name="InvoiceLoggedAt" type="base:LevelType" minOccurs="0"/>
+            <xs:element name="InvoiceAddress" type="target:InvoiceAddressType" minOccurs="0"/>
+            <xs:element name="BillingMedia" type="target:BillingMediaType" minOccurs="0"/>
+            <xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+            <xs:element name="SuspendedFromInvoicing" type="base:SuspendedFromInvoicingType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="InvoiceControlType">
+        <xs:annotation>
+            <xs:documentation>Data structure  returned by Agreement Query Response when INVOICECONTROL dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all> 
+            <xs:element name="OverrideBillingCycle" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="FirstInvoiceOnCycle" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="FinalInvoiceOnCycle" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="FirstInvoiceDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="NextExpectedInvoiceDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="LastInvoiceDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>   
+    <xs:complexType name="ContractAndSalesType">
+        <xs:annotation>
+            <xs:documentation>Data structure  returned by Agreement Query Response when CONTRACTANDSALES dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:all> 
+            <xs:element name="SalesAccountCodeType" type="base:SalesAccountCodeType" minOccurs="0"/>
+            <xs:element name="ContractNumber" type="base:ContractNumber" minOccurs="0"/>
+            <xs:element name="TermsAndConditionsGroupCode"
+                type="target:TermsAndConditionsGroupCodeType" minOccurs="0"/>
+            <xs:element name="TermsAndConditionsEffectiveDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="DefaultContractTermMonths" type="xs:integer" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+     <xs:complexType name="QueryAgreementCostCentresBasicType">
+        <xs:annotation>
+			<xs:documentation>This structure is returned as part of the BASIC dataset for 
+				the QueryAgreementCostCentres response</xs:documentation>
+        </xs:annotation>
+         <xs:choice>
+            <xs:element name="CostCentre" type="target:QueryCostCentreType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:complexType>
+    
+     <xs:complexType name="QueryCostCentreType">       
+        <xs:all>
+            <xs:element name="CostCentreCode" type="target:CostCenterCodeType" minOccurs="1"/>
+            <xs:element name="CostCentreDescription" type="base:StringMaxLength30Type" minOccurs="1"/>            
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:simpleType name="QueryAgreementCostCentresDatasetType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BASIC"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="QueryAgreementCostCentresDatasetsType">
+        <xs:sequence>
+            <xs:element name="Dataset" type="target:QueryAgreementCostCentresDatasetType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <xs:complexType name="UpdateAgreementBasicType">
+        <xs:annotation>
+            <xs:documentation>Agreement data which can be updated with an "UpdateAgreementBasic" dataset </xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="InvoiceFrequency" type="target:UpdateInvoiceFrequencyType" minOccurs="0"/>
+            <xs:element name="InvoiceConsolidationLevel" type="target:UpdateInvoiceConsolidationLevelType" minOccurs="0"/>
+            <xs:element name="InvoiceAddress" type="target:InvoiceAddressType" minOccurs="0"/>
+            <xs:element name="BillingMedia" type="target:BillingMediaType" minOccurs="0"/>
+            <xs:element name="AddressNumber" type="target:UpdateAddressNumberType" minOccurs="0"/>
+            <xs:element name="AttachSubscriptionsOnCreation" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="xs:dateTime" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateContractAndSalesType">
+        <xs:annotation>
+            <xs:documentation>Agreement data which can be updated with an "UpdateContractAndSales" dataset 
+            Attribute names match existing query attributes or names in GUI panel for clarity
+            Query attribute DefaultContractTermMonths is TermOfAgreement here (and on GUI)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:all>     
+            <xs:element name="SalesAccountCode" type="target:UpdateSalesAccountCodeType" minOccurs="0"/>
+            <xs:element name="TermsAndConditionsGroupCode"
+                type="target:TermsAndConditionsGroupCodeType" minOccurs="0"/>
+            <xs:element name="TermOfAgreement" type="target:UpdateTermOfAgreementType" minOccurs="0"/>
+            <xs:element name="ContractCode" type="target:ContractCodeType" minOccurs="0"/>
+            <xs:element name="AutoContractRenewal" type="target:AutoContractRenewalType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="xs:dateTime" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="AutoContractRenewalType">
+       <xs:all> 
+           <xs:element name="AutoContractRenewal" type="xs:boolean" minOccurs="1"/>
+           <xs:element name="ContractTemplateCode" type="target:UpdateContractTemplateCodeType" minOccurs="0"/>
+           <xs:element name="RenewalContractTemplateCode" type="base:StringMaxLength8Type" minOccurs="0"/>
+           <xs:element name="OptOutDeliveryAddressCode" type="target:UpdateOptOutAddressCodeType" minOccurs="0"/>        
+       </xs:all>
+   </xs:complexType>
+    
+    <xs:complexType name="UpdateInvoiceControlType">
+        <xs:annotation>
+            <xs:documentation>
+                Agreement data which can be updated with an "UpdateInvoiceControl" dataset
+            </xs:documentation>
+        </xs:annotation>
+        <xs:all> 
+            <xs:element name="BillingCycle" type="base:DayOfMonthIntType"  minOccurs="0"/>
+            <xs:element name="OverrideBillingCycle" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="FirstInvoiceOnCycle" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="FinalInvoiceOnCycle" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="NextExpectedInvoiceDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="xs:dateTime" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>   
+
+    <xs:simpleType name="InvoiceAddressType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Subscription"/>
+            <xs:enumeration value="Agreement"/>
+            <xs:enumeration value="Account"/>
+            <xs:enumeration value="Corporate"/>
+            <xs:enumeration value="Group"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="QueryAgreementsReturnType">
+        <xs:all>
+            <xs:element name="AgreementNumber" type="base:AgreementNumberType" minOccurs="1"/>
+            <xs:element name="InvoiceLoggedAt" type="account:TargetIdentifierType" minOccurs="0"/>
+            <xs:element name="InvoiceConsolidationLevel" type="base:LevelType" minOccurs="0"/>
+            <xs:element name="InvoiceAddress" type="target:InvoiceAddressType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+     <xs:simpleType name="QueryAgreementDatasetType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BASIC"/>
+            <xs:enumeration value="ADDRESS"/>
+            <xs:enumeration value="BUNDLES"/>
+            <xs:enumeration value="CONTRACTANDSALES"/>
+            <xs:enumeration value="INVOICECONTROL"/>
+            <xs:enumeration value="SERVICES"/>
+            <xs:enumeration value="DISCOUNTS"/>
+            <xs:enumeration value="BASKETS"/>
+        </xs:restriction>
+     </xs:simpleType>    
+
+    <xs:complexType name="QueryAgreementDatasetsType">
+        <xs:sequence>
+            <xs:element name="Dataset" type="target:QueryAgreementDatasetType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="InvoiceFrequencyType">
+        <xs:all>
+            <xs:element name="InvoiceFrequencyIn" type= "target:InvoiceFrequencyInType" minOccurs="1"/>
+            <xs:element name="InvoiceEvery" type="target:InvoiceEveryType" minOccurs="1"/> 
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateInvoiceFrequencyType">
+	    <xs:choice>
+	        <xs:element name="DayOfYear" type= "base:DayOfYearIntType" minOccurs="1"/>
+	        <xs:element name="MonthOfYear" type= "base:MonthOfYearIntType" minOccurs="1"/>
+	    </xs:choice>
+    </xs:complexType>
+
+    <xs:simpleType name="AgreementNumberIntType">
+        <xs:restriction base="base:EightDigitInt_NotZeroType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="InvoiceFrequencyInType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DAYS" />
+            <xs:enumeration value="MONTHS" />
+        </xs:restriction>
+     </xs:simpleType>
+   
+    <xs:simpleType name="InvoiceEveryType">
+        <xs:restriction base="base:EightDigitNumber_NotZeroType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="TermsAndConditionsGroupCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="BillingMediaType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AgreementLevelIdentifierCodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="BundleCodeType">
+        <xs:restriction base="base:StringMaxLength6NotRequiredType"/>
+    </xs:simpleType>
+
+    <!-- FULL -->
+
+    <xs:simpleType name="DefaultAgreementDeliverType">
+        <xs:restriction base="base:Decimal8Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="SalespersonNumberType">
+        <xs:restriction base="base:Decimal8Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="TermConditionGroupType">
+        <xs:restriction base="base:StringMaxLength6NotRequiredType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="TCGEffectiveDateType">
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="UpdateTCGEffectiveDateType">
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="RCReasonCodeType">
+        <xs:restriction base="base:StringMaxLength4NotRequiredType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="InvConsolidationLevelType">
+        <xs:restriction base="base:StringMaxLength1NotRequiredType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="UpdateInvoiceConsolidationLevelType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Subscription"/>
+            <xs:enumeration value="Account"/>
+            <xs:enumeration value="Group"/>
+            <xs:enumeration value="Corporate"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DefContractTermType">
+        <xs:restriction base="base:Decimal3Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="BillingCycleType">
+        <xs:restriction base="base:Decimal2Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="NextExpectedInvDateType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="FirstInvoiceDateType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="LastInvoiceDateType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="LastAmendedDateType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AgreementTerminationDteType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="LastInvoiceRunNumberType">
+        <xs:restriction base="base:Decimal8Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="OngoingInvFreqDaysType">
+        <xs:restriction base="base:Decimal3Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="OngoingInvFreqMonthsType">
+        <xs:restriction base="base:Decimal2Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="PasswordType">
+        <xs:restriction base="base:StringMaxLength10NotRequiredType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CompanyCodeType">
+        <xs:restriction base="base:StringMaxLength3Type"/>
+    </xs:simpleType>        
+    
+    <xs:simpleType name="AddressCodeType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="99999999"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="TariffType">
+        <xs:all>            
+            <xs:element name="ATEffectiveDate" type="xs:date" minOccurs="1"/>
+            <xs:element name="Company" type="base:CompanyCodeType" minOccurs="0"/>
+            <xs:element name="TariffCode" type="target:TariffCodeType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:simpleType name="TariffCodeType">
+        <xs:restriction base="base:StringMaxLength6NotRequiredType"/>
+    </xs:simpleType>
+    
+    <xs:complexType name="ServiceType">
+        <xs:all>
+            <xs:element name="CompanyCode" type="target:CompanyCodeType" minOccurs="1"/>        
+            <xs:element name="ServiceCode" type="base:ServiceCodeType" minOccurs="1"/>
+            <xs:element name="ASEffectiveDate" type="xs:date" minOccurs="1"/>                        
+            <xs:element name="SalesPersonId" type="target:SalespersonNumberType" minOccurs="0"/>            
+            <xs:element name="ServicePrice" type="xs:decimal" minOccurs="0"/>                       
+            <xs:element name="InvoiceThisService" type="target:InvoiceThisServiceType" minOccurs="0"/>                       
+            <xs:element name="ASEndDate" type="xs:date" minOccurs="1"/>                        
+            <xs:element name="ChargeToNominalCode" type="xs:string" minOccurs="0"/>                        
+            <xs:element name="ComissionCalculatedDate" type="xs:date" minOccurs="0"/>
+             
+        </xs:all>
+    </xs:complexType>
+       
+    <xs:simpleType name="InvoiceThisServiceType">
+        <xs:restriction base="base:StringMaxLength1Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ContractCodeType">
+        <xs:restriction base="base:StringMaxLength12Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="UpdateAddressNumberType">
+        <xs:restriction base="base:EightDigitInt_NotZeroType"/>
+    </xs:simpleType>   
+
+    <xs:simpleType name="UpdateTermOfAgreementType">
+        <xs:restriction base="base:ThreeDigitInt_NotZeroType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="UpdateSalesAccountCodeType">
+        <xs:restriction base="base:EightDigitIntType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="UpdateContractTemplateCodeType">
+        <xs:restriction base="base:StringMaxLength8Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="UpdateOptOutAddressCodeType">
+        <xs:restriction base="base:EightDigitIntType"/>
+    </xs:simpleType>
+    
+	<xs:simpleType name="CostCenterCodeType">
+        <xs:restriction base="base:StringMaxLength20Type"/>
+    </xs:simpleType>    
+</xs:schema>

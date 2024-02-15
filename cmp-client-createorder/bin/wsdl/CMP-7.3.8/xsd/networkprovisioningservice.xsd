@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/networkprovisioningservice.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/networkprovisioningservice.xsd#1 $
+    $DateTime: 2015/05/11 09:39:43 $
+    $Author: Andrea Jackuliakova $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/networkprovisioningservice.xsd $
+    $Revision: #1 $
+    (c) Copyright 2015 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Network Provisioning service -->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/networkprovisioning/dto/service"
+    xmlns:target="http://mdsuk.com/ws/dise3g/networkprovisioning/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:workflow="http://mdsuk.com/ws/dise3g/workflow/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:networkprovisioning="http://mdsuk.com/ws/dise3g/networkprovisioning/dto/business">
+    
+
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/networkprovisioning/dto/business"
+        schemaLocation="networkprovisioning.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/workflow/dto/business"
+        schemaLocation="workflow.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+     <xs:complexType name="UpdateProvisioningStatusType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="TransactionID" type="networkprovisioning:TransactionIDType" minOccurs="1"/>
+            <xs:element name="TransactionStatus" type="networkprovisioning:TransactionStatusType" minOccurs="1"/>
+			<xs:element name="ErrorCode" type="networkprovisioning:ErrorCodeType" minOccurs="0"/>
+			<xs:element name="ErrorDescription" type="networkprovisioning:ErrorDescriptionType" minOccurs="0" />
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateProvisioningStatusResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="EventNumber" type="workflow:WorkflowNumberType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+</xs:schema>

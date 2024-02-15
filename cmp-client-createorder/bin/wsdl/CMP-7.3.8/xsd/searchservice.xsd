@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/searchservice.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/searchservice.xsd#1 $
+    $DateTime: 2008/05/02 $
+    $Author: Malgorzata.Grzybowska $
+    $File: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/searchservice.xsd $
+    $Revision: #1 $
+    (c) Copyright 2008 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Search service -->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/search/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:search="http://mdsuk.com/ws/dise3g/search/dto/business"
+    xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+	xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+	xmlns:billing="http://mdsuk.com/ws/dise3g/billing/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/search/dto/business" schemaLocation="search.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business" schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business" schemaLocation="subscription.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/billing/dto/business" schemaLocation="billing.xsd"/>
+
+	<xs:complexType name="SearchByNameAndAddressType">
+        <xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="Postcode" type="base:StringMaxLength10Type" minOccurs="1"/>
+			<xs:element name="Name" type="base:StringMaxLength25NotRequiredType" minOccurs="0"/>
+			<xs:element name="Address" type="base:StringMaxLength25NotRequiredType" minOccurs="0"/>
+			<xs:element name="CustomerLevel" type="search:CustomerLevelType" minOccurs="1"/>
+		</xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="SearchByNameAndAddressResponseType">
+        <xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="SearchResults" type="search:SearchResultsType" minOccurs="0"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType" minOccurs="0"/>            
+		</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SearchSubscriptionsBySerialNumberType">
+        <xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="NetworkSerialNumber" type="base:NetworkSerialNumberType" minOccurs="1"/>
+			<xs:element name="NetworkSerialNumberID" type="subscription:NetworkSerialNumberIDType" minOccurs="0"/>
+			<xs:element name="NetworkCode" type="base:NetworkCodeType" minOccurs="0"/>
+			<xs:element name="NetworkSerialStatus" type="search:StatusFilterType" minOccurs="0"/>
+			<xs:element name="SubscriptionStatus" type="base:StatusFilterAllActiveType" minOccurs="0"/>
+		</xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="SearchSubscriptionsBySerialNumberResponseType">
+        <xs:sequence>
+        	<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="SearchSubscriptionsResults" type="search:SearchSubscriptionsResultsType" minOccurs="0"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType" minOccurs="0"/>              
+		</xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="SearchAccountsBySerialNumberType">
+        <xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="AccountSerialNumber" type="base:NetworkSerialNumberType" minOccurs="1"/>
+			<xs:element name="SerialStatus" type="search:AccountSerialNumberFilterType" minOccurs="0"/>
+		</xs:sequence>
+    </xs:complexType>
+	<xs:complexType name="SearchAccountsBySerialNumberResponseType">
+        <xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="SearchAccountsResults" type="search:SearchAccountsResultsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType" minOccurs="1"/>            
+		</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SearchByAttributeValueType">
+        <xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="CustomerLevel" type="search:AttributeCustomerLevelType" minOccurs="1"/>
+			<xs:element name="AttributeValue" type="billing:AttributeValueType" minOccurs="1"/>
+			<xs:element name="AttributeGroupCode" type="billing:AttributeGroupIdType" minOccurs="0"/>
+			<xs:element name="AttributeID" type="billing:AttributeIdType" minOccurs="0"/>
+			<xs:element name="AttributeStatus" type="search:StatusFilterType" minOccurs="0"/>
+		</xs:sequence>
+    </xs:complexType>
+	<xs:complexType name="SearchByAttributeValueResponseType">
+        <xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="SearchResults" type="search:AttributeSearchResultsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType" minOccurs="0"/>            
+		</xs:sequence>
+    </xs:complexType>
+	
+</xs:schema>

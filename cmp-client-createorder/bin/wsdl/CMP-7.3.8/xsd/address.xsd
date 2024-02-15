@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/address.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/address.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/address.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema contains data types used to describe Addresses -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+    <xs:complexType name="AddressType">
+        <xs:choice>
+            <xs:element name="PersonalAddress" type="target:PersonalAddressType"/>
+            <xs:element name="BusinessAddress" type="target:BusinessAddressType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="PersonalAddressType">
+        <xs:all>
+            <xs:element name="Title" type="target:TitleType" minOccurs="1"/>
+            <xs:element name="Forename" type="target:ForenameType" minOccurs="0"/>
+            <xs:element name="MiddleName" type="target:MiddlenameType" minOccurs="0"/>
+            <xs:element name="Surname" type="target:SurnameType" minOccurs="1"/>
+            <xs:element name="Address1" type="target:AddressLineType" minOccurs="1"/>
+            <xs:element name="Address2" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address3" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address4" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address5" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Postcode" type="target:PostcodeType" minOccurs="0"/>
+            <xs:element name="DateOfBirth" type="xs:date" minOccurs="0"/>
+            <xs:element name="Gender" type="target:GenderType" minOccurs="0"/>
+            <xs:element name="MaritalStatus" type="target:MaritalStatusType" minOccurs="0"/>
+            <xs:element name="DateOfResidence" type="xs:date" minOccurs="0"/>
+            <xs:element name="CustomerType" type="target:CustomerType" minOccurs="0"/>
+            <xs:element name="AddressType" type="target:AddressOwnershipType" minOccurs="0"/>
+            <xs:element name="AddressCategory" type="target:AddressCategoryType" minOccurs="0"/>
+            <xs:element name="Occupation" type="target:OccupationType" minOccurs="0"/>
+            <xs:element name="IDType" type="target:IdType" minOccurs="0"/>
+            <xs:element name="IDNumber" type="target:IdNumberType" minOccurs="0"/>
+            <xs:element name="TelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="EveningTelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="FaxNumber" type="base:PhoneNumberType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="BusinessAddressType">
+        <xs:all>
+            <xs:element name="CompanyName" type="target:CompanyNameType" minOccurs="1"/>
+            <xs:element name="Address1" type="target:AddressLineType" minOccurs="1"/>
+            <xs:element name="Address2" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address3" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address4" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address5" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Postcode" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="CompanyTelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="FaxNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="ContactTelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="CompanyType" type="target:CompanyType" minOccurs="0"/>
+            <xs:element name="AddressType" type="target:CompanySizeType" minOccurs="0"/>
+            <xs:element name="AddressCategory" type="target:AddressCategoryType" minOccurs="0"/>
+            <xs:element name="IndustrialClassificationCode" type="target:IndustrialClassificationType" minOccurs="0"/>
+            <xs:element name="CompanyRegistration" type="target:CompanyRegistrationNumberType" minOccurs="0"/>
+            <xs:element name="DateOfIncorporation" type="xs:date" minOccurs="0"/>
+            <xs:element name="Title" type="target:TitleType" minOccurs="0"/>
+            <xs:element name="Forename" type="target:ForenameType" minOccurs="0"/>
+            <xs:element name="MiddleName" type="target:MiddlenameType" minOccurs="0"/>
+            <xs:element name="Surname" type="target:SurnameType" minOccurs="0"/>
+            <xs:element name="JobTitle" type="target:JobTitleType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+       
+    
+     
+    <xs:complexType name="UpdatePersonalAddressType">
+        <xs:all>
+            <xs:element name="Title" type="target:TitleType" minOccurs="1"/>
+            <xs:element name="Forename" type="target:ForenameType" minOccurs="0"/>
+            <xs:element name="MiddleName" type="target:MiddlenameType" minOccurs="0"/>
+            <xs:element name="Surname" type="target:SurnameType" minOccurs="1"/>
+            <xs:element name="Address1" type="target:AddressLineType" minOccurs="1"/>           
+            <xs:element name="Address2" type="target:AddressLineType" minOccurs="0"/>           
+            <xs:element name="Address3" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address4" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address5" type="target:AddressLineType" minOccurs="0"/>           
+            <xs:element name="Postcode" type="target:PostcodeType" minOccurs="0"/>           
+            <xs:element name="DateOfBirth" type="base:ClearableDateType" minOccurs="0"/>           
+            <xs:element name="Gender" type="target:GenderType" minOccurs="0"/>
+            <xs:element name="MaritalStatus" type="target:MaritalStatusType" minOccurs="0"/>           
+            <xs:element name="DateOfResidence" type="base:ClearableDateType" minOccurs="0"/>            
+            <xs:element name="CustomerType" type="target:CustomerType" minOccurs="0"/>            
+            <xs:element name="AddressType" type="target:AddressOwnershipType" minOccurs="0"/>            
+            <xs:element name="AddressCategory" type="target:AddressCategoryType" minOccurs="0"/>            
+            <xs:element name="Occupation" type="target:OccupationType" minOccurs="0"/>            
+            <xs:element name="IDType" type="target:IdType" minOccurs="0"/>            
+            <xs:element name="IDNumber" type="target:IdNumberType" minOccurs="0"/>           
+            <xs:element name="TelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="EveningTelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="FaxNumber" type="base:PhoneNumberType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateBusinessAddressType">
+        <xs:all>
+            <xs:element name="CompanyName" type="target:CompanyNameType" minOccurs="1"/>
+            <xs:element name="Address1" type="target:AddressLineType" minOccurs="1"/>           
+            <xs:element name="Address2" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address3" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address4" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address5" type="target:AddressLineType" minOccurs="0"/>           
+            <xs:element name="Postcode" type="target:PostcodeType" minOccurs="0"/>            
+            <xs:element name="CompanyTelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="FaxNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="ContactTelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>           
+            <xs:element name="CompanyType" type="target:CompanyType" minOccurs="0"/>            
+            <xs:element name="AddressType" type="target:CompanySizeType" minOccurs="0"/>           
+            <xs:element name="AddressCategory" type="target:AddressCategoryType" minOccurs="0"/>           
+            <xs:element name="IndustrialClassificationCode" type="target:IndustrialClassificationType" minOccurs="0"/>           
+            <xs:element name="CompanyRegistration" type="target:CompanyRegistrationNumberType" minOccurs="0"/>           
+            <xs:element name="DateOfIncorporation" type="base:ClearableDateType" minOccurs="0"/>           
+            <xs:element name="Title" type="target:TitleType" minOccurs="0"/>
+            <xs:element name="Forename" type="target:ForenameType" minOccurs="0"/>
+            <xs:element name="MiddleName" type="target:MiddlenameType" minOccurs="0"/>
+            <xs:element name="Surname" type="target:SurnameType" minOccurs="0"/>
+            <xs:element name="JobTitle" type="target:JobTitleType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>    
+    
+    <xs:complexType name="UpdateAddressBasicType">
+        <xs:sequence>
+            <xs:element name="AddressNumber" type="target:AddressCodeType"/> 
+            <xs:choice>
+                <xs:element name="PersonalAddress" type="target:UpdatePersonalAddressType"/>
+                <xs:element name="BusinessAddress" type="target:UpdateBusinessAddressType"/>
+            </xs:choice>        
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+       <xs:complexType name="CreateAddressBasicType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="PersonalAddress" type="target:CreatePersonalAddressType"/>
+                <xs:element name="BusinessAddress" type="target:CreateBusinessAddressType"/>
+            </xs:choice>        
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="AddressUsageType">
+        <xs:all>
+            <xs:element name="UsedByType" type="xs:string" minOccurs="1"/>
+            <xs:element name="UsedByNumber" type="target:NumberType" minOccurs="0"/>
+            <xs:element name="Number" type="target:NumberType" minOccurs="1"/>
+            <xs:element name="AddressText" type="xs:string" minOccurs="1"/>
+            <xs:element name="AccountNumber" type="target:NumberType" minOccurs="0"/>
+            <xs:element name="AccountUsage" type="target:AccountUsageType" minOccurs="0"/>
+            <xs:element name="Details" type="xs:string" minOccurs="0"/>
+            <xs:element name="UsedByCode" type="target:CodeType" minOccurs="0"/>
+            <xs:element name="NetworkSerialNoDescription" type="xs:string" minOccurs="0"/>
+            <xs:element name="AccountTypeDescription" type="target:AccountTypeDescriptionType" minOccurs="0"/>
+            <xs:element name="TelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/> 
+            <xs:element name="FaxNumber" type="base:PhoneNumberType" minOccurs="0"/> 
+            <xs:element name="TelephoneNumber2" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="AddressTextHighlightedRegions" type="xs:string" minOccurs="0"/> 
+            <xs:element name="Subset" type="xs:boolean" minOccurs="0"/>
+       </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="AddressQueryType">
+        <xs:sequence>
+            <xs:element name="AddressNumber" type="target:AddressCodeType"/> 
+            <xs:choice>
+                <xs:element name="PersonalAddress" type="target:PersonalAddressQueryType"/>
+                <xs:element name="BusinessAddress" type="target:BusinessAddressQueryType"/>
+            </xs:choice>        
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="PersonalAddressQueryType">
+        <xs:all>
+            <xs:element name="Title" type="target:TitleType" minOccurs="1"/>
+            <xs:element name="Forename" type="xs:string" minOccurs="0"/>
+            <xs:element name="MiddleName" type="xs:string" minOccurs="0"/>
+            <xs:element name="Surname" type="target:SurnameType" minOccurs="1"/>
+            <xs:element name="Address1" type="target:AddressLineType" minOccurs="1"/>
+            <xs:element name="Address2" type="xs:string" minOccurs="0"/>
+            <xs:element name="Address3" type="xs:string" minOccurs="0"/>
+            <xs:element name="Address4" type="xs:string" minOccurs="0"/>
+            <xs:element name="Address5" type="xs:string" minOccurs="0"/>
+            <xs:element name="Postcode" type="xs:string" minOccurs="0"/>
+            <xs:element name="DateOfBirth" type="xs:date" minOccurs="0"/>
+            <xs:element name="Gender" type="target:GenderType" minOccurs="0"/>
+            <xs:element name="MaritalStatus" type="target:MaritalStatusType" minOccurs="0"/>
+            <xs:element name="DateOfResidence" type="xs:date" minOccurs="0"/>
+            <xs:element name="CustomerType" type="xs:string" minOccurs="0"/>
+            <xs:element name="AddressType" type="xs:string" minOccurs="0"/>
+            <xs:element name="AddressCategory" type="xs:string" minOccurs="0"/>
+            <xs:element name="Occupation" type="xs:string" minOccurs="0"/>
+            <xs:element name="IDType" type="xs:string" minOccurs="0"/>
+            <xs:element name="IDNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="TelephoneNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="EveningTelephoneNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="FaxNumber" type="xs:string" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="BusinessAddressQueryType">
+        <xs:all>
+            <xs:element name="CompanyName" type="target:CompanyNameType" minOccurs="1"/>
+            <xs:element name="Address1" type="target:AddressLineType" minOccurs="1"/>
+            <xs:element name="Address2" type="xs:string" minOccurs="0"/>
+            <xs:element name="Address3" type="xs:string" minOccurs="0"/>
+            <xs:element name="Address4" type="xs:string" minOccurs="0"/>
+            <xs:element name="Address5" type="xs:string" minOccurs="0"/>
+            <xs:element name="Postcode" type="xs:string" minOccurs="0"/>
+            <xs:element name="CompanyTelephoneNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="FaxNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="ContactTelephoneNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="CompanyType" type="xs:string" minOccurs="0"/>
+            <xs:element name="AddressType" type="xs:string" minOccurs="0"/>
+            <xs:element name="AddressCategory" type="xs:string" minOccurs="0"/>
+            <xs:element name="IndustrialClassificationCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="CompanyRegistration" type="xs:string" minOccurs="0"/>
+            <xs:element name="DateOfIncorporation" type="xs:date" minOccurs="0"/>
+            <xs:element name="Title" type="xs:string" minOccurs="0"/>
+            <xs:element name="Forename" type="xs:string" minOccurs="0"/>
+            <xs:element name="MiddleName" type="xs:string" minOccurs="0"/>
+            <xs:element name="Surname" type="xs:string" minOccurs="0"/>
+            <xs:element name="JobTitle" type="xs:string" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="CreatePersonalAddressType">
+        <xs:all>
+            <xs:element name="Title" type="target:TitleType" minOccurs="1"/>
+            <xs:element name="Forename" type="target:ForenameType" minOccurs="1"/>
+            <xs:element name="MiddleName" type="target:MiddlenameType" minOccurs="0"/>
+            <xs:element name="Surname" type="target:SurnameType" minOccurs="1"/>
+            <xs:element name="Address1" type="target:AddressLineType" minOccurs="1"/>           
+            <xs:element name="Address2" type="target:AddressLineType" minOccurs="0"/>           
+            <xs:element name="Address3" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address4" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address5" type="target:AddressLineType" minOccurs="0"/>           
+            <xs:element name="Postcode" type="target:PostcodeType" minOccurs="0"/>           
+            <xs:element name="DateOfBirth" type="base:ClearableDateType" minOccurs="0"/>           
+            <xs:element name="Gender" type="target:GenderType" minOccurs="0"/>
+            <xs:element name="MaritalStatus" type="target:MaritalStatusType" minOccurs="0"/>           
+            <xs:element name="DateOfResidence" type="base:ClearableDateType" minOccurs="0"/>            
+            <xs:element name="CustomerType" type="target:CustomerType" minOccurs="0"/>            
+            <xs:element name="AddressType" type="target:AddressOwnershipType" minOccurs="0"/>            
+            <xs:element name="AddressCategory" type="target:AddressCategoryType" minOccurs="0"/>            
+            <xs:element name="Occupation" type="target:OccupationType" minOccurs="0"/>            
+            <xs:element name="IDType" type="target:IdType" minOccurs="0"/>            
+            <xs:element name="IDNumber" type="target:IdNumberType" minOccurs="0"/>           
+            <xs:element name="TelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="EveningTelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="FaxNumber" type="base:PhoneNumberType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="CreateBusinessAddressType">
+        <xs:all>
+            <xs:element name="CompanyName" type="target:CompanyNameType" minOccurs="1"/>
+            <xs:element name="Address1" type="target:AddressLineType" minOccurs="1"/>           
+            <xs:element name="Address2" type="target:AddressLineType" minOccurs="1"/>
+            <xs:element name="Address3" type="target:AddressLineType" minOccurs="1"/>
+            <xs:element name="Address4" type="target:AddressLineType" minOccurs="0"/>
+            <xs:element name="Address5" type="target:AddressLineType" minOccurs="0"/>           
+            <xs:element name="Postcode" type="target:PostcodeType" minOccurs="0"/>            
+            <xs:element name="CompanyTelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="FaxNumber" type="base:PhoneNumberType" minOccurs="0"/>
+            <xs:element name="ContactTelephoneNumber" type="base:PhoneNumberType" minOccurs="0"/>           
+            <xs:element name="CompanyType" type="target:CompanyType" minOccurs="0"/>            
+            <xs:element name="AddressType" type="target:CompanySizeType" minOccurs="0"/>           
+            <xs:element name="AddressCategory" type="target:AddressCategoryType" minOccurs="0"/>           
+            <xs:element name="IndustrialClassificationCode" type="target:IndustrialClassificationType" minOccurs="0"/>           
+            <xs:element name="CompanyRegistration" type="target:CompanyRegistrationNumberType" minOccurs="0"/>           
+            <xs:element name="DateOfIncorporation" type="base:ClearableDateType" minOccurs="0"/>           
+            <xs:element name="Title" type="target:TitleType" minOccurs="0"/>
+            <xs:element name="Forename" type="target:ForenameType" minOccurs="0"/>
+            <xs:element name="MiddleName" type="target:MiddlenameType" minOccurs="0"/>
+            <xs:element name="Surname" type="target:SurnameType" minOccurs="0"/>
+            <xs:element name="JobTitle" type="target:JobTitleType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>    
+    
+    <xs:simpleType name="NumberType">
+            <xs:restriction base="base:EightDigitNumberType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CodeType">
+        <xs:restriction base="base:StringMaxLength6Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AccountTypeDescriptionType">
+        <xs:restriction base="base:StringMaxLength30Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AccountUsageType">
+        <xs:restriction base="base:StringMaxLength1Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AddressCodeType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="99999999"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TitleType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ForenameType">
+        <xs:restriction base="base:StringMaxLength15Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="MiddlenameType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="SurnameType">
+        <xs:restriction base="base:StringMaxLength25Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AddressLineType">
+        <xs:restriction base="base:StringMaxLength40Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="PostcodeType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="GenderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Male"/>
+            <xs:enumeration value="Female"/>
+            <xs:enumeration value="Unknown"/> 
+            <xs:enumeration value="BLANK"/>
+        </xs:restriction>        
+    </xs:simpleType>
+    
+    <xs:simpleType name="MaritalStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Married"/>
+            <xs:enumeration value="Single"/>
+            <xs:enumeration value="Widowed"/>
+            <xs:enumeration value="Divorced"/>
+            <xs:enumeration value="Other"/>
+            <xs:enumeration value="Separated"/>
+            <xs:enumeration value="BLANK"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CustomerType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+        
+    <xs:simpleType name="CompanyType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AddressOwnershipType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CompanySizeType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AddressCategoryType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="OccupationType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="IdType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="IdNumberType">
+        <xs:restriction base="base:StringMaxLength30Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CompanyNameType">
+        <xs:restriction base="base:StringMaxLength60Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="IndustrialClassificationType">
+        <xs:restriction base="base:StringMaxLength10Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="CompanyRegistrationNumberType">
+        <xs:restriction base="base:StringMaxLength25Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="JobTitleType">
+        <xs:restriction base="base:StringMaxLength30Type"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="EmailAddressType">
+        <xs:restriction base="base:StringMaxLength70Type"/>
+    </xs:simpleType>    
+    
+    
+     <xs:complexType name="TargetIdentifierType">
+        <xs:choice>
+            <xs:element name="GroupIdentifier" type="base:GroupCodeType"/>
+            <xs:element name="CorporateIdentifier" type="base:CorporateCodeType"/>
+            <xs:element name="AccountIdentifier" type="base:AccountNumberType"/>
+            <xs:element name="SubscriptionIdentifier" type="base:SubscriptionNumberType"/>
+        </xs:choice>
+     </xs:complexType>          
+
+	 <xs:complexType name="EmailTypes">
+		<xs:sequence>
+			<xs:element name="Email" type="target:EmailType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	 
+	 <xs:complexType name="EmailType">
+        <xs:sequence>
+            <xs:element name="EmailAddress" type="target:EmailAddressType" minOccurs="1"/>
+            <xs:element name="PrimaryEmailAddress" type="xs:boolean" minOccurs="1"/>
+            <xs:element name="Active" type="xs:boolean" minOccurs="1"/>    
+            <xs:element name="EmailAddressType" type="base:StringMaxLength6Type" minOccurs="1"/>    
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="1"/>
+	    </xs:sequence>
+    </xs:complexType>
+
+	 
+</xs:schema>

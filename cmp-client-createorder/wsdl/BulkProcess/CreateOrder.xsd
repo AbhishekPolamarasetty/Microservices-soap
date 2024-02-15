@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+//Schema/BulkProcess/CreateOrder.xsd
+
+(c) Copyright 2006 Martin Dawes Systems Ltd
+
+Description
+	CreateOrder specifies the request and response for the Creation of 
+	Orders using the Bulk Process Application. Each CreateOrder request
+	has a corresponding CreateOrderResponse.
+ 
+Edit History
+    Date			Author        		Comment     
+	03/04/2006  	Mark Waters 		New Document SCR 34798
+-->
+<xs:schema targetNamespace="http://mdsuk.com/dise3g/bulkprocess/createOrder"
+	xmlns:account="http://mdsuk.com/ws/dise3g/account/dto/business"
+	xmlns:agreement="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+	xmlns:base="http://mdsuk.com/ws/dise3g/base"
+	xmlns:bulkbase="http://mdsuk.com/dise3g/bulkprocess/base"
+	xmlns:order="http://mdsuk.com/ws/dise3g/order/dto/business"
+	xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+	xmlns="http://mdsuk.com/dise3g/bulkprocess/createOrder"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/account/dto/business"
+		schemaLocation="../xsd/account.xsd"/>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+		schemaLocation="../xsd/agreement.xsd"/>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/base"
+		schemaLocation="../xsd/base.xsd"/>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/order/dto/business"
+		schemaLocation="../xsd/orderprocessing.xsd"/>
+	<xs:import namespace="http://mdsuk.com/dise3g/bulkprocess/base"
+		schemaLocation="../BulkProcess/base/base.xsd"/>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+		schemaLocation="../xsd/subscription.xsd"/>
+	<xs:annotation>
+		<xs:documentation>Schema for Creating an Order in DISE</xs:documentation>
+	</xs:annotation>
+
+	<xs:complexType name="CreateOrderType">
+		<xs:sequence>
+			<xs:element name="AccountNumber" type="base:AccountNumberType"/>
+			<xs:element name="OrderHeader" type="order:OrderHeaderType"/>
+			<xs:element name="OrderProduct" type="OrderProductType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrderProductType">
+		<xs:sequence>
+			<xs:element name="OrderProductData" type="order:OrderProductDataType"/>
+			<xs:element name="Subscriptions" type="bulkbase:SubscriptionsType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CreateOrderResponseType">
+		<xs:sequence>
+			<xs:element name="Result" type="bulkbase:ResultType"/>
+			<xs:element name="AccountNumber" type="base:AccountNumberType"/>
+			<xs:element name="OrderHeader" type="order:OrderHeaderType"/>
+			<xs:element name="OrderProductResponse" type="OrderProductResponseType"
+				maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrderProductResponseType">
+		<xs:sequence>
+			<xs:element name="Result" type="bulkbase:ResultType"/>
+			<xs:element name="OrderProductData" type="order:OrderProductDataType"/>
+			<xs:element name="OrderProductItem" type="base:StringMaxLength25Type" minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xs:element name="SubscriptionsResponse" type="bulkbase:SubscriptionsResponseType" minOccurs="0"
+				maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

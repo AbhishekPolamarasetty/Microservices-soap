@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/group.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/group.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/group.xsd $
+    $Revision: #1 $
+    (c) Copyright 2008 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema contains data types used to describe Groups -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/group/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/group/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:account="http://mdsuk.com/ws/dise3g/account/dto/business"
+    xmlns:discount="http://mdsuk.com/ws/dise3g/discount/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business" schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/account/dto/business" schemaLocation="account.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/discount/dto/business" schemaLocation="discount.xsd"/>
+
+    <xs:complexType name="CreateGroupType">
+        <xs:sequence>
+            <xs:element name="GroupCode" type="base:GroupCodeType"/>
+            <xs:element name="GroupDescription" type="target:GroupDescriptionType"/>
+            <xs:element name="Account" type="account:AccountType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateGroupBasicType">
+        <xs:sequence>
+            <xs:element name="GroupDescription" type="target:GroupDescriptionType" minOccurs="0"/>
+            <xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+            <xs:element name="PostingAccountNumber" type="base:AccountNumberType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType"/>
+        </xs:sequence> 
+    </xs:complexType>
+
+
+    <xs:complexType name="GroupBasicType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Group Query response
+                when BASIC dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="GroupCode" type="base:GroupCodeType"/>
+            <xs:element name="GroupDescription" type="target:GroupDescriptionType"/>
+            <xs:element name="CompanyNumber" type="base:CompanyNumberType"/>
+            <xs:element name="AddressNumber" type="address:AddressCodeType"/>
+            <xs:element name="EmailAddress" type="address:EmailAddressType" minOccurs="0"/>
+            <xs:element name="PostingAccountNumber" type="base:AccountNumberType"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:sequence> 
+    </xs:complexType>
+
+    <xs:simpleType name="GroupDescriptionType">
+        <xs:restriction base="base:StringMaxLength30Type"/>
+    </xs:simpleType>
+
+    <!-- an existing address or data needed to create a new address -->
+    <xs:complexType name="AddressChoiceType">
+        <xs:choice>
+            <xs:element name="AddressCode" type="address:AddressCodeType"/>
+            <xs:element name="NewAddressData" type="address:BusinessAddressType"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:simpleType name="QueryGroupDatasetType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BASIC"/>
+            <xs:enumeration value="ADDRESS"/>
+            <xs:enumeration value="DISCOUNTS"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="QueryGroupDatasetsType">
+        <xs:sequence>
+            <xs:element name="Dataset" type="target:QueryGroupDatasetType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

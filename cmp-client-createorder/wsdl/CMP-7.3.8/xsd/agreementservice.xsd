@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/agreementservice.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/agreementservice.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/agreementservice.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Agreement service -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/agreement/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:agreement="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/agreement/dto/service"
+    xmlns:discount="http://mdsuk.com/ws/dise3g/discount/dto/business"
+    xmlns:service="http://mdsuk.com/ws/dise3g/services/dto/business"
+    xmlns:bundle="http://mdsuk.com/ws/dise3g/bundle/dto/business"
+    xmlns:account="http://mdsuk.com/ws/dise3g/account/dto/business"
+    xmlns:basket="http://mdsuk.com/ws/dise3g/basket/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+        schemaLocation="agreement.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business"
+        schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/discount/dto/business"
+        schemaLocation="discount.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/services/dto/business"
+        schemaLocation="services.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/bundle/dto/business"
+        schemaLocation="bundle.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/account/dto/business"
+        schemaLocation="account.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/basket/dto/business"
+        schemaLocation="basket.xsd"/>
+
+    <xs:complexType name="CreateAgreementType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AgreementData" type="agreement:AgreementType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CreateAgreementResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AgreementNumber" type="base:AgreementNumberType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="QueryAgreementType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AgreementNumber" type="base:AgreementNumberType"/>
+            <xs:element name="Datasets" type="agreement:QueryAgreementDatasetsType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="QueryAgreementResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AgreementBasic" type="agreement:AgreementBasicType" minOccurs="0"/>
+            <xs:element name="Address" type="address:AddressQueryType" minOccurs="0"/>
+            <xs:element name="Discounts" type="discount:DiscountsType" minOccurs="0"/>
+            <xs:element name="Services" type="service:ServiceDetailsType" minOccurs="0"/>
+            <xs:element name="Bundles" type="bundle:BundlesType" minOccurs="0"/>
+            <xs:element name="ContractAndSales" type="agreement:ContractAndSalesType" minOccurs="0"/>
+            <xs:element name="InvoiceControl" type="agreement:InvoiceControlType" minOccurs="0"/>
+        	<xs:element name="Baskets" type="basket:QueryBasketsType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateAgreementType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AgreementNumber" type="agreement:AgreementNumberIntType" minOccurs="1"/>
+            <xs:element name="UpdateAgreementBasic" type="agreement:UpdateAgreementBasicType" minOccurs="0"/>
+            <xs:element name="UpdateContractAndSales" type="agreement:UpdateContractAndSalesType" minOccurs="0"/>
+            <xs:element name="UpdateInvoiceControl" type="agreement:UpdateInvoiceControlType" minOccurs="0"/>
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="QueryAgreementsByCustomerLevelType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>          
+            <xs:element name="AccountIdentifier" type="base:AccountNumberType" minOccurs="1"/>            
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="QueryAgreementsByCustomerLevelResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>            
+            <xs:element name="Agreement" type="agreement:QueryAgreementsReturnType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+        
+    
+    <xs:complexType name="UpdateAgreementResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AgreementNumber" type="agreement:AgreementNumberIntType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CreateAgreementCostCentreType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+             <xs:element name="AgreementNumber" type="agreement:AgreementNumberIntType" minOccurs="1"/>
+			 <xs:element name="CostCentreCode" minOccurs="1" type="agreement:CostCenterCodeType"/>
+            <xs:element name="CostCentreDescription" minOccurs="1" type="base:StringMaxLength30Type"/>                 
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CreateAgreementCostCentreResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="QueryAgreementCostCentresType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+             <xs:element name="AgreementNumber" type="base:AgreementNumberType"/>
+             <xs:element name="Datasets" type="agreement:QueryAgreementCostCentresDatasetsType"/>             
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="QueryAgreementCostCentresResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType" minOccurs="1"/>
+            <xs:element name="AgreementCostCentres" type="agreement:QueryAgreementCostCentresBasicType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+ <xs:complexType name="CreateAggregatedBundlesRequestType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AgreementNumber" type="agreement:AgreementNumberIntType" minOccurs="1"/>
+            <xs:element name="Bundles" type="bundle:AggregatedBundlesType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="CreateAggregatedBundlesResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="CreatedBundles" type="bundle:AggregatedBundlesType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+</xs:schema>

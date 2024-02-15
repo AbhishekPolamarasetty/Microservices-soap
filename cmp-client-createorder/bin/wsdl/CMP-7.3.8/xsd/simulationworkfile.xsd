@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $DateTime: 2007/08/23 14:00:00 $
+    $Author: Sean Ryan $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes data types used by the simulation workfile service and others -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/simulationworkfile/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/simulationworkfile/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+    <xs:complexType name="SubscriptionNumberType">
+        <xs:annotation>
+            <xs:documentation>Data structure used by get simulation work file data.</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="SubscriptionNumber" type="xs:long" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="SimulationWorkfileType">
+        <xs:annotation>
+            <xs:documentation>Data structure returned by get simulation workfile data</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="SubscriptionNumber" type="xs:long" minOccurs="0"/>
+            <xs:element name="CompanyNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="ServiceCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="ReloadAmount" type="xs:long" minOccurs="0"/>
+            <xs:element name="LastUsedDate" type="xs:dateTime" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+</xs:schema>

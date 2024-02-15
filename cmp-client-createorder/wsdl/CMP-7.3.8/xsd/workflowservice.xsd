@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/workflowservice.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/workflowservice.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/workflowservice.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Workflow service -->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/workflow/dto/service"
+    xmlns:target="http://mdsuk.com/ws/dise3g/workflow/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:workflow="http://mdsuk.com/ws/dise3g/workflow/dto/business"
+    xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:services="http://mdsuk.com/ws/dise3g/services/dto/business"
+	xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/workflow/dto/business"
+        schemaLocation="workflow.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business"
+        schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/services/dto/business"
+        schemaLocation="services.xsd"/>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+        schemaLocation="subscription.xsd"/> 	
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+    <xs:complexType name="CreateWorkflowType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="WorkflowData" type="workflow:WorkflowEventType" minOccurs="1"/>
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CreateWorkflowResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="EventNumber" type="workflow:WorkflowNumberType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateWorkflowType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="UpdateWorkflowData" type="workflow:UpdateWorkflowEventType"
+                minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateWorkflowResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+
+    <xs:complexType name="QueryWorkflowType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+             <xs:choice>	
+            	<xs:element name="EventNumber" type="workflow:WorkflowNumberType"/>
+            	<xs:element name="EventNumberAlias" type="base:StringMaxLength20Type"/>
+            </xs:choice>
+            <xs:element name="Datasets" type="workflow:QueryWorkflowDatasetsType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="QueryWorkflowResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="WorkflowBasic" type="workflow:QueryWorkflowBasicType" minOccurs="0"/>
+            <xs:element name="ContactDetails" type="workflow:QueryWorkflowContactDetailsType"
+                minOccurs="0"/>
+            <xs:element name="Address" type="address:AddressQueryType" minOccurs="0"/>
+			<xs:element name="Notes" type="workflow:QueryWorkflowNotesType" minOccurs="0"/>
+			<xs:element name="Adjustments" type="workflow:AdjustmentsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="LinkedEvents" type="workflow:LinkedEventsType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="QueryWorkflowsType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="CustomerLevel" type="workflow:CustomerLevelType"/>
+            <xs:element name="CustomerLevelReference" type="workflow:CustomerLevelReferenceType"/>
+            <xs:element name="StatusFilter" type="workflow:StatusFilterType"/>
+            <xs:element name="DataFilter" type="workflow:DataFilterType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="QueryWorkflowsResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>
+            <xs:element name="Workflows" type="workflow:QueryWorkflowsType"/>
+        </xs:all>
+    </xs:complexType>
+    	
+	<xs:complexType name="CreateSalesLedgerAdjustmentType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="EventNumber" type="workflow:WorkflowNumberType"/>
+			<xs:element name="ServiceCode" type="base:ServiceCodeType"/>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="0"/>
+            <xs:element name="ChargeStartDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="ChargeEndDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="NetAmount" type="base:SignedDecimal9_2Type"/>
+            <xs:element name="ChargeToNominalCode" type="services:ChargetoNominalCodeType" minOccurs="0"/>
+			<xs:element name="TaxRateAtStart" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="Comments" type="workflow:SalesLedgerAdjustmentCommentsType" minOccurs="0"/>
+			<xs:element name="EligibilityRules" type="subscription:EligibilityRulesType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="CreateSalesLedgerAdjustmentResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="DeleteSalesLedgerAdjustmentType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="WorkflowEventNumber" type="workflow:WorkflowNumberType"/>
+			<xs:element name="LineNumber" type="base:FiveDigitNumberType"/>
+        </xs:all>
+    </xs:complexType>
+
+	
+	<xs:complexType name="DeleteSalesLedgerAdjustmentResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:simpleType name="EventStatusType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="OperatorIdentifierType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+	<xs:complexType name="QueryWorklistsType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="ResolutionRequiredByDate" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="Department" type="base:StringMaxLength6Type" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="QueryWorklistType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="UserID" type="workflow:UserIDType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="QueryWorklistsResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="Worklists" type="workflow:WorklistsType"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="QueryWorklistResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="WorklistItems" type="workflow:WorklistItemsType"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>
+        </xs:all>
+    </xs:complexType>
+	
+</xs:schema>

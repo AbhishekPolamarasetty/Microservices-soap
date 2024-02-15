@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/porting/dto/service"
+	xmlns:target="http://mdsuk.com/ws/dise3g/porting/dto/service"
+	xmlns:porting="http://mdsuk.com/ws/dise3g/porting/dto/business"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://mdsuk.com/ws/dise3g/base">
+
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/porting/dto/business"
+		schemaLocation="porting.xsd"></xs:import>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"></xs:import>
+
+	<xs:complexType name="CreatePacType">
+		<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"></xs:element>
+			<xs:element name="Subscriptions" type="porting:SubscriptionListType" minOccurs="1"/>
+            <xs:element name="ApplyCharge" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="SwitchType" type="porting:SwitchType" minOccurs="0"/>
+			<xs:element name="PortOutReasonCode" type="porting:ReasonCodeType" minOccurs="0"/>
+			<xs:element name="SuppressNotificationWorkflow" type="xs:boolean" minOccurs="0"/>	
+			<xs:element name="ETCInfo" type="porting:ETCInfoType" minOccurs="0"/>		
+            <xs:element name="SpOptionalData" type="porting:SpOptionalDataType" minOccurs="0"/>		
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CreatePacResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+             <xs:element name="PacDetail" type="porting:PacDetailType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PortInType">
+		<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"></xs:element>
+			<xs:element name="PortDetails" type="porting:DonorLedPortDetailsType" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="PortInResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+             <xs:element name="PortDate" type="porting:PortDateType"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="CancelPortInType">
+		<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"></xs:element>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CancelPortInResponseType">
+        <xs:annotation>
+			<xs:documentation>A successful Cancel request returns an empty response if ExternalReference isn't populated
+				An unsuccessful request returns a SOAP Fault</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+ 	<xs:complexType name="QueryPacType">
+		<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="PortType" type="porting:PortType" minOccurs="1"/>
+			<xs:choice>
+				<xs:element name="Subscription" type="base:SubscriptionNumberType" maxOccurs="1"/>
+				<xs:element name="PacCode" type="porting:PacCodeType" maxOccurs="1"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="QueryPacResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="PacDetail" type="porting:PacDetailQueryResponseType"/>
+			<xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>			
+        </xs:sequence>
+    </xs:complexType>   	
+</xs:schema>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/agreement/agreementservice.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/agreement/agreementservice.wsdl#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/agreement/agreementservice.wsdl $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/agreement/service"
+    xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:definition="http://mdsuk.com/ws/dise3g/agreement/definition"
+    xmlns:target="http://mdsuk.com/ws/dise3g/agreement/service">
+
+    <import namespace="http://mdsuk.com/ws/dise3g/agreement/definition" location="agreement.wsdl"/>
+
+    <!-- binding declns -->
+
+    <binding name="AgreementSOAPBinding" type="definition:AgreementPortType">
+        <documentation> This Webservice binding encompasses all operations relating to Dise3G
+            Agreement WebServices. </documentation>
+
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="CreateAgreement">
+            <documentation> Creates a new Agreement within Dise3G. </documentation>
+			<soap:operation/>
+             <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+        <operation name="QueryAgreement">
+            <documentation>Query a specific Agreement within Dise3G. </documentation>
+			<soap:operation/>
+             <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+        
+        <operation name="QueryAgreementsByCustomerLevel">
+            <documentation>Query the Agreements associated with a specific Account, Corporate, or Group. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+        
+        <operation name="UpdateAgreement">
+            <documentation>Update a specific Agreement within Dise3G. </documentation>
+			<soap:operation/>
+             <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+
+       <operation name="CreateAgreementCostCentre">
+            <documentation> Creates a new Agreement Cost Centre within Dise3G. </documentation>
+			<soap:operation/>
+             <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+
+       <operation name="QueryAgreementCostCentres">
+            <documentation> Query an Agreement to retrieve the list of Cost Centres associated to it within Dise3G. </documentation>
+			<soap:operation/>
+             <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+		
+        <operation name="CreateAggregatedBundles">
+			<documentation> Create aggregated bundle allocations to an agreement within Dise3G. </documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"/>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"/>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"/>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"/>
+			</fault>
+		</operation>
+    </binding>
+
+   
+    <!-- service declns -->
+    
+    <service name="AgreementPort">
+        <documentation> This is the WebService for Dise3G Agreement management. </documentation>
+        <port name="AgreementPort" binding="target:AgreementSOAPBinding">
+            <soap:address location="http://localhost:9082/ws/dise3g/services/AgreementPort"/>
+        </port>
+    </service>
+
+</definitions>

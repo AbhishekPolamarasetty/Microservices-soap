@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/services/servicesservice.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/services/servicesservice.wsdl#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/services/servicesservice.wsdl $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/services/service"
+    xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:definition="http://mdsuk.com/ws/dise3g/services/definition"
+    xmlns:target="http://mdsuk.com/ws/dise3g/services/service">
+
+
+    <import namespace="http://mdsuk.com/ws/dise3g/services/definition" location="services.wsdl"/>
+
+    <!-- binding declns -->
+
+    <binding name="ServicesSOAPBinding" type="definition:ServicePortType">
+        <documentation> This Webservice binding encompasses all operations relating to Dise3G
+            Service WebServices. </documentation>
+
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="CreateService">
+            <documentation> Creates a new Service within Dise3G. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+        <operation name="UpdateService">
+		    <documentation> Updates a Service within Dise3G. </documentation>
+			<soap:operation/>
+		    <input>
+		        <soap:body use="literal"/>
+		    </input>
+		    <output>
+		        <soap:body use="literal"/>
+		    </output>
+		    <fault name="SystemFault">
+		        <soap:fault use="literal" name="SystemFault"/>
+		    </fault>
+		    <fault name="SecurityFault">
+		        <soap:fault use="literal" name="SecurityFault"/>
+		    </fault>
+		    <fault name="ValidationFault">
+		        <soap:fault use="literal" name="ValidationFault"/>
+		    </fault>
+		    <fault name="ServiceUnavailableFault">
+		        <soap:fault use="literal" name="ServiceUnavailableFault"/>
+		    </fault>
+		</operation>        
+		<operation name="QuerySubscriptionServices">
+			<documentation>Queries for Subscription Services by subscription.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+		<operation name="QueryAccountServices">
+			<documentation>Queries for Account Services by account.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal"></soap:body>
+			</input>
+			<output>
+				<soap:body use="literal"></soap:body>
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault"></soap:fault>
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault"></soap:fault>
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault"></soap:fault>
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault"></soap:fault>
+			</fault>
+		</operation>
+        
+    </binding>
+
+    <!-- service declns -->
+    <service name="ServicesPort">
+        <documentation> This is the WebService for Dise3G Service management. </documentation>
+        <port name="ServicesPort" binding="target:ServicesSOAPBinding">
+            <soap:address location="http://localhost:9082/ws/dise3g/services/ServicesPort"/>
+        </port>
+    </service>
+
+</definitions>

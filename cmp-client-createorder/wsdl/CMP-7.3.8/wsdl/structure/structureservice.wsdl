@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	$$Id$$
+	$$Header$$
+	$$DateTime$$
+	$$Author$$
+	$$File$$
+	$$Revision$$
+	(c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/structure/service" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:definition="http://mdsuk.com/ws/dise3g/structure/definition" xmlns:target="http://mdsuk.com/ws/dise3g/structure/service">
+
+	<import namespace="http://mdsuk.com/ws/dise3g/structure/definition" location="structure.wsdl" />
+
+	<!-- binding declns -->
+
+	<binding name="StructureSOAPBinding" type="definition:StructurePortType">
+		<documentation>This Webservice binding encompasses all operations relating to Dise3G Custumer or Biling Structure WebServices.</documentation>
+
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="CreateDataAPNS">
+            <documentation> Creates data APNs on a given structure.</documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+        
+		<operation name="QueryCustomerStructure">
+			<documentation>Query Customer Structure within Dise3G.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault" />
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault" />
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault" />
+			</fault>
+		</operation>
+		
+		<operation name="ManageAPNS">
+            <documentation> Manage data APNs on a given subscriber.</documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault name="SystemFault" use="literal"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault name="SecurityFault" use="literal"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault name="ValidationFault" use="literal"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault name="ServiceUnavailableFault" use="literal"/>
+            </fault>
+        </operation>
+		
+		<operation name="QueryAgreementStructure">
+			<documentation>Query Customer Structure within Dise3G by specifying an agreement number.</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault" />
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault" />
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault" />
+			</fault>
+		</operation>
+
+	</binding>
+
+	<!-- service declns -->
+	<service name="StructurePort">
+		<documentation>This Webservice binding encompasses all operations relating to Dise3G Custumer or Biling Structure WebServices.</documentation>
+		<port name="StructurePort" binding="target:StructureSOAPBinding">
+			<soap:address location="http://localhost:9082/ws/dise3g/services/StructurePort" />
+		</port>
+	</service>
+
+</definitions>

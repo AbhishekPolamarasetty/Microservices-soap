@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/faults.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/faults.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/faults.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema contains data types used to describe the various webservices faults. -->
+
+<xs:schema xmlns:target="http://mdsuk.com/ws/dise3g/fault"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mdsuk.com/ws/dise3g/fault">
+    <!-- Fault types -->
+    <xs:complexType name="FaultDetails">
+        <xs:sequence>
+            <xs:element name="MessageId" type="xs:string"/>
+            <xs:element name="MessageText" type="xs:string" minOccurs="0"/>
+            <xs:element name="ExtraInfo" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="BaseFault">
+        <xs:sequence>
+            <xs:element name="Details" type="target:FaultDetails" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SystemFault">
+        <xs:complexContent>
+            <xs:extension base="target:BaseFault"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SecurityFault">
+        <xs:complexContent>
+            <xs:extension base="target:BaseFault"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ValidationFault">
+        <xs:complexContent>
+            <xs:extension base="target:BaseFault">
+                <xs:sequence>
+                    <xs:element name="Errors" type="target:ErrorListType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ErrorListType">
+        <xs:sequence>
+            <xs:element name="Error" type="target:FaultDetails" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ServiceUnavailableFault">
+        <xs:complexContent>
+            <xs:extension base="target:BaseFault"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- This schema describes data types used by the subscription freeze service. -->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/subscriptionfreeze/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/subscriptionfreeze/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:services="http://mdsuk.com/ws/dise3g/services/dto/business"
+    xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/services/dto/business"
+    	schemaLocation="services.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+        schemaLocation="subscription.xsd"/>
+
+	<xs:simpleType name="FreezeCategoryType">
+        <xs:restriction base="xs:string">
+		    <xs:minLength value="1"></xs:minLength>       
+            <xs:maxLength value="10"></xs:maxLength>
+		</xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="UnfreezeDateType">
+        <xs:restriction base="xs:date">
+		</xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="FreezeDateType">
+        <xs:restriction base="xs:date">
+		</xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="ChargeType">
+	    <xs:restriction base="base:SignedDecimal9_2Type">
+		</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="QueryFreezesType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Subscription Query response
+                when FREEZES dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Freeze" type="target:QueryFreezeType"
+                minOccurs="1" maxOccurs="999"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="QueryFreezeType">       
+        <xs:all>
+            <xs:element name="ExpectedFreezeStartDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="ExpectedFreezeEndDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="ActualFreezeStartDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="ActualFreezeEndDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="CatagoryCode" type="target:FreezeCategoryType" minOccurs="0"/>
+ 			<xs:element name="ContractNumber" type="subscription:ContractNumberType" minOccurs="0"/>
+            <xs:element name="ServiceCode" type="subscription:ServiceCodeType" minOccurs="0"/>
+            <xs:element name="ServicePrice" type="services:ServicePriceType" minOccurs="0"/>
+            <xs:element name="FreezeCancellationDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="FreezeStatus" type="xs:string" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/porting/definition"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:target="http://mdsuk.com/ws/dise3g/porting/definition"
+    xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition">
+
+    <documentation>This Webservice definition encompasses all operations relating to porting.
+    </documentation>
+    
+     <import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://mdsuk.com/ws/dise3g/porting/definition"
+            xmlns:porting="http://mdsuk.com/ws/dise3g/porting/dto/service"
+            elementFormDefault="qualified">
+
+            <import namespace="http://mdsuk.com/ws/dise3g/porting/dto/service" schemaLocation="../../xsd/portingservice.xsd"/>
+
+            <element name="CreatePac">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="porting:CreatePacType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="CreatePacResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="porting:CreatePacResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="PortIn">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="porting:PortInType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="PortInResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="porting:PortInResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+			
+			<element name="CancelPortIn">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="porting:CancelPortInType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="CancelPortInResponse">
+				<complexType>
+                    <sequence>
+                        <element name="Result" type="porting:CancelPortInResponseType"/>
+                    </sequence>
+                </complexType>
+			</element>
+
+            <element name="QueryPac">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="porting:QueryPacType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="QueryPacResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="porting:QueryPacResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+			
+        </schema>
+    </types>
+
+    <message name="CreatePacRequest">
+        <part name="Parameters" element="target:CreatePac"/>
+    </message>
+
+    <message name="CreatePacResponse">
+        <part name="Parameters" element="target:CreatePacResponse"/>
+    </message>
+    
+    <message name="PortInRequest">
+        <part name="Parameters" element="target:PortIn"/>
+    </message>
+
+    <message name="PortInResponse">
+        <part name="Parameters" element="target:PortInResponse"/>
+    </message>
+
+	<message name="CancelPortInRequest">
+        <part name="Parameters" element="target:CancelPortIn"/>
+    </message>
+
+    <message name="CancelPortInResponse">
+        <part name="Parameters" element="target:CancelPortInResponse"/>
+    </message>
+    
+	<message name="QueryPacRequest">
+        <part name="Parameters" element="target:QueryPac"/>
+    </message>
+
+    <message name="QueryPacResponse">
+        <part name="Parameters" element="target:QueryPacResponse"/>
+    </message>
+	
+    <portType name="PortingPortType">
+        <operation name="CreatePac">
+            <input message="target:CreatePacRequest"/>
+            <output message="target:CreatePacResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="PortIn">
+            <input message="target:PortInRequest"/>
+            <output message="target:PortInResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+		
+		<operation name="CancelPortIn">
+            <input message="target:CancelPortInRequest"/>
+            <output message="target:CancelPortInResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+		
+        <operation name="QueryPac">
+            <input message="target:QueryPacRequest"/>
+            <output message="target:QueryPacResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>		
+    </portType>
+
+</definitions>

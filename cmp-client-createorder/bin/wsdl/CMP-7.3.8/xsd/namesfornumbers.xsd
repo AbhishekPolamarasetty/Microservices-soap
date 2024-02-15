@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/5.1/1/WebService/Schema/xsd/namesfornumbers.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/5.1/1/WebService/Schema/xsd/namesfornumbers.xsd#1 $
+    $DateTime: 2012/03/09 10:38:47 $
+    $Author: Dominic.Tynne $
+    $File: //Source_Code/BCC/Dise3G/5.1/1/WebService/Schema/xsd/namesfornumbers.xsd $
+    $Revision: #1 $
+    (c) Copyright 2012 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes data types used by the Names For Numbers service. -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/namesfornumbers/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:target="http://mdsuk.com/ws/dise3g/namesfornumbers/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+	
+    <xs:complexType name="NamesForNumbersResponseType">
+        <xs:sequence>
+            <xs:element name="NameForNumber" type="target:NameForNumberType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+    <xs:complexType name="NamesForNumbersType">
+        <xs:sequence>
+            <xs:element name="NameForNumber" type="target:NameForNumberType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>	
+    </xs:complexType>
+	
+    <xs:complexType name="NameForNumberType">
+        <xs:sequence>
+            <xs:element name="Number" type="base:PhoneNumberType" minOccurs="1"/>
+            <xs:element name="Name" type="base:StringMaxLength40Type" minOccurs="1"/>
+        </xs:sequence>	
+    </xs:complexType>	
+	
+</xs:schema>

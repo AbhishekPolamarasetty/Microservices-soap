@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+//Schema/BulkProcess/BulkProcessResponse.xsd
+
+(c) Copyright 2006 Martin Dawes Systems Ltd
+
+Description
+	BulkProcessResponse is the top level response XSD for the Bulk Process Application.
+	It specifies the results of requests that are specified in BulkProcessRequest.xsd .
+ 
+Edit History
+    Date			Author        		Comment     
+	03/04/2006  	Mark Waters 		New Document SCR 34798
+	07/12/2007		Gosia Grzybowska	CreateWorkflow added CIF 55955 	
+-->
+<xs:schema targetNamespace="http://mdsuk.com/dise3g/bulkprocess"
+	xmlns="http://mdsuk.com/dise3g/bulkprocess"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:bulkbase="http://mdsuk.com/dise3g/bulkprocess/base"
+	xmlns:createCustomerStructure="http://mdsuk.com/dise3g/bulkprocess/createCustomerStructure"
+	xmlns:createOrder="http://mdsuk.com/dise3g/bulkprocess/createOrder"
+	xmlns:createWorkflow="http://mdsuk.com/dise3g/bulkprocess/createWorkflow">
+	<xs:import namespace="http://mdsuk.com/dise3g/bulkprocess/base"
+		schemaLocation="../BulkProcess/base/base.xsd"/>
+	<xs:import namespace="http://mdsuk.com/dise3g/bulkprocess/createCustomerStructure"
+		schemaLocation="../BulkProcess/CreateCustomerStructure.xsd"/>
+	<xs:import namespace="http://mdsuk.com/dise3g/bulkprocess/createOrder"
+		schemaLocation="../BulkProcess/CreateOrder.xsd"/>
+	<xs:import namespace="http://mdsuk.com/dise3g/bulkprocess/createWorkflow"
+		schemaLocation="../BulkProcess/CreateWorkflow.xsd"/>
+
+	<xs:annotation>
+		<xs:documentation>Basic schema for Bulk Process Response</xs:documentation>
+	</xs:annotation>
+
+	<xs:element name="BulkProcessResponse">
+		<xs:complexType>
+			<xs:all>
+				<!-- 
+			    ExternalIdentifier contains the value received in the
+			    ExternalIdentifier tag in BulkUploadRequest. It is  returned
+			    unmodified. It may be used by the requester to correlate a 
+			    request and a response.
+			    -->
+				<xs:element name="ExternalIdentifier" type="xs:string" minOccurs="0"/>
+				<!-- 
+				Result Status indicates whether the request was successful or not.
+				If the request was unsuccessful then reasons are given.
+				See BulkProcessBase.xsd
+				-->
+				<xs:element name="ResultStatus" type="bulkbase:ResultStatusType"/>
+				<!--
+				CreateCustomerStructureResponse is the response to the CreateCustomerStructure
+				request in BulkUploadRequest. See CreateCustomerStructure.xsd
+				-->
+				<xs:element name="CreateCustomerStructureResponse"
+					type="createCustomerStructure:CreateCustomerStructureResponseType" minOccurs="0"/>
+				<!--
+				CreateOrderResponse is the response to the CreateOrder
+				request in BulkUploadRequest. Each CreateOrder request will have a 
+				corresponding CreateOrderResponse. See CreateCustomerStructure.xsd
+				-->
+				<xs:element name="CreateOrderResponse" type="createOrder:CreateOrderResponseType"
+					minOccurs="0"  maxOccurs="unbounded"/>
+				<!--
+				CreateWorkspaceResponse is the response to the CreateWorkspace
+				request in BulkUploadRequest. Each CreateWorkspace request will have a 
+				corresponding CreateWorkspaceResponse. See CreateCustomerStructure.xsd
+				-->
+				<xs:element name="CreateWorkflowResponse" 
+					type="createWorkflow:CreateWorkflowResponseType"
+					minOccurs="0"  maxOccurs="unbounded"/>
+				<!-- -->
+			</xs:all>
+            <xs:attribute name="schemaLocation" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

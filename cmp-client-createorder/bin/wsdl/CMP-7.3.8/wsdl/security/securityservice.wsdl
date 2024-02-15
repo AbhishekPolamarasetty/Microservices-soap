@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	$Id:  $
+	$Header:  $
+	$DateTime:  $
+	$Author:  $
+	$File:  $
+	$Revision:  $
+	(c) Copyright 2014 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/security/service" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:target="http://mdsuk.com/ws/dise3g/security/service" xmlns:definition="http://mdsuk.com/ws/dise3g/security/definition" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://mdsuk.com/ws/dise3g/security/definition" location="security.wsdl" />
+
+	<!-- binding declns -->
+	<binding name="SecuritySoapBinding" type="definition:SecurityPortType">
+		<documentation>This Webservice binding encompasses all operations relating to Security (Secure Session) management.</documentation>
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="QuerySecureSession">
+			<documentation>Progresses a Secure Session</documentation>
+			<soap:operation/>
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="SystemFault">
+				<soap:fault use="literal" name="SystemFault" />
+			</fault>
+			<fault name="SecurityFault">
+				<soap:fault use="literal" name="SecurityFault" />
+			</fault>
+			<fault name="ValidationFault">
+				<soap:fault use="literal" name="ValidationFault" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault use="literal" name="ServiceUnavailableFault" />
+			</fault>
+		</operation>
+	</binding>
+
+	<!-- service declns -->
+	<service name="SecurityPort">
+		<documentation>This is the webservice for DISE Secure Session processing.</documentation>
+		<port name="SecurityPort" binding="target:SecuritySoapBinding">
+			<soap:address location="http://localhost:8080/ws/dise3g/services/SecurityPort" />
+		</port>
+	</service>
+</definitions>
+

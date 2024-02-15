@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	$$Id$$
+	$$Header$$
+	$$DateTime$$
+	$$Author$$
+	$$File$$
+	$$Revision$$
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/address/definition"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:target="http://mdsuk.com/ws/dise3g/address/definition"
+    xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition">
+
+    <documentation>This Webservice definition encompasses all operations relating to Address
+        management. </documentation>
+
+	<import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://mdsuk.com/ws/dise3g/address/definition"
+            xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/service"
+            elementFormDefault="qualified">
+            <import namespace="http://mdsuk.com/ws/dise3g/address/dto/service"
+                schemaLocation="../../xsd/addressservice.xsd"/>
+
+            <element name="UpdateAddress">
+                <complexType>
+                    <sequence>
+                        <element name="AddressData" type="address:UpdateAddressType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="UpdateAddressResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="address:UpdateAddressResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="CreateAddress">
+                <complexType>
+                    <sequence>
+                        <element name="AddressData" type="address:CreateAddressType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            <element name="CreateAddressResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="address:CreateAddressResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+           <element name="CreateEmailAddress">
+             <complexType>
+              <sequence>
+              <element name="EmailData" type="address:CreateEmailAddressType"/> 
+              </sequence>
+             </complexType>
+           </element>
+           
+           <element name="CreateEmailAddressResponse">
+             <complexType>
+              <sequence>
+              <element name="Result" type="address:CreateEmailAddressResponseType"/> 
+              </sequence>
+             </complexType>
+           </element>
+		  <element name="QueryEmails">
+             <complexType>
+              <sequence>
+              <element name="Request" type="address:QueryEmailsType"/> 
+              </sequence>
+             </complexType>
+           </element>
+           
+           <element name="QueryEmailsResponse">
+             <complexType>
+              <sequence>
+              <element name="Result" type="address:QueryEmailsResponseType"/> 
+              </sequence>
+             </complexType>
+           </element>
+               
+           <element name="RemoveEmail">
+             <complexType>
+              <sequence>
+              <element name="Request" type="address:RemoveEmailType"/> 
+              </sequence>
+             </complexType>
+           </element>  
+           
+           <element name="RemoveEmailResponse">
+             <complexType>
+              <sequence>
+              <element name="Result" type="address:RemoveEmailResponseType"/> 
+              </sequence>
+             </complexType>
+           </element>
+
+        </schema>
+    </types>
+
+    <message name="UpdateAddressRequest">
+        <part name="Parameters" element="target:UpdateAddress"/>
+    </message>
+
+    <message name="UpdateAddressResponse">
+        <part name="Parameters" element="target:UpdateAddressResponse"/>
+    </message>
+    
+    <message name="CreateAddressRequest">
+        <part name="Parameters" element="target:CreateAddress"/>
+    </message>
+
+    <message name="CreateAddressResponse">
+        <part name="Parameters" element="target:CreateAddressResponse"/>
+    </message>
+
+   <message name="CreateEmailAddressRequest">
+        <part name="Parameters" element="target:CreateEmailAddress"/>
+    </message>
+
+   <message name="CreateEmailAddressResponse">
+        <part name="Parameters" element="target:CreateEmailAddressResponse"/>
+   </message>
+  
+  <message name="QueryEmailsRequest">
+        <part name="Parameters" element="target:QueryEmails"/>
+    </message>
+
+   <message name="QueryEmailsResponse">
+        <part name="Parameters" element="target:QueryEmailsResponse"/>
+   </message>
+   
+   <message name="RemoveEmailRequest">
+        <part name="Parameters" element="target:RemoveEmail"/>
+   </message>
+
+   <message name="RemoveEmailResponse">
+        <part name="Parameters" element="target:RemoveEmailResponse"/>
+   </message>
+   
+    <portType name="AddressPortType">
+        <operation name="UpdateAddress">
+            <input message="target:UpdateAddressRequest"/>
+            <output message="target:UpdateAddressResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        
+       	<operation name="CreateAddress">
+            <input message="target:CreateAddressRequest"/>
+            <output message="target:CreateAddressResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        
+        <operation name="CreateEmailAddress">
+            <input message="target:CreateEmailAddressRequest"/>
+            <output message="target:CreateEmailAddressResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+        <operation name="QueryEmails">
+            <input message="target:QueryEmailsRequest"/>
+            <output message="target:QueryEmailsResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+       <operation name="RemoveEmail">
+            <input message="target:RemoveEmailRequest"/>
+            <output message="target:RemoveEmailResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+       
+    </portType>
+</definitions>

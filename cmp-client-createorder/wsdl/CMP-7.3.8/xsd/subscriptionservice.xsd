@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/subscriptionservice.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/subscriptionservice.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/subscriptionservice.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Subscription service -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/subscription/dto/service"
+    xmlns:target="http://mdsuk.com/ws/dise3g/subscription/dto/service"
+    xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:bundle="http://mdsuk.com/ws/dise3g/bundle/dto/business"
+    xmlns:discount="http://mdsuk.com/ws/dise3g/discount/dto/business"
+    xmlns:service="http://mdsuk.com/ws/dise3g/services/dto/business"
+    xmlns:workflow="http://mdsuk.com/ws/dise3g/workflow/dto/business"
+    xmlns:billing="http://mdsuk.com/ws/dise3g/billing/dto/business"
+    xmlns:tariff="http://mdsuk.com/ws/dise3g/tariff/dto/business"
+    xmlns:porting="http://mdsuk.com/ws/dise3g/porting/dto/business"
+    xmlns:subscriptionfreeze="http://mdsuk.com/ws/dise3g/subscriptionfreeze/dto/business"
+    xmlns:basket="http://mdsuk.com/ws/dise3g/basket/dto/business"
+    xmlns:account="http://mdsuk.com/ws/dise3g/account/dto/business" >
+    
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+        schemaLocation="subscription.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business"
+        schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/bundle/dto/business"
+        schemaLocation="bundle.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/discount/dto/business"
+        schemaLocation="discount.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/services/dto/business"
+        schemaLocation="services.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/workflow/dto/business"
+        schemaLocation="workflow.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/billing/dto/business"
+        schemaLocation="billing.xsd"/>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/tariff/dto/business"
+        schemaLocation="tariff.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/porting/dto/business"
+        schemaLocation="porting.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/subscriptionfreeze/dto/business"
+        schemaLocation="subscriptionfreeze.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/basket/dto/business"
+        schemaLocation="basket.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/account/dto/business"
+        schemaLocation="account.xsd"/>
+    
+    <xs:complexType name="SubscriptionQueryType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SubscriptionQueryData" type="target:SubscriptionQueryDataType"/>
+            <xs:element name="Datasets" type="subscription:QuerySubscriptionDatasetsType"/>
+        </xs:all>
+    </xs:complexType>
+    
+     <xs:complexType name="ProcessM2MSIMType">
+        <xs:all>
+            <xs:element name="SIMNumber" type="base:NetworkSerialNumberType" minOccurs="1"/>
+            <xs:element name="ProcessDate" type="base:ProcessDateType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+     <xs:complexType name="ProcessM2MSIMResponseType"> 
+        <xs:all>
+            <xs:element name="JasperReturnCode" type="base:StatusSuccessFailureType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="SubscriptionQueryDataType">
+        <xs:choice>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType"
+                maxOccurs="1"/>
+            <xs:element name="PrimarySerialNumber" type="base:NetworkSerialNumberType"
+                maxOccurs="1"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="SubscriptionQueryResponseType"> 
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SubscriptionBasic" type="subscription:SubscriptionBasicType" minOccurs="0"/>
+            <xs:element name="CustomerDetails" type="subscription:CustomerDetailsType" minOccurs="0"/>
+            <xs:element name="ContractAndSales" type="subscription:ContractAndSalesType" minOccurs="0"/>
+            <xs:element name="SerialNumbers" type="subscription:SerialNumbersType" minOccurs="0"/>
+            <xs:element name="BillingMedia" type="subscription:BillingMediaType" minOccurs="0"/>
+            <xs:element name="UsageAndCreditControl" type="subscription:UsageAndCreditControlType" minOccurs="0"/>
+            <xs:element name="DiscountOverrides" type="subscription:DiscountsOverridesType" minOccurs="0"/>
+            <xs:element name="Bundles" type="bundle:BundlesType" minOccurs="0"/> 
+            <xs:element name="Discounts" type="discount:DiscountsType" minOccurs="0"/>
+            <xs:element name="Address" type="address:AddressQueryType" minOccurs="0"/>
+            <xs:element name="Services" type="service:ServiceDetailsType" minOccurs="0"/>
+            <xs:element name="SubscriptionBars" type="subscription:SubscriptionBarsType" minOccurs="0"/>
+            <xs:element name="AttributeGroup" type="billing:QueryAttributeGroupType" minOccurs="0"/>           
+            <xs:element name="PostPayCaps" type="subscription:QueryPostPayCapsType" minOccurs="0"/>
+            <xs:element name="ActiveAndPendingServices" type="service:ActiveAndPendingServiceDetailsType" minOccurs="0"/>
+            <xs:element name="Freezes" type="subscriptionfreeze:QueryFreezesType" minOccurs="0"/>
+            <xs:element name="Baskets" type="basket:QueryBasketsType" minOccurs="0"/>
+			<xs:element name="SimProfileInformation" type="subscription:SimProfileInformationsType" minOccurs="0"/>
+			<xs:element name="TerminationFee" type="account:TerminationFeeType" minOccurs="0"/>
+			<xs:element name="Notifications" type="subscription:QueryNotificationsType" minOccurs="0"/>
+			<xs:element name="UpgradeEligibility" type="subscription:UpgradeEligibleType" minOccurs="0"/>
+			<xs:element name="RewardEntitlement" type="subscription:RewardEntitlementsTypes" minOccurs="0"/>
+			<xs:element name="DefaultRewardCategory" type="subscription:DefaultRewardCategoryType" minOccurs="0"/>
+			<xs:element name="Features" type="subscription:FeatureTypes" minOccurs="0"/>
+			<xs:element name="NotificationPreferences" type="subscription:NotificationPreferencesType" minOccurs="0"/>
+			<xs:element name="Refreshes" type="subscription:RefreshesType" minOccurs="0"/>
+			<xs:element name="TotalAllowances" type="basket:QueryBasketsType" minOccurs="0"/>
+			<xs:element name="Packages" type="subscription:PackagesDatasetsType" minOccurs="0"/>
+        	<xs:element name="Definitions" type="subscription:DefinitionsDatasetsType" minOccurs="0"/>
+        	<xs:element name="PendingTariffChange" type="subscription:PendingTariffChangeDatasetType" minOccurs="0"/>
+        	<xs:element name="CallClassOverrides" type="subscription:CallClassOverridesDatasetsType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CreateSubscriptionType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AccountIdentifier" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="SubscriptionData" type="subscription:SubscriptionConnectionType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CreateSubscriptionResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference"  type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SubscriptionIdentifier" type="base:SubscriptionNumberType" minOccurs="1"/>
+            <xs:element name="PortDate"  type="porting:PortDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ActivateSubscriptionType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SubscriptionIdentifier" type="base:SubscriptionNumberType" minOccurs="1"/>
+            <xs:element name="ActivateData" type="subscription:ActivateDataType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="ActivateSubscriptionResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference"  type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="EventNumber" type="workflow:WorkflowNumberType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateSubscriptionType">    
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SubscriptionIdentifier" type="base:SubscriptionNumberType" minOccurs="1"/>
+            <xs:element name="UpdateSubscriptionBasic"  type="subscription:UpdateSubscriptionBasicType" minOccurs="0"/>
+            <xs:element name="UpdateCustomerDetails" type="subscription:UpdateCustomerDetailsType" minOccurs="0"/>
+            <xs:element name="UpdateContractAndSales" type="subscription:UpdateContractAndSalesType" minOccurs="0"/>
+            <xs:element name="UpdateBillingMedia" type="subscription:UpdateBillingMediaType" minOccurs="0"/>
+            <xs:element name="UpdateUsageAndCreditControl" type="subscription:UpdateUsageAndCreditControlType" minOccurs="0"/>            
+            <xs:element name="UpdateDiscountOverrides" type="subscription:DiscountsOverridesType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateSubscriptionResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateTariffType">    
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType"
+                minOccurs="1"/>
+			<xs:element name="PricePlanCode" type="base:PricePlanCodeType" minOccurs="0"/>
+            <xs:element name="TariffCode" type="subscription:TariffCodeType" minOccurs="0"/>
+			<xs:element name="PackageCode" type="subscription:PackageCodeType" minOccurs="0"/>
+            <xs:element name="IgnoreDefaultPackage" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="NonNetworkChange" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="EndBars" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="EndBarEventCode" type="workflow:EventCodeType" minOccurs="0"/>
+            <xs:element name="EndDialledOverrides" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="EndCallClassOverrides" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="ManagedSerialNumbers" type="subscription:UpdateManagedSerialNumbersType" minOccurs="0"/>
+            <xs:element name="NonManagedSerialNumbers" type="subscription:NonManagedSerialNumbersValueType" minOccurs="0"/>
+            <xs:element name="NetworkSubCodes" type="subscription:NetworkSubCodesValueType" minOccurs="0"/>
+			<xs:element name="SalesAccountIdentifier" type="base:AccountNumberType" minOccurs="0"/>
+			<xs:element name="UpdateContractAndSales" type="tariff:TariffUpdateContractAndSalesType" minOccurs="0"/>
+			<xs:element name="AttributeGroup" type="billing:AttributeGroupType" minOccurs="0"/>
+			<xs:element name="AsOfDate" type="subscription:AsOfDateType" minOccurs="0"/>
+			<xs:element name="BoltOnPackages" type="subscription:UpdateBoltOnPackagesType" minOccurs="0"/>
+			<xs:element name="EligibilityRules" type="subscription:EligibilityRulesType" minOccurs="0"/>
+            <xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType"/>
+            <xs:element name="SuppressEarlyTerminationCharges" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateTariffResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+	       <xs:element name="EventNumber" type="workflow:WorkflowNumberType" minOccurs="1"/>
+	       <xs:element name="PackageCode" type="subscription:PackageCodeType" minOccurs="0"/> 
+        </xs:all>
+    </xs:complexType>
+    
+	<xs:complexType name="RevertLastUpgradeType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>   
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="RevertLastUpgradeResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>    
+    <xs:complexType name="LinkSubscriptionsType">    
+        <xs:sequence>
+ 			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+ 			<xs:element name="SubscriptionLinkType"  type="subscription:SubscriptionLinkTypeType" minOccurs="1"/>            
+            <xs:element name="LinkTargetReference" type="subscription:LinkTargetReferenceType" minOccurs="1"/>
+            <xs:element name="LinkedSubscriptions"  type="subscription:LinkedSubscriptionsType" minOccurs="1"/>
+            </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="LinkSubscriptionsResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+	
+	    <xs:complexType name="UpdateSubscriptionSerialNumbersType">    
+        <xs:sequence>
+ 			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+ 			<xs:element name="SubscriptionIdentifier" type="base:SubscriptionNumberType" minOccurs="1"/>
+            <xs:element name="ManagedSerialNumbers" type="subscription:UpdateManagedSerialNumbersType" minOccurs="0"/>
+            <xs:element name="NonManagedSerialNumbers" type="subscription:NonManagedSerialNumbersValueType" minOccurs="0"/>
+            <xs:element name="NetworkSubCodes" type="subscription:NetworkSubCodesValueType" minOccurs="0"/>
+			<xs:element name="SalesAccountIdentifier" type="base:AccountNumberType" minOccurs="0"/>
+			<xs:element name="NonNetworkChange" type="xs:boolean" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+    
+    <xs:complexType name="UpdateSubscriptionSerialNumbersResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+       </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="CreatePackageType">    
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>               
+            <xs:element name="PackageCode" type="subscription:PackageCodeType" minOccurs="1"/>            
+            <xs:element name="EffectiveDate" type="xs:date" minOccurs="1"/>
+            <xs:element name="SalesPersonId" type="subscription:SalesPersonNumberType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CreatePackageResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="ExpirePackageType">    
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType"/>               
+            <xs:element name="PackageCode" type="subscription:PackageCodeType"/>
+            <xs:element name="EffectiveDate" type="xs:date"  minOccurs="0"/> 			
+            <xs:element name="AsOfDate" type="base:ClearableDateType"/>
+			<xs:element name="EligibilityRules" type="subscription:EligibilityRulesType" minOccurs="0"/>
+            <xs:element name="SuppressETC" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ExpirePackageResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="ManagePackagesType">
+    	<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+    		<xs:element name="TargetIdentifier" type="target:TargetIdentifierType" minOccurs="1" maxOccurs="1"/>
+    		<xs:element name="SalesAccountCode" type="base:SalesAccountCodeType" minOccurs="0"/>
+    		<xs:element name="AsOfDate" type="subscription:AsOfDateType" minOccurs="0"/>
+    		<xs:element name="PackagesToCreate" type="subscription:PackagesToCreateType" minOccurs="0"/>
+    		<xs:element name="PackagesToExpire" type="subscription:PackagesToExpireType" minOccurs="0"/>
+            <xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+            <xs:element name="SuppressETC" type="xs:boolean" minOccurs="0"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ManagePackagesResponseType">
+    	<xs:all>
+    		<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+    	</xs:all>
+    </xs:complexType>
+	
+    <xs:complexType name="IsEligibleForUpgradeType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="UpgradeEligibility" type="target:UpgradeEligibilityType" maxOccurs="1"/>
+			<xs:element name="Notes" type="base:StringMaxLength56NotRequiredType" minOccurs="0"/>
+			<xs:element name="UpgradeDate" type="xs:date" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpgradeEligibilityType">
+	    <xs:all>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>
+        </xs:all>		
+    </xs:complexType>
+
+    <xs:complexType name="IsEligibleForUpgradeResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="Eligible" type="xs:boolean" minOccurs="1"/>
+            <xs:element name="EventNumber" type="workflow:WorkflowNumberType" minOccurs="1"/>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>
+			<xs:element name="TariffCode" type="subscription:TariffCodeType" minOccurs="1"/>
+            <xs:element name="PackageCode" type="subscription:PackageCodeType" minOccurs="1"/>
+			<xs:element name="DateUpgradePossible" type="xs:date" minOccurs="0"/>
+			<xs:element name="EarlyUpgradeCharge" type="base:Currency9_2NotRequiredType" minOccurs="0"/>
+			<xs:element name="RemainingContractTerm" type="base:StringMaxLength2Type" minOccurs="1"/>
+			<xs:element name="FailureReasons" type="subscription:FailureReasonsType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>	
+	
+	<xs:complexType name="SetPostPayCapsType">    
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"  maxOccurs="1"/>    
+            <xs:element name="PostPayCaps" type="subscription:PostPayCapsWithUnBarType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0" maxOccurs="1"/>			
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SetPostPayCapsResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="TargetIdentifierType">
+		<xs:choice>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType"/>
+			<xs:element name="PrimarySerialNumber" type="base:NetworkSerialNumberType"/>
+		</xs:choice> 
+	</xs:complexType>
+		
+</xs:schema>

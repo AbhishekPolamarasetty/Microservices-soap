@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/billing/billing.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/billing/billing.wsdl#1 $
+    $DateTime: 2008/02/18 10:20:44 $
+    $Author: Malgorzata.Grzybowska $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/billing/billing.wsdl $
+    $Revision: #1 $
+    (c) Copyright 2008 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/billing/definition"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:target="http://mdsuk.com/ws/dise3g/billing/definition"
+	xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition">
+
+	<documentation> This Webservice definition encompasses all operations relating to Billing
+		management. </documentation>
+
+	<import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://mdsuk.com/ws/dise3g/billing/definition"
+			xmlns:billing="http://mdsuk.com/ws/dise3g/billing/dto/service"
+			xmlns:discount="http://mdsuk.com/ws/dise3g/discount/dto/service"
+			elementFormDefault="qualified">
+
+			<import namespace="http://mdsuk.com/ws/dise3g/billing/dto/service"
+				schemaLocation="../../xsd/billingservice.xsd"></import>
+			<import namespace="http://mdsuk.com/ws/dise3g/discount/dto/service"
+				schemaLocation="../../xsd/discountservice.xsd"></import>
+
+			<element name="CreateDiscount">
+				<complexType>
+					<sequence>
+						<element name="Request" type="discount:CreateDiscountType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="CreateDiscountResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="discount:CreateDiscountResponseType"
+						> </element>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="UpdateDiscount">
+				<complexType>
+					<sequence>
+						<element name="Request" type="discount:UpdateDiscountType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="UpdateDiscountResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="discount:UpdateDiscountResponseType"
+						> </element>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="QueryCUGNumbers">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QueryCUGNumbersType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryCUGNumbersResponse">
+				<complexType>
+					<sequence>
+						<element name="Response" type="billing:QueryCUGNumbersResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="CreateCUGNumbers">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:CreateCUGNumbersType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="CreateCUGNumbersResponse">
+				<complexType>
+					<sequence>
+						<element name="Response" type="billing:CreateCUGNumbersResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryBundle">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QueryBundleType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryBundleResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="billing:QueryBundleResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryUnbilledUnits" >
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QueryUnbilledUnitsType"/>
+					</sequence>
+				</complexType>                
+			</element>
+			
+			<element name="QueryUnbilledUnitsResponse" >
+				<complexType>
+					<sequence>
+						<element name="Result" type="billing:QueryUnbilledUnitsResponseType"/>
+					</sequence>
+				</complexType>                
+			</element>
+			
+			
+			<element name="QueryUnbilledUnitAttributes" >
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QueryUnbilledUnitAttributesType"/>
+					</sequence>
+				</complexType>                
+			</element>
+			
+			<element name="QueryUnbilledUnitAttributesResponse" >
+				<complexType>
+					<sequence>
+						<element name="Result" type="billing:QueryUnbilledUnitAttributesResponseType"/>
+					</sequence>
+				</complexType>                
+			</element>
+			
+			
+			<element name="QueryCUGs">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QueryCUGsType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryCUGsResponse">
+				<complexType>
+					<sequence>
+						<element name="Response" type="billing:QueryCUGsResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryCUG">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QueryCUGType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryCUGResponse">
+				<complexType>
+					<sequence>
+						<element name="Response" type="billing:QueryCUGResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryBillableAssets">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QueryBillableAssetsType"> </element>
+					</sequence>
+				</complexType>
+			</element>			
+			<element name="QueryBillableAssetsResponse">
+				<complexType>
+					<sequence>
+						<element name="Response" type="billing:QueryBillableAssetsResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>			
+			
+			<element name="CreateBillableAsset">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:CreateBillableAssetType"> </element>
+					</sequence>
+				</complexType>
+			</element>			
+			<element name="CreateBillableAssetResponse">
+				<complexType>
+					<sequence>
+						<element name="Response" type="billing:CreateBillableAssetResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryBillableAsset">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QueryBillableAssetType"> </element>
+					</sequence>
+				</complexType>
+			</element>			
+			<element name="QueryBillableAssetResponse">
+				<complexType>
+					<sequence>
+						<element name="Response" type="billing:QueryBillableAssetResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>		
+			
+			<element name="UpdateBillableAssetLine">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:UpdateBillableAssetLineType"> </element>
+					</sequence>
+				</complexType>
+			</element>			
+			<element name="UpdateBillableAssetLineResponse">
+				<complexType>
+					<sequence>
+						<element name="Response" type="billing:UpdateBillableAssetLineResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>			
+			
+			<element name="DeleteBillableAssetLines">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:DeleteBillableAssetLinesType"> </element>
+					</sequence>
+				</complexType>
+			</element>			
+			<element name="DeleteBillableAssetLinesResponse">
+				<complexType>
+					<sequence>
+						<element name="Response" type="billing:DeleteBillableAssetLinesResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="SetAttributes">
+            	<complexType>				
+                	<sequence>					
+                    	<element name="Request" type="billing:SetAttributesType"/>
+					</sequence>
+				</complexType>
+			</element>			
+			<element name="SetAttributesResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="billing:SetAttributesResponseType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="CreateBundle">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:CreateBundleType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="CreateBundleResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="billing:CreateBundleResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="CreateBundleLink">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:CreateBundleLinkType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="CreateBundleLinkResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="billing:CreateBundleLinkResponseType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="UpdateBundle">
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:UpdateBundleType"> </element>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="UpdateBundleResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="billing:UpdateBundleResponseType"
+						> </element>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="QueryRecentUsage" >
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QueryRecentUsageType"/>
+					</sequence>
+				</complexType>                
+			</element>
+			
+			<element name="QueryRecentUsageResponse" >
+				<complexType>
+					<sequence>
+						<element name="Result" type="billing:QueryRecentUsageResponseType"/>
+					</sequence>
+				</complexType>                
+			</element>
+
+				<element name="QuerySubscriptionBundles" >
+				<complexType>
+					<sequence>
+						<element name="Request" type="billing:QuerySubscriptionBundlesType"/>
+					</sequence>
+				</complexType>                
+			</element>
+			
+			<element name="QuerySubscriptionBundlesResponse" >
+				<complexType>
+					<sequence>
+						<element name="Result" type="billing:QuerySubscriptionBundlesResponseType"/>
+					</sequence>
+				</complexType>                
+			</element>
+		
+			<element name="QueryResourceAttributes">
+				<complexType>
+					<sequence>
+						<element name="Request"
+							type="billing:QueryResourceAttributesRequestType" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryResourceAttributesResponse">
+				<complexType>
+					<sequence>
+						<element name="Result"
+							type="billing:QueryResourceAttributesResponseType" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="SetResourceAttributes">
+				<complexType>
+					<sequence>
+						<element name="Request"
+							type="billing:SetResourceAttributesRequestType" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="SetResourceAttributesResponse">
+				<complexType>
+					<sequence>
+						<element name="Result"
+							type="billing:SetResourceAttributesResponseType" />
+					</sequence>
+				</complexType>
+			</element>
+
+		</schema>
+	</types>
+
+	<message name="CreateDiscountRequest">
+		<part name="Request" element="target:CreateDiscount"></part>
+	</message>
+
+	<message name="CreateDiscountResponse">
+		<part name="Result" element="target:CreateDiscountResponse"></part>
+	</message>
+
+	<message name="UpdateDiscountRequest">
+		<part name="Request" element="target:UpdateDiscount"></part>	
+	</message>
+
+	<message name="UpdateDiscountResponse">
+		<part name="Result" element="target:UpdateDiscountResponse"></part>
+	</message>
+
+	<message name="QueryCUGNumbersRequest">
+		<part name="Parameters" element="target:QueryCUGNumbers"></part>
+	</message>
+
+	<message name="QueryCUGNumbersResponse">
+		<part name="Parameters" element="target:QueryCUGNumbersResponse"></part>
+	</message>
+
+	<message name="CreateCUGNumbersRequest">
+		<part name="Parameters" element="target:CreateCUGNumbers"></part>
+	</message>
+
+	<message name="CreateCUGNumbersResponse">
+		<part name="Parameters" element="target:CreateCUGNumbersResponse"></part>
+	</message>
+
+	<message name="QueryBundleRequest">
+		<part name="Parameters" element="target:QueryBundle"></part>
+	</message>
+
+	<message name="QueryBundleResponse">
+		<part name="Parameters" element="target:QueryBundleResponse"></part>
+	</message>
+	
+	<message name="QueryUnbilledUnitsRequest">
+		<part name="Parameters" element="target:QueryUnbilledUnits"/>
+	</message>
+	
+	<message name="QueryUnbilledUnitsResponse">
+		<part name="Parameters" element="target:QueryUnbilledUnitsResponse"/>
+	</message>
+	
+	<message name="QueryUnbilledUnitAttributesRequest">
+		<part name="Parameters" element="target:QueryUnbilledUnitAttributes"/>
+	</message>
+	
+	<message name="QueryUnbilledUnitAttributesResponse">
+		<part name="Parameters" element="target:QueryUnbilledUnitAttributesResponse"/>
+	</message>
+
+	<message name="QueryCUGsRequest">
+		<part name="Parameters" element="target:QueryCUGs"></part>
+	</message>
+
+	<message name="QueryCUGsResponse">
+		<part name="Parameters" element="target:QueryCUGsResponse"></part>
+	</message>
+
+	<message name="QueryCUGRequest">
+		<part name="Parameters" element="target:QueryCUG"></part>
+	</message>
+
+	<message name="QueryCUGResponse">
+		<part name="Parameters" element="target:QueryCUGResponse"></part>
+	</message>
+	
+	<message name="QueryBillableAssets">
+		<part name="Parameters" element="target:QueryBillableAssets"></part>
+	</message>	
+
+	<message name="QueryBillableAssetsResponse">
+		<part name="Parameters" element="target:QueryBillableAssetsResponse"></part>
+	</message>
+	
+	<message name="CreateBillableAsset">
+		<part name="Parameters" element="target:CreateBillableAsset"></part>
+	</message>	
+	
+	<message name="CreateBillableAssetResponse">
+		<part name="Parameters" element="target:CreateBillableAssetResponse"></part>
+	</message>
+
+	<message name="QueryBillableAsset">
+		<part name="Parameters" element="target:QueryBillableAsset"></part>
+	</message>
+	<message name="QueryBillableAssetResponse">
+		<part name="Parameters" element="target:QueryBillableAssetResponse"></part>
+	</message>
+	
+	<message name="UpdateBillableAssetLine">
+		<part name="Parameters" element="target:UpdateBillableAssetLine"></part>
+	</message>
+	<message name="UpdateBillableAssetLineResponse">
+		<part name="Parameters" element="target:UpdateBillableAssetLineResponse"></part>
+	</message>
+	
+	<message name="DeleteBillableAssetLines">
+		<part name="Parameters" element="target:DeleteBillableAssetLines"></part>
+	</message>
+	<message name="DeleteBillableAssetLinesResponse">
+		<part name="Parameters" element="target:DeleteBillableAssetLinesResponse"></part>
+	</message>
+	
+	<message name="CreateBundleRequest">
+		<part name="Request" element="target:CreateBundle"></part>
+	</message>
+
+	<message name="CreateBundleResponse">
+		<part name="Result" element="target:CreateBundleResponse"></part>
+	</message>
+	
+	<message name="CreateBundleLinkRequest">
+		<part name="Request" element="target:CreateBundleLink"></part>
+	</message>
+
+	<message name="CreateBundleLinkResponse">
+		<part name="Result" element="target:CreateBundleLinkResponse"></part>
+	</message>
+	
+	<message name="UpdateBundleRequest">
+		<part name="Request" element="target:UpdateBundle"></part>
+	</message>
+
+	<message name="UpdateBundleResponse">
+		<part name="Result" element="target:UpdateBundleResponse"></part>
+	</message>
+	
+	<message name="SetAttributes">
+		<part name="Parameters" element="target:SetAttributes"></part>
+	</message>
+
+	<message name="SetAttributesResponse">
+		<part name="Parameters" element="target:SetAttributesResponse"></part>
+	</message>
+
+	<message name="QueryRecentUsageRequest">
+		<part name="Parameters" element="target:QueryRecentUsage"/>
+	</message>
+	
+	<message name="QueryRecentUsageResponse">
+		<part name="Parameters" element="target:QueryRecentUsageResponse"/>
+	</message>
+	
+	<message name="QuerySubscriptionBundlesRequest">
+		<part name="Parameters" element="target:QuerySubscriptionBundles"/>
+	</message>
+	
+	<message name="QuerySubscriptionBundlesResponse">
+		<part name="Parameters" element="target:QuerySubscriptionBundlesResponse"/>
+	</message>
+	
+	<message name="QueryResourceAttributesRequest">
+		<part name="Parameters" element="target:QueryResourceAttributes" />
+	</message>
+
+	<message name="QueryResourceAttributesResponse">
+		<part name="Result" element="target:QueryResourceAttributesResponse" />
+	</message>
+
+	<message name="SetResourceAttributesRequest">
+		<part name="Parameters" element="target:SetResourceAttributes" />
+	</message>
+
+	<message name="SetResourceAttributesResponse">
+		<part name="Result" element="target:SetResourceAttributesResponse" />
+	</message>
+	
+	<portType name="BillingPortType">
+		<operation name="CreateDiscount">
+			<input message="target:CreateDiscountRequest"></input>
+			<output message="target:CreateDiscountResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="UpdateDiscount">
+			<input message="target:UpdateDiscountRequest"></input>
+			<output message="target:UpdateDiscountResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="QueryCUGNumbers">
+			<input message="target:QueryCUGNumbersRequest"></input>
+			<output message="target:QueryCUGNumbersResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="CreateCUGNumbers">
+			<input message="target:CreateCUGNumbersRequest"></input>
+			<output message="target:CreateCUGNumbersResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="QueryBundle">
+			<input message="target:QueryBundleRequest"></input>
+			<output message="target:QueryBundleResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="QueryUnbilledUnits">
+			<input message="target:QueryUnbilledUnitsRequest"/>
+			<output message="target:QueryUnbilledUnitsResponse"/>
+			<fault message="fault:SystemFault" name="SystemFault"/>
+			<fault message="fault:SecurityFault" name="SecurityFault"/>
+			<fault message="fault:ValidationFault" name="ValidationFault"/>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+		</operation>
+		<operation name="QueryUnbilledUnitAttributes">
+			<input message="target:QueryUnbilledUnitAttributesRequest"/>
+			<output message="target:QueryUnbilledUnitAttributesResponse"/>
+			<fault message="fault:SystemFault" name="SystemFault"/>
+			<fault message="fault:SecurityFault" name="SecurityFault"/>
+			<fault message="fault:ValidationFault" name="ValidationFault"/>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+		</operation>
+		<operation name="QueryCUGs">
+			<input message="target:QueryCUGsRequest"></input>
+			<output message="target:QueryCUGsResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="QueryCUG">
+			<input message="target:QueryCUGRequest"></input>
+			<output message="target:QueryCUGResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		
+		<operation name="QueryBillableAssets">
+			<input message="target:QueryBillableAssets"></input>
+			<output message="target:QueryBillableAssetsResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="CreateBillableAsset">
+			<input message="target:CreateBillableAsset"></input>
+			<output message="target:CreateBillableAssetResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="QueryBillableAsset">
+			<input message="target:QueryBillableAsset"></input>
+			<output message="target:QueryBillableAssetResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="UpdateBillableAssetLine">
+			<input message="target:UpdateBillableAssetLine"></input>
+			<output message="target:UpdateBillableAssetLineResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="DeleteBillableAssetLines">
+			<input message="target:DeleteBillableAssetLines"></input>
+			<output message="target:DeleteBillableAssetLinesResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="SetAttributes">
+			<input message="target:SetAttributes"></input>
+			<output message="target:SetAttributesResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>	
+		<operation name="CreateBundle">
+			<input message="target:CreateBundleRequest"></input>
+			<output message="target:CreateBundleResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="CreateBundleLink">
+			<input message="target:CreateBundleLinkRequest"></input>
+			<output message="target:CreateBundleLinkResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="UpdateBundle">
+			<input message="target:UpdateBundleRequest"></input>
+			<output message="target:UpdateBundleResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		<operation name="QueryRecentUsage">
+			<input message="target:QueryRecentUsageRequest"/>
+			<output message="target:QueryRecentUsageResponse"/>
+			<fault message="fault:SystemFault" name="SystemFault"/>
+			<fault message="fault:SecurityFault" name="SecurityFault"/>
+			<fault message="fault:ValidationFault" name="ValidationFault"/>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+		</operation>
+
+			<operation name="QuerySubscriptionBundles">
+			<input message="target:QuerySubscriptionBundlesRequest"></input>
+			<output message="target:QuerySubscriptionBundlesResponse"></output>
+			<fault message="fault:SystemFault" name="SystemFault"></fault>
+			<fault message="fault:SecurityFault" name="SecurityFault"></fault>
+			<fault message="fault:ValidationFault" name="ValidationFault"></fault>
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"></fault>
+		</operation>
+		
+		<operation name="QueryResourceAttributes">
+			<input message="target:QueryResourceAttributesRequest" />
+			<output message="target:QueryResourceAttributesResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+
+		<operation name="SetResourceAttributes">
+			<input message="target:SetResourceAttributesRequest" />
+			<output message="target:SetResourceAttributesResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+	</portType>
+
+</definitions>

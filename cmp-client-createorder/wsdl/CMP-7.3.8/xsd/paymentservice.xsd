@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/paymentservice.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/paymentservice.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/paymentservice.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Payments service -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/payment/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:payment="http://mdsuk.com/ws/dise3g/payment/dto/business"
+	xmlns:recordpayment="http://mdsuk.com/ws/dise3g/recordpayment/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:target="http://mdsuk.com/ws/dise3g/payment/dto/service">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/payment/dto/business" schemaLocation="payment.xsd" />
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/recordpayment/dto/business" schemaLocation="recordpayment.xsd" />
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd" />
+    
+    <xs:complexType name="CreatePaymentType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="PaymentData" type="payment:PaymentType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="CreatePaymentResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="PaymentNumber" type="payment:PaymentNumberType"/> 
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="ReleasePaymentType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="PaymentNumber" type="payment:PaymentNumberType" minOccurs="1"/> 
+        </xs:all>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="ReleasePaymentResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="PaymentHistoryType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="PaymentHistoryResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="PaymentDetails" type="target:PaymentDetailsListType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="PaymentDetailsListType">
+        <xs:sequence>
+            <xs:element name="Payment" type="payment:PaymentDetailsType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPaymentErrorsType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="PaymentNumber" type="payment:PaymentNumberType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="GetPaymentErrorsResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="Errors" type="target:ErrorListType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ErrorListType">
+        <xs:sequence>
+            <xs:element name="Error" type="payment:ErrorType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+    <xs:complexType name="RecordPaymentType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="PaymentDetails" type="recordpayment:PaymentDetailsType" minOccurs="1"/>
+            <xs:element name="PaymentOutcome" type="recordpayment:PaymentOutcomeType" minOccurs="1"/>
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="RecordPaymentResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="TransactionReference" type="recordpayment:TransactionReferenceType" minOccurs="0"/> 
+        </xs:all>
+    </xs:complexType>
+	
+</xs:schema>

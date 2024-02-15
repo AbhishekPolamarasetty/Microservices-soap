@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id$
+    $Header$
+    $DateTime$
+    $Author$
+    $File$
+    $Revision$
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/account/service"
+    xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:target="http://mdsuk.com/ws/dise3g/account/service"
+    xmlns:definition="http://mdsuk.com/ws/dise3g/account/definition"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+    <import namespace="http://mdsuk.com/ws/dise3g/account/definition" location="account.wsdl"/>
+
+    <!-- binding declns -->
+
+    <binding name="AccountSoapBinding" type="definition:AccountPortType">
+        <documentation> This Webservice binding encompasses all operations relating to Dise Account
+            structure. </documentation>
+
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="CreateAccount">
+            <documentation> Creates a new Account within Dise. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+        
+        <operation name="CreateAccountSerialNumber">
+            <documentation> Creates a new Account Serial Number within Dise' Account. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+		
+		<operation name="SetCustomerPreferences">
+            <documentation> Creates or updates Customer Preferences for an Account within Dise. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+        
+        <operation name="QueryAccount">
+            <documentation> Queries an Account within Dise. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+		
+		<operation name="QueryCustomerPreferences">
+            <documentation> Queries customer preferences for an Account within Dise. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+
+        <operation name="UpdateRecurringPaymentDetails">
+            <documentation>Update of the Recurring Payments</documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+
+        <operation name="UpdateAccountDetails">
+            <documentation> Updates an Account within Dise. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+        
+        <operation name="UpdateAccountSerialNumber">
+            <documentation> Updates an Account Serial Number within Dise' Account. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+
+		<operation name="QueryNamesForNumbers">
+            <documentation> Queries Names For Numbers within Dise3G. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+		
+        <operation name="SetNamesForNumbersList">
+		    <documentation> Sets Names For Numbers within Dise3G. </documentation>
+			<soap:operation/>
+		    <input>
+		        <soap:body use="literal"/>
+		    </input>
+		    <output>
+		        <soap:body use="literal"/>
+		    </output>
+		    <fault name="SystemFault">
+		        <soap:fault use="literal" name="SystemFault"/>
+		    </fault>
+		    <fault name="SecurityFault">
+		        <soap:fault use="literal" name="SecurityFault"/>
+		    </fault>
+		    <fault name="ValidationFault">
+		        <soap:fault use="literal" name="ValidationFault"/>
+		    </fault>
+		    <fault name="ServiceUnavailableFault">
+		        <soap:fault use="literal" name="ServiceUnavailableFault"/>
+		    </fault>
+		</operation>        
+
+        <operation name="RecordBondPayment">
+		    <documentation>Record a Bond Payment against an account within CMP</documentation>
+			<soap:operation/>
+		    <input>
+		        <soap:body use="literal"/>
+		    </input>
+		    <output>
+		        <soap:body use="literal"/>
+		    </output>
+		    <fault name="SystemFault">
+		        <soap:fault use="literal" name="SystemFault"/>
+		    </fault>
+		    <fault name="SecurityFault">
+		        <soap:fault use="literal" name="SecurityFault"/>
+		    </fault>
+		    <fault name="ValidationFault">
+		        <soap:fault use="literal" name="ValidationFault"/>
+		    </fault>
+		    <fault name="ServiceUnavailableFault">
+		        <soap:fault use="literal" name="ServiceUnavailableFault"/>
+		    </fault>
+		</operation>        
+
+        <operation name="AddRegisteredCard">
+		    <documentation>Adds an externall registered card for one off payments</documentation>
+			<soap:operation/>
+		    <input>
+		        <soap:body use="literal"/>
+		    </input>
+		    <output>
+		        <soap:body use="literal"/>
+		    </output>
+		    <fault name="SystemFault">
+		        <soap:fault use="literal" name="SystemFault"/>
+		    </fault>
+		    <fault name="SecurityFault">
+		        <soap:fault use="literal" name="SecurityFault"/>
+		    </fault>
+		    <fault name="ValidationFault">
+		        <soap:fault use="literal" name="ValidationFault"/>
+		    </fault>
+		    <fault name="ServiceUnavailableFault">
+		        <soap:fault use="literal" name="ServiceUnavailableFault"/>
+		    </fault>
+		</operation>      
+		
+		<operation name="CancelRegisteredCard">
+		    <documentation>Cancels an existing registered card</documentation>
+			<soap:operation/>
+		    <input>
+		        <soap:body use="literal"/>
+		    </input>
+		    <output>
+		        <soap:body use="literal"/>
+		    </output>
+		    <fault name="SystemFault">
+		        <soap:fault use="literal" name="SystemFault"/>
+		    </fault>
+		    <fault name="SecurityFault">
+		        <soap:fault use="literal" name="SecurityFault"/>
+		    </fault>
+		    <fault name="ValidationFault">
+		        <soap:fault use="literal" name="ValidationFault"/>
+		    </fault>
+		    <fault name="ServiceUnavailableFault">
+		        <soap:fault use="literal" name="ServiceUnavailableFault"/>
+		    </fault>
+		</operation>     
+        
+        <operation name="SetAccountSerialNumber">
+            <documentation>Creates or Updates the Account Serial Number for an Account. </documentation>
+			<soap:operation/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="SystemFault">
+                <soap:fault use="literal" name="SystemFault"/>
+            </fault>
+            <fault name="SecurityFault">
+                <soap:fault use="literal" name="SecurityFault"/>
+            </fault>
+            <fault name="ValidationFault">
+                <soap:fault use="literal" name="ValidationFault"/>
+            </fault>
+            <fault name="ServiceUnavailableFault">
+                <soap:fault use="literal" name="ServiceUnavailableFault"/>
+            </fault>
+        </operation>
+		
+    </binding>
+
+    <!-- service declns -->
+    <service name="AccountPort">
+        <documentation>This is the webservice for DISE Account operations.</documentation>
+        <port name="AccountPort" binding="target:AccountSoapBinding">
+            <soap:address location="http://localhost:9082/ws/dise3g/services/AccountPort"/>
+        </port>
+    </service>
+</definitions>

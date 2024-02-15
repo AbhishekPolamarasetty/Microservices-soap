@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/corporate.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/corporate.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/corporate.xsd $
+    $Revision: #1 $
+    (c) Copyright 2008 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema contains data types used to describe Corporates -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/corporate/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:target="http://mdsuk.com/ws/dise3g/corporate/dto/business"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:account="http://mdsuk.com/ws/dise3g/account/dto/business"
+    xmlns:discount="http://mdsuk.com/ws/dise3g/discount/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business" schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/account/dto/business" schemaLocation="account.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/discount/dto/business" schemaLocation="discount.xsd"/>
+
+    <xs:complexType name="CreateCorporateType">
+        <xs:sequence>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType"/>
+            <xs:element name="CorporateDescription" type="target:CorporateDescriptionType"/>
+            <xs:element name="Account" type="account:AccountType"/>
+            <xs:element name="GroupCode" type="base:GroupCodeType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateCorporateBasicType">
+        <xs:sequence>
+            <xs:element name="CorporateDescription" type="target:CorporateDescriptionType" minOccurs="0"/>
+            <xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+            <xs:element name="PostingAccountNumber" type="base:AccountNumberType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType"/>
+        </xs:sequence> 
+    </xs:complexType>
+
+
+    <xs:complexType name="CorporateBasicType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the Corporate Query response
+                when BASIC dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType"/>
+            <xs:element name="CorporateDescription" type="target:CorporateDescriptionType"/>
+            <xs:element name="CompanyNumber" type="base:CompanyNumberType"/>
+            <xs:element name="AddressNumber" type="address:AddressCodeType"/>
+            <xs:element name="EmailAddress" type="address:EmailAddressType" minOccurs="0"/>
+            <xs:element name="PostingAccountNumber" type="base:AccountNumberType"/>
+            <xs:element name="GroupCode" type="base:GroupCodeType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:sequence> 
+    </xs:complexType>
+
+    <xs:simpleType name="CorporateDescriptionType">
+        <xs:restriction base="base:StringMaxLength30Type"/>
+    </xs:simpleType>
+
+    <!-- an existing address or data needed to create a new address -->
+    <xs:complexType name="AddressChoiceType">
+        <xs:choice>
+            <xs:element name="AddressCode" type="address:AddressCodeType"/>
+            <xs:element name="NewAddressData" type="address:BusinessAddressType"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:simpleType name="QueryCorporateDatasetType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BASIC"/>
+            <xs:enumeration value="ADDRESS"/>
+            <xs:enumeration value="DISCOUNTS"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="QueryCorporateDatasetsType">
+        <xs:sequence>
+            <xs:element name="Dataset" type="target:QueryCorporateDatasetType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

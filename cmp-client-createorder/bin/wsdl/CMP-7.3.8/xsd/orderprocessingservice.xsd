@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/orderprocessingservice.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/orderprocessingservice.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/orderprocessingservice.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Order Processing service -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/order/dto/service"
+    xmlns:target="http://mdsuk.com/ws/dise3g/order/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:order="http://mdsuk.com/ws/dise3g/order/dto/business"
+    xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+    xmlns:agreement="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/order/dto/business"
+        schemaLocation="orderprocessing.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+        schemaLocation="subscription.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+        schemaLocation="agreement.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+    <xs:complexType name="QueryOrderType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+         	<xs:element name="OrderNumber" type="order:OrderNumberType" />
+        	<xs:element name="QueryOrderDatasets" type="order:QueryOrderDatasetsType" />
+        </xs:all>
+    </xs:complexType>
+    <xs:complexType name="QueryOrderResponseType">
+        <xs:all>	
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+       		<xs:element name="OrderBasic" type="order:OrderBasicType" minOccurs="0"/>
+            <xs:element name="OrderAdditionalDetail" type="order:OrderAdditionalDetailType" minOccurs="0"/>   
+            <xs:element name="Sales" type="order:SalesType" minOccurs="0"/>
+            <xs:element name="Subscriptions" type="order:SubscriptionsType" minOccurs="0"/>
+            <xs:element name="Products" type="order:ProductsType" minOccurs="0"/>   
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="OrderType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="AccountIdentifier" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="OrderHeader" type="order:OrderHeaderType" minOccurs="1"/>
+            <xs:element name="Products" type="target:ProductsType" minOccurs="1"/>
+			<xs:element name="EligibilityRules" type="subscription:EligibilityRulesType" minOccurs="0"/>
+            <xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ProductsType">
+        <xs:sequence>
+            <xs:element name="Product" type="target:ProductType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="ProductType">
+        <xs:complexContent>
+            <xs:extension base="order:OrderProductDataType">
+                <xs:choice maxOccurs="1" minOccurs="0">
+                    <xs:element name="Subscriptions" type="target:SubscriptionsConnectionType"
+                        maxOccurs="1"/>
+                    <xs:element name="SubscriptionIdentifiers"
+                        type="target:SubscriptionNumbersType" maxOccurs="1"/>
+					<xs:element name="Upgrades" type="target:SubscriptionUpgradesType"
+						maxOccurs="1"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+	<xs:complexType name="SubscriptionsConnectionType">
+        <xs:sequence>
+            <xs:element name="Subscription" type="subscription:SubscriptionConnectionType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="SubscriptionNumbersType">
+        <xs:sequence>
+            <xs:element name="SubscriptionIdentifier" type="base:SubscriptionNumberType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="SubscriptionUpgradesType">
+        <xs:sequence>
+            <xs:element name="Upgrade" type="order:SubscriptionOrderUpgradeType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+    <xs:complexType name="OrderResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="OrderNumber" type="order:OrderNumberType" minOccurs="1"/>
+            <xs:element name="Products" type="target:OrderResponseProductsType" minOccurs="1"/>
+			<xs:element name="WarningMessages" type="base:MessageListType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="OrderResponseProductsType">
+        <xs:sequence>
+            <xs:element name="Product" type="target:OrderResponseProductType"
+                maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OrderResponseProductType">
+        <xs:all>
+            <xs:element name="ProductCode" type="order:ProductCodeType" minOccurs="1"/>
+            <xs:element name="Comment" type="order:CommentType" minOccurs="0"/>
+            <xs:element name="SubscriptionsDetails" type="target:OrderResponseSubscriptionsDetailsType"
+                minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+	
+	<xs:complexType name="OrderResponseSubscriptionsDetailsType">
+        <xs:sequence>
+            <xs:element name="SubscriptionDetails" type="target:OrderResponseSubsDetailsType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	
+    <xs:complexType name="OrderResponseSubsDetailsType">
+        <xs:all>
+            <xs:element name="SubscriptionCreationStatus"
+                type="target:SubscriptionCreationStatusesType" minOccurs="0"/>
+            <xs:element name="SubscriptionCreationMessage" type="base:MessageType" minOccurs="0"/>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType"
+                minOccurs="0"/>
+            <xs:element name="MobileNumber" type="base:PhoneNumberType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+
+    <xs:simpleType name="SubscriptionCreationStatusesType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SUCCESS"/>
+            <xs:enumeration value="FAILURE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="OrderHeaderStatusType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:complexType name="StockEnquiryType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="ProductCode" type="order:ProductCodeType" minOccurs="1"/>
+            <xs:element name="WarehouseCode" type="order:WarehouseCodeType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="StockEnquiryResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="ProductCode" type="order:ProductCodeType" minOccurs="1"/>
+            <xs:element name="Quantity" type="xs:integer" minOccurs="1"/>
+            <xs:element name="NonStockItem" type="xs:boolean" minOccurs="1" default="false"/>
+            <xs:element name="WarehouseCode" type="order:WarehouseCodeType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateOrderStatusType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="OrderNumber" type="order:OrderNumberType" minOccurs="1"/>
+            <xs:element name="OrderStatus" type="order:OrderUpgradeType" minOccurs="1"/>
+			<xs:element name="overrideHardwareCreditLimit" type="xs:boolean" minOccurs="0" default="false"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateOrderStatusResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="QueryOrdersType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="AccountNumber" type="base:AccountNumberType" />
+			<xs:element name="StatusFilter" type="order:StatusFilterType"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="QueryOrdersResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="QueryLimitExceeded" type="base:QueryLimitExceededType"/>
+			<xs:element name="Orders" type="order:OrdersType"/>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="OrderDispatchNotificationType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="OrderNumber" type="order:OrderNumberType" minOccurs="0"/>
+			<xs:element name="CustomerReference" type="order:CustomerReferenceType" minOccurs="0"/>
+			<xs:element name="CourierReference" type="order:CourierReferenceType" minOccurs="0"/>
+			<xs:element name="DispatchByDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="OrderComments" type="order:CommentType" minOccurs="0"/>
+			<xs:element name="Subscriptions" type="order:OrderDispatchSubscriptionsType" minOccurs="0"/>
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="OrderDispatchNotificationResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+			<xs:element name="OrderNumber" type="order:OrderNumberType" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+</xs:schema>

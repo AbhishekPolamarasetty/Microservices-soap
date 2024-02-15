@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/oam.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/oam.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/oam.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes data types used by the OAM service -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/oam/dto/business"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:target="http://mdsuk.com/ws/dise3g/oam/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+    <xs:complexType name="ProvisionOAMType">
+        <xs:all>
+            <xs:element name="level" type="target:LevelType" minOccurs="1"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="address" type="xs:string" minOccurs="0"/>
+            <xs:element name="suppressInvoice" type="xs:boolean" minOccurs="1"/>
+            <xs:element name="securityLevel" type="target:SecurityLevelType" minOccurs="1"/>
+            <xs:element name="isActive" type="xs:boolean" minOccurs="1"/>
+            <xs:element name="tools" type="target:ToolListType" minOccurs="0"/>
+            <xs:element name="companyNumber" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="companyReferenceIdCode" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="customerType" type="target:CustomerType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="userName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="explanationText1" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="explanationText2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="explanationText3" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="explanationText4" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:simpleType name="LevelType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Group"/>
+            <xs:enumeration value="Corporate"/>
+            <xs:enumeration value="Account"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CustomerType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CONCUS"/>
+            <xs:enumeration value="NATCUS"/>
+            <xs:enumeration value="VIEWON"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="SecurityLevelType">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ToolListType">
+        <xs:sequence>
+            <xs:element name="inUse" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/recordpayment.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/recordpayment.xsd#1 $
+    $DateTime: $
+    $Author: Paul.Kinnane $
+    $File: //Source_Code/BCC/Dise3G/5.1/1/WebService/Schema/xsd/recordpayment.xsd $
+    $Revision: #1 $
+    (c) Copyright 2012 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes data types used by the Record Card Payments service. -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/recordpayment/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:target="http://mdsuk.com/ws/dise3g/recordpayment/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+    <xs:complexType name="PaymentDetailsType">
+        <xs:sequence>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+			<xs:element name="TransactionReference" type="target:TransactionReferenceType" minOccurs="0"/>
+			<xs:element name="PaymentReference" type="target:PaymentReferenceType" minOccurs="0"/>
+			<xs:element name="CardReference" type="base:StringMaxLength30Type" minOccurs="0"/>
+            <xs:element name="TransactionDateTime" type="xs:dateTime" minOccurs="1"/>
+            <xs:element name="Amount" type="base:Currency9_2Type" minOccurs="1"/>
+            <xs:element name="CurrencyCode" type="target:CurrencyCodeType" minOccurs="1"/>
+            <xs:element name="PaymentType" type="base:PaymentTypeType" minOccurs="1"/>
+            <xs:element name="CardNumber" type="base:CCDCCardNumberType" minOccurs="0"/>
+            <xs:element name="StartDate" type="target:MonthYearType" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="target:MonthYearType" minOccurs="0"/>
+            <xs:element name="NameOnCard" type="base:StringMaxLength30Type" minOccurs="0"/>		
+            <xs:element name="AVSHouseStreetNumber" type="base:StringMaxLength25Type" minOccurs="0"/>		
+            <xs:element name="PostCode" type="base:StringMaxLength10Type" minOccurs="0"/>
+            <xs:element name="CountryCode" type="base:StringFixedLength2Type" minOccurs="0"/>
+            <xs:element name="ReasonCode" type="base:StringMaxLength4Type" minOccurs="0"/>
+            <xs:element name="ProductService" type="base:StringMaxLength30Type" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="BondPaymentDetailsType">
+        <xs:annotation>
+            <xs:documentation>Details of a payment made externally for an account bond</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+			<xs:element name="TransactionReference" type="target:TransactionReferenceType" minOccurs="0"/>
+			<xs:element name="PaymentReference" type="target:PaymentReferenceType" minOccurs="0"/>
+			<xs:element name="CardReference" type="base:StringMaxLength30Type" minOccurs="0"/>
+            <xs:element name="TransactionDateTime" type="xs:dateTime" minOccurs="1"/>
+            <xs:element name="CurrencyCode" type="target:CurrencyCodeType" minOccurs="1"/>
+            <xs:element name="PaymentType" type="base:PaymentTypeType" minOccurs="1"/>
+            <xs:element name="CardNumber" type="base:CCDCCardNumberType" minOccurs="0"/>
+            <xs:element name="StartDate" type="target:MonthYearType" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="target:MonthYearType" minOccurs="0"/>
+            <xs:element name="NameOnCard" type="base:StringMaxLength30Type" minOccurs="0"/>		
+            <xs:element name="AVSHouseStreetNumber" type="base:StringMaxLength25Type" minOccurs="0"/>		
+            <xs:element name="PostCode" type="base:StringMaxLength10Type" minOccurs="0"/>
+            <xs:element name="CountryCode" type="base:StringFixedLength2Type" minOccurs="0"/>
+            <xs:element name="ReasonCode" type="base:StringMaxLength4Type" minOccurs="0"/>
+            <xs:element name="ProductService" type="base:StringMaxLength30Type" minOccurs="0"/>
+            <xs:element name="AuthorisationCode" type="base:StringMaxLength6Type" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:simpleType name="TransactionReferenceType">
+        <xs:restriction base="base:StringMaxLength20Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="PaymentReferenceType">
+        <xs:restriction base="base:StringMaxLength40Type"/>
+    </xs:simpleType>
+	
+    <xs:complexType name="PaymentOutcomeType">
+        <xs:choice>
+            <xs:element name="SuccessfulPayment" type="target:SuccessfulPaymentType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="FailedPayment" type="target:FailedPaymentType" minOccurs="1" maxOccurs="1"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="SuccessfulPaymentType">
+		<xs:sequence>
+            <xs:element name="AuthorisationCode" type="base:StringMaxLength6Type" minOccurs="0"/>
+            <xs:element name="Status" type="target:StatusType" minOccurs="0"/>		
+		</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="FailedPaymentType">
+		<xs:sequence>
+            <xs:element name="ErrorCode" type="base:StringMaxLength50Type" minOccurs="0"/>
+            <xs:element name="ErrorDescription" type="base:StringMaxLength60Type" minOccurs="0"/>		
+		</xs:sequence>
+    </xs:complexType>
+	
+    <xs:complexType name="MonthYearType">
+        <xs:sequence>
+            <xs:element name="Month" type="base:MonthOfYearType"/>
+            <xs:element name="Year" type="base:TwoDigitYearType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="CurrencyCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GBP"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CAPTURED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

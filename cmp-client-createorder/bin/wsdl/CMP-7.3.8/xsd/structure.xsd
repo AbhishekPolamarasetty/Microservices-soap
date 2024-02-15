@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	$$Id$$
+	$$Header$$
+	$$DateTime$$
+	$$Author$$
+	$$File$$
+	$$Revision$$
+	(c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/structure/dto/business" 
+	xmlns:target="http://mdsuk.com/ws/dise3g/structure/dto/business" 
+	xmlns:base="http://mdsuk.com/ws/dise3g/base" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business">
+
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd" />
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+        schemaLocation="subscription.xsd"/>
+
+	<xs:complexType name="SubscriptionCustomerNodeType">
+		<xs:sequence>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"  maxOccurs="1"/>
+			<xs:element name="SubscriptionUserName" type="base:StringMaxLength30Type" minOccurs="0"  maxOccurs="1"/>
+			<xs:element name="ConnectedDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="DisconnectedDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="PrimarySerialNumber" type="base:StringMaxLength25Type" minOccurs="0"  maxOccurs="1"/>
+			<xs:element name="TariffCode" type="base:StringMaxLength30Type" minOccurs="1"  maxOccurs="1"/>
+			<xs:element name="CustomerCostCentre" type="base:StringMaxLength20Type" minOccurs="0"  maxOccurs="1"/>
+			<xs:element name="NetworkCode" type="base:StringMaxLength6Type" minOccurs="1"  maxOccurs="1"/>
+			<xs:element name="Terminated" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="LinkTargetReference" type="subscription:LinkTargetReferenceType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AccountCustomerNodeType">
+		<xs:sequence>
+			<xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"  maxOccurs="1"/>
+			<xs:element name="AccountName" type="base:StringMaxLength60Type" minOccurs="0"  maxOccurs="1"/>
+			<xs:element name="Subscriptions" type="target:SubscriptionCustomerNodesType" minOccurs="0"  maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CorporateCustomerNodeType">
+		<xs:sequence>
+			<xs:element name="CorporateCode" type="base:StringMaxLength30Type" minOccurs="1"  maxOccurs="1"/>
+			<xs:element name="CorporateDescription" type="base:StringMaxLength30Type" minOccurs="0"  maxOccurs="1"/>
+			<xs:element name="PostingAccountNumber" type="base:AccountNumberType" minOccurs="1"  maxOccurs="1"/>
+			<xs:element name="Accounts" type="target:AccountCustomerNodesType" minOccurs="0"  maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GroupCustomerNodeType">
+		<xs:sequence>
+			<xs:element name="GroupCode" type="base:StringMaxLength30Type" minOccurs="1"  maxOccurs="1"/>
+			<xs:element name="GroupDescription" type="base:StringMaxLength30Type" minOccurs="0"  maxOccurs="1"/>
+			<xs:element name="Corporates" type="target:CorporateCustomerNodesType" minOccurs="0"  maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubscriptionCustomerNodesType">
+		<xs:sequence>
+			<xs:element name="Subscription" type="target:SubscriptionCustomerNodeType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AccountCustomerNodesType">
+		<xs:sequence>
+			<xs:element name="Account" type="target:AccountCustomerNodeType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CorporateCustomerNodesType">
+		<xs:sequence>
+			<xs:element name="Corporate" type="target:CorporateCustomerNodeType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="CustomerLevelType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Group" />
+			<xs:enumeration value="Corporate" />
+			<xs:enumeration value="Account" />
+			<xs:enumeration value="Subscription" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="CustomerLevelIdType">
+		<xs:restriction base="base:StringMaxLength8Type" />
+	</xs:simpleType>
+
+	<xs:simpleType name="InvoiceConsolidationLevelType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUB" />
+			<xs:enumeration value="ACCOUNT" />
+			<xs:enumeration value="CORPORATE" />
+			<xs:enumeration value="GROUP" />
+			<xs:enumeration value="UNDEFINDED" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TreeFilterType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ImmediateChildren" />
+			<xs:enumeration value="AllDependents" />
+			<xs:enumeration value="Ancestors" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

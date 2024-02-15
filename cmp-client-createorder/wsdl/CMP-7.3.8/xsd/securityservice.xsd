@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id:  $
+    $Header:  $
+    $DateTime:  $
+    $Author:  $
+    $File:  $
+    $Revision:  $
+    (c) Copyright 2014 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Security service -->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/security/dto/service"
+    xmlns:target="http://mdsuk.com/ws/dise3g/security/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:security="http://mdsuk.com/ws/dise3g/security/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/security/dto/business"
+		schemaLocation="security.xsd"></xs:import>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+
+    <xs:complexType name="QuerySecureSessionType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SessionToken" type="base:StringMaxLength10Type"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="QuerySecureSessionResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="SessionToken" type="base:StringMaxLength10Type"/>
+			<xs:element name="CompanyNumber" type="base:CompanyNumberType"/>
+			<xs:element name="UserName" type="base:StringMaxLength10Type"/>
+			<xs:element name="SessionAttributes" type="security:SessionAttributesType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+</xs:schema>

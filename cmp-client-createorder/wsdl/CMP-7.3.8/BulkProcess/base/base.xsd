@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+//Schema/BulkProcess/base/base.xsd
+
+(c) Copyright 2006 Martin Dawes Systems Ltd
+
+Description
+	base.xsd contains types which are common to the
+	other Bulk Process XSDs. 
+
+Edit History
+    Date			Author        		Comment     
+	03/04/2006  	Mark Waters 		New Document 34798
+	26/04/2006		Siobhan Madigan		Now contains results and structure
+-->
+<xs:schema targetNamespace="http://mdsuk.com/dise3g/bulkprocess/base"
+    xmlns="http://mdsuk.com/dise3g/bulkprocess/base"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:account="http://mdsuk.com/ws/dise3g/account/dto/business"
+    xmlns:agreement="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/account/dto/business"
+        schemaLocation="../../xsd/account.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/agreement/dto/business"
+        schemaLocation="../../xsd/agreement.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base"
+        schemaLocation="../../xsd/base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+        schemaLocation="../../xsd/subscription.xsd"/>
+
+<!-- 
+############################################
+#### Result Related Element Definitions #### 
+############################################
+-->
+	<xs:complexType name="ResultType">
+		<xs:choice>
+			<!-- 
+			Identifier is an internal DISE identifier which is included 
+			if the request is successfulif and it is available. For example 
+			it may identify an Account, Agreement, Subscription or Order.
+			-->
+			<xs:element name="Identifier" type="xs:string"/>
+			<!--
+			Status is included if the request is successful and no identifier
+			is available.
+			-->
+			<xs:element name="Status" type="StatusType"/>
+			<!--
+			Error is included if errors occurred and the request could not
+			be processed.
+			-->
+			<xs:element name="Errors" type="ErrorsType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="ErrorsType">
+		<xs:sequence>
+			<xs:element name="Error" type="ErrorType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ErrorType">
+		<xs:all>
+			<!--
+			ErrorName contains the Exception Type
+			-->
+			<xs:element name="ErrorName" type="xs:string"/>
+			<!--
+			ErrorDetails contains the Error Message.
+			-->
+			<xs:element name="ErrorDetails" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:simpleType name="StatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+    <xs:complexType name="ResultStatusType">
+        <xs:sequence>
+            <xs:choice>
+	            <xs:element name="SummaryDetails" type="StatusSummaryDetailsType"/>
+				<!--
+				Error is element is included if errors occurred before XML validatin was completed.
+				-->
+				<xs:element name="Errors" type="ErrorsType"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="StatusSummaryDetailsType">
+        <xs:sequence>
+            <xs:element name="ProcessedGroup" type="ProcessedGroupType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<!-- 
+	ProcessedSummaryType gives the total number of processed requests, 
+	the total number successfully processed, and the total number failed
+	for each ProcessedSummaryDescription type.
+	-->
+    <xs:complexType name="ProcessedSummaryType">
+        <xs:sequence>
+            <xs:element name="Type" type="ProcessedSummaryDescriptionType"/>
+            <xs:element name="NumberProcessed" type="xs:integer"/>
+            <xs:element name="NumberPassed" type="xs:integer"/>
+            <xs:element name="NumberFailed" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ProcessedSummaryDescriptionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Total"/>
+            <xs:enumeration value="Accounts"/>
+            <xs:enumeration value="Agreements"/>
+            <xs:enumeration value="Subscriptions"/>
+            <xs:enumeration value="Orders"/>
+            <xs:enumeration value="OrderProducts"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ProcessedGroupType">
+        <xs:sequence>
+            <xs:element name="Type" type="ProcessedGroupDescriptionType"/>
+            <xs:element name="ProcessedSummary" type="ProcessedSummaryType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ProcessedGroupDescriptionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CreateOrder"/>
+            <xs:enumeration value="CreateCustomerStructure"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+<!-- 
+###############################################
+#### Structure Related Element Definitions #### 
+###############################################
+-->
+
+<!-- 
+#############################
+#### Account Definitions #### 
+#############################
+-->
+    <xs:complexType name="AccountsType">
+        <xs:sequence>
+            <xs:element name="Account" type="AccountType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    	
+    <xs:complexType name="AccountType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="AccountData" type="account:AccountType"/>
+                <xs:element name="AccountId" type="base:AccountNumberType"/>
+            </xs:choice>
+            <xs:element name="Agreements" type="AgreementsType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="AccountsResponseType">
+		<xs:sequence>
+			<xs:element name="AccountResponse" type="AccountResponseType" minOccurs="0" maxOccurs="unbounded"
+			/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AccountResponseType">
+		<xs:sequence>
+			<xs:element name="Result" type="ResultType"/>
+			<xs:element name="AccountData" type="account:AccountType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!-- 
+###############################
+#### Agreement Definitions #### 
+###############################
+-->
+    <xs:complexType name="AgreementsType">
+        <xs:sequence>
+            <xs:element name="Agreement" type="AgreementType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AgreementType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="AgreementData" type="agreement:AgreementType"/>
+	            <xs:element name="AgreementId" type="base:AgreementNumberType"/>
+			</xs:choice>
+            <xs:element name="Subscriptions" type="SubscriptionsType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="AgreementsResponseType">
+		<xs:sequence>
+			<xs:element name="AgreementResponse" type="AgreementResponseType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AgreementResponseType">
+		<xs:sequence>
+			<xs:element name="Result" type="ResultType"/>
+			<xs:element name="AgreementData" type="agreement:AgreementType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!-- 
+##################################
+#### Subscription Definitions #### 
+##################################
+-->
+    <xs:complexType name="SubscriptionsType">
+        <xs:sequence>
+            <xs:element name="Subscription" type="SubscriptionType"
+                minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+	<xs:complexType name="SubscriptionType">
+		<xs:sequence>
+			<xs:element name="SubscriptionData" type="subscription:SubscriptionConnectionType" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SubscriptionsResponseType">
+		<xs:sequence>
+			<xs:element name="SubscriptionResponse" type="SubscriptionResponseType" minOccurs="1"
+				maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SubscriptionResponseType">
+		<xs:sequence>
+			<xs:element name="Result" type="ResultType"/>
+			<xs:element name="SubscriptionData" type="subscription:SubscriptionConnectionType" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

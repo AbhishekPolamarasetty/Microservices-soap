@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	$Id:  $
+	$Header:  $
+	$DateTime:  $
+	$Author:  $
+	$File:  $
+	$Revision:  $
+	(c) Copyright 2014 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/security/definition" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:target="http://mdsuk.com/ws/dise3g/security/definition" xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition">
+
+	<documentation>This Webservice definition encompasses all operations relating to Security (Secure Session) management.</documentation>
+
+	<import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+			targetNamespace="http://mdsuk.com/ws/dise3g/security/definition" 
+			xmlns:security="http://mdsuk.com/ws/dise3g/security/dto/service" 
+			elementFormDefault="qualified">
+			<import namespace="http://mdsuk.com/ws/dise3g/security/dto/service" schemaLocation="../../xsd/securityservice.xsd" />
+
+			<element name="QuerySecureSession">
+				<complexType>
+	                <sequence>
+	                    <element name="Request" type="security:QuerySecureSessionType"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QuerySecureSessionResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="security:QuerySecureSessionResponseType" />
+					</sequence>
+				</complexType>
+			</element>
+
+		</schema>
+	</types>
+
+	<message name="QuerySecureSessionRequest">
+		<part name="Parameters" element="target:QuerySecureSession" />
+	</message>
+
+	<message name="QuerySecureSessionResponse">
+		<part name="Parameters" element="target:QuerySecureSessionResponse" />
+	</message>
+
+	<portType name="SecurityPortType">
+		<operation name="QuerySecureSession">
+			<input message="target:QuerySecureSessionRequest" />
+			<output message="target:QuerySecureSessionResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+	</portType>
+
+</definitions>

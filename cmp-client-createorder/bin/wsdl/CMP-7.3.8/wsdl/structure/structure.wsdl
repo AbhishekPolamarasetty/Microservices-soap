@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	$$Id$$
+	$$Header$$
+	$$DateTime$$
+	$$Author$$
+	$$File$$
+	$$Revision$$
+	(c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/structure/definition" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition" xmlns:target="http://mdsuk.com/ws/dise3g/structure/definition">
+
+	<documentation>This Webservice binding encompasses all operations relating to Dise3G Custumer or Biling Structure WebServices.</documentation>
+
+	<import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+			targetNamespace="http://mdsuk.com/ws/dise3g/structure/definition" 
+			xmlns:structure="http://mdsuk.com/ws/dise3g/structure/dto/service" 
+			elementFormDefault="qualified">
+			<import namespace="http://mdsuk.com/ws/dise3g/structure/dto/service" schemaLocation="../../xsd/structureservice.xsd" />
+
+			<element name="QueryCustomerStructureRequest">
+				<complexType>
+					<sequence>
+						<element name="CustomerStructureQueryData" type="structure:CustomerStructureQueryType" />
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="CreateDataAPNSRequest">
+				<complexType>
+					<sequence>
+						<element name="CretaeDataAPNS" type="structure:CreateDataAPNSRequestType" />
+					</sequence>
+				</complexType>
+			</element>
+
+           <element name="CreateDataAPNSResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="structure:CreateDataAPNSResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            
+            
+			<element name="ManageDataAPNSRequest">
+				<complexType>
+					<sequence>
+						<element name="ManageDataAPNS" type="structure:ManageDataAPNSRequestType" />
+					</sequence>
+				</complexType>
+			</element>
+
+           <element name="ManageDataAPNSResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="structure:ManageDataAPNSResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+ 
+ 			<element name="QueryCustomerStructureResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="structure:CustomerStructureResponseType" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryAgreementStructureRequest">
+				<complexType>
+					<sequence>
+						<element name="CustomerAgreementQueryData" type="structure:CustomerAgreementQueryType" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="QueryAgreementStructureResponse">
+				<complexType>
+					<sequence>
+						<element name="Result" type="structure:CustomerAgreementResponseType" />
+					</sequence>
+				</complexType>
+			</element>
+		</schema>
+
+
+	</types>
+
+	<message name="QueryCustomerStructureRequest">
+		<part name="Parameters" element="target:QueryCustomerStructureRequest" />
+	</message>
+
+	<message name="CreateDataAPNSResponse">
+		<part name="Result" element="target:CreateDataAPNSResponse" />
+	</message>
+	
+	<message name="CreateDataAPNSRequest">
+		<part name="Parameters" element="target:CreateDataAPNSRequest" />
+	</message>
+            
+	<message name="ManageDataAPNSResponse">
+		<part name="Result" element="target:ManageDataAPNSResponse" />
+	</message>
+	
+	<message name="ManageDataAPNSRequest">
+		<part name="Parameters" element="target:ManageDataAPNSRequest" />
+	</message>
+	
+	<message name="QueryCustomerStructureResponse">
+		<part name="Result" element="target:QueryCustomerStructureResponse" />
+	</message>
+
+	<message name="QueryAgreementStructureRequest">
+		<part name="Parameters" element="target:QueryAgreementStructureRequest" />
+	</message>
+
+	<message name="QueryAgreementStructureResponse">
+		<part name="Result" element="target:QueryAgreementStructureResponse" />
+	</message>
+
+	<portType name="StructurePortType">
+		<operation name="QueryCustomerStructure">
+			<input message="target:QueryCustomerStructureRequest" />
+			<output message="target:QueryCustomerStructureResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+		<operation name="QueryAgreementStructure">
+			<input message="target:QueryAgreementStructureRequest" />
+			<output message="target:QueryAgreementStructureResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+		<operation name="CreateDataAPNS">
+			<input message="target:CreateDataAPNSRequest" />
+			<output message="target:CreateDataAPNSResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+		<operation name="ManageAPNS">
+			<input message="target:ManageDataAPNSRequest" />
+			<output message="target:ManageDataAPNSResponse" />
+			<fault message="fault:SystemFault" name="SystemFault" />
+			<fault message="fault:SecurityFault" name="SecurityFault" />
+			<fault message="fault:ValidationFault" name="ValidationFault" />
+			<fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault" />
+		</operation>
+	</portType>
+</definitions>

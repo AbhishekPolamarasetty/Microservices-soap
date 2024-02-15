@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/corporateservice.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/corporateservice.xsd#1 $
+    $DateTime: 2008/05/02 $
+    $Author: Malgorzata.Grzybowska $
+    $File: //Source_Code/BCC/Dise3G/4.5/0/WebService/Schema/xsd/corporateservice.xsd $
+    $Revision: #1 $
+    (c) Copyright 2008 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Corporate service -->
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/corporate/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:corporate="http://mdsuk.com/ws/dise3g/corporate/dto/business"
+    xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:account="http://mdsuk.com/ws/dise3g/account/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:discount="http://mdsuk.com/ws/dise3g/discount/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/corporate/dto/business" schemaLocation="corporate.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business" schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/account/dto/business" schemaLocation="account.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/discount/dto/business" schemaLocation="discount.xsd"/>
+
+    <xs:complexType name="CreateCorporateType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="CorporateData" type="corporate:CreateCorporateType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CreateCorporateResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="UpdateCorporateType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType"/>
+            <xs:element name="UpdateCorporateBasic" type="corporate:UpdateCorporateBasicType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateCorporateResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    
+    <xs:complexType name="QueryCorporateType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType"/>
+            <xs:element name="Datasets" type="corporate:QueryCorporateDatasetsType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+   <xs:complexType name="QueryCorporateResponseType">
+        <xs:sequence>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="CorporateBasic" type="corporate:CorporateBasicType" minOccurs="0"/>
+            <xs:element name="Address" type="address:AddressQueryType" minOccurs="0"/>
+            <xs:element name="Discounts" type="discount:DiscountsType" minOccurs="0"/>
+        </xs:sequence>
+   </xs:complexType>
+
+</xs:schema>

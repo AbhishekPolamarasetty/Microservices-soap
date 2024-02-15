@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    $$Id$$
+    $$Header$$
+    $$DateTime$$
+    $$Author$$
+    $$File$$
+    $$Revision$$
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes the API data types for the Address service -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/tariff/dto/service"
+    xmlns:target="http://mdsuk.com/ws/dise3g/tariff/dto/service"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tariff="http://mdsuk.com/ws/dise3g/tariff/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/tariff/dto/business" schemaLocation="tariff.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base" schemaLocation="base.xsd"/>
+
+    <xs:complexType name="UpdateTariffType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+            <xs:element name="TariffID" type="tariff:TariffIdType" />
+            <xs:element name="TariffData" type="tariff:TariffType" />
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+            
+        </xs:all>
+    </xs:complexType>
+
+
+    <xs:complexType name="UpdateTariffResponseType">
+        <xs:all>
+            <xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/account.xsd#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/account.xsd#1 $
+    $DateTime: 2021/03/22 14:14:36 $
+    $Author: BuildMaster $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/xsd/account.xsd $
+    $Revision: #1 $
+    (c) Copyright 2007 Martin Dawes Systems Ltd
+-->
+
+<!-- This schema describes data types used by the account service and others -->
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/account/dto/business"
+    xmlns:target="http://mdsuk.com/ws/dise3g/account/dto/business"
+    xmlns:address="http://mdsuk.com/ws/dise3g/address/dto/business"
+    xmlns:payment="http://mdsuk.com/ws/dise3g/payment/dto/business"
+    xmlns:recordpayment="http://mdsuk.com/ws/dise3g/recordpayment/dto/business"
+    xmlns:subscription="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+    xmlns:base="http://mdsuk.com/ws/dise3g/base"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:services="http://mdsuk.com/ws/dise3g/services/dto/business"
+	xmlns:porting="http://mdsuk.com/ws/dise3g/porting/dto/business">
+
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/address/dto/business"
+        schemaLocation="address.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/payment/dto/business"
+        schemaLocation="payment.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/recordpayment/dto/business"
+        schemaLocation="recordpayment.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/subscription/dto/business"
+        schemaLocation="subscription.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/base"
+    	schemaLocation="base.xsd"/>
+    <xs:import namespace="http://mdsuk.com/ws/dise3g/services/dto/business"
+    	schemaLocation="services.xsd"/>
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/porting/dto/business"
+    	schemaLocation="porting.xsd"/>
+
+    <xs:complexType name="AccountType">
+        <xs:annotation>
+            <xs:documentation>Data structure used in Account Creation</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="CompanyNumber" type="base:CompanyNumberType" minOccurs="1"/>
+            <xs:element name="Address" type="address:AddressType" minOccurs="1"/>
+            <xs:element name="PaymentType" type="base:PaymentTypeType" minOccurs="0"/>
+            <xs:element name="PaymentTerm" type="base:PaymentTermType" minOccurs="0"/>
+            <xs:element name="AccountType" type="target:AccountTypeType" minOccurs="0"/>
+            <xs:element name="SubLedgerCode" type="target:SubLedgerCodeType" minOccurs="0"/>
+            <xs:element name="CreditLimit" type="target:CreditLimitType" minOccurs="0"/>
+			<xs:element name="HardwareCreditLimit" type="target:HardwareCreditLimitType" minOccurs="0"/>
+            <xs:element name="AccountPassword" type="target:AccountPasswordType" minOccurs="0"/>
+            <xs:element name="AccountPIN" type="target:AccountPINType" minOccurs="0"/>
+            <xs:element name="AccountUsage" type="target:AccountUsageType" minOccurs="0"
+                default="SubscriptionAndSales"/>
+            <xs:element name="BankAccountNumber" type="base:BankAccountNumberType" minOccurs="0"/>
+            <xs:element name="BankSortCode" type="base:BankSortCodeType" minOccurs="0"/>
+            <xs:element name="BankName" type="base:BankNameType" minOccurs="0"/>
+            <xs:element name="ControlDigit" type="base:ControlDigitType" minOccurs="0"/>
+            <xs:element name="NameOfPayer" type="base:NameOfPayerType" minOccurs="0"/>
+            <xs:element name="DateMandateReceived" type="xs:date" minOccurs="0"/>
+            <xs:element name="DDSetupMethodCode" type="base:DDSetupMethodCodeType" minOccurs="0"/>
+			<xs:element name="IBAN" type="base:IBANType" minOccurs="0"/>
+			<xs:element name="BIC" type="base:BICType" minOccurs="0"/>
+            <xs:element name="MandateReference" type="base:MandateReferenceType" minOccurs="0"/>
+			<xs:element name="MandateSignatureDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="PaymentCardToken" type="payment:PaymentCardTokenType" minOccurs="0"/>
+			<xs:element name="CCDCCardNumber" type="base:CCDCCardNumberType" minOccurs="0"/>
+            <xs:element name="NameOnCard" type="base:NameOnCardType" minOccurs="0"/>
+            <xs:element name="FriendlyName" type="base:StringMaxLength70Type" minOccurs="0"/>
+            <xs:element name="StartYear" type="base:YearNumberType" minOccurs="0"/>
+            <xs:element name="StartMonth" type="base:MonthNumberType" minOccurs="0"/>
+            <xs:element name="ExpiryYear" type="base:YearNumberType" minOccurs="0"/>
+            <xs:element name="ExpiryMonth" type="base:MonthNumberType" minOccurs="0"/>
+            <xs:element name="CreditSecurityCode" type="base:CreditSecurityCodeType" minOccurs="0"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType" minOccurs="0"/>
+            <xs:element name="EmailAddress" type="base:StringMaxLength70Type" minOccurs="0"/>
+            <xs:element name="AccountSerialNumbers" type="target:SimpleCreateAccountSerialNumbersType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="AccountBasicType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally returned as part of the Account Query response</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="AccountNumber" type="base:AccountNumberType" minOccurs="1"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType" minOccurs="0"/>
+            <xs:element name="GroupCode" type="base:GroupCodeType" minOccurs="0"/>
+            <xs:element name="CompanyNumber" type="base:CompanyNumberType" minOccurs="1"/>
+            <xs:element name="PaymentType" type="base:PaymentTypeType" minOccurs="1"/>
+            <xs:element name="PaymentTerms" type="base:PaymentTermType" minOccurs="1"/>
+            <xs:element name="BondAmount" type="base:BondAmountType" minOccurs="0"/>
+            <xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="1"/>
+            <xs:element name="EmailAddress" type="base:StringMaxLength70Type" minOccurs="0"/>
+			<xs:element name="CreationDate" type="base:CreationDateType" minOccurs="1"/>
+			<xs:element name="SuspendedFromInvoicing" type="base:SuspendedFromInvoicingType" minOccurs="0"/>
+			<xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+			<xs:element name="ParentSubscription" type="base:SubscriptionNumberType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateAccountBasic">
+        <xs:annotation>
+            <xs:documentation>This structure optionally filled as part of the Update Account request</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="AddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+            <xs:element name="PaymentTerms" type="base:PaymentTermType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateAccountTypeAndUsage">
+        <xs:annotation>
+            <xs:documentation>This structure optionally filled as part of the Update Account request</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="AccountType" type="target:AccountTypeType" minOccurs="0"/>
+            <xs:element name="SubLedgerCode" type="target:SubLedgerCodeType" minOccurs="0"/>
+            <xs:element name="AccountUsage" type="target:AccountUsageType" minOccurs="0"/>
+            <xs:element name="CorrespondingAccount" type="base:AccountNumberType" minOccurs="0"/>
+			<xs:element name="AccountServiceAgreement" type="base:AgreementNumberType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateCustomerDetailsType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally filled as part of the Update Account request</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="AccountPassword" type="target:AccountPasswordType" minOccurs="0"/>
+            <xs:element name="AccountPIN" type="target:AccountPINType" minOccurs="0"/>
+            <xs:element name="ForAttnOfName" type="base:StringMaxLength30Type" minOccurs="0"/>
+            <xs:element name="AccountContactName" type="base:StringMaxLength30Type" minOccurs="0"/>
+            <xs:element name="Comments" type="base:StringMaxLength20Type" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateCreditControlType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally posted as part of the Update Account Query request</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="CreditLimit" type="target:CreditLimitType" minOccurs="0"/>
+				<xs:element name="HardwareCreditLimit" type="target:HardwareCreditLimitType" minOccurs="0"/>
+            <xs:element name="CreditScore" type="target:CreditScoreType" minOccurs="0"/>
+            <xs:element name="IgnoreCreditControl" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="IgnoreCreditControlUpToDate" type="base:ClearableDateType" minOccurs="0"/>
+            <xs:element name="IgnoreUsageLimits" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="AccountInQuery" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="CreditControlAddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateSubscriptionInvoiceControlType">
+        <xs:all>
+            <xs:element name="GenericText" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="OverrideTaxCode" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="PrintStatementSubscription" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="PrintStatementSubscriptionFormat" type="target:PrintStatementSubscriptionFormatType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateNonSubscriptionInvoiceControlType">
+        <xs:all>
+            <xs:element name="PrintStatementInvoice" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="PrintStatementInvoiceFormat" type="target:PrintStatementInvoiceFormatType" minOccurs="0"/>
+            <xs:element name="StatementFormatInvoiceFormat" type="target:StatementFormatInvoiceFormatType" minOccurs="0"/>
+            <xs:element name="FirstInvoice" type="xs:date" minOccurs="0"/>
+            <xs:element name="SubsequentInvoiceFrequency" type="target:SubsequentInvoiceFrequencyIntType" minOccurs="0"/>
+            <xs:element name="DelayToCycle" type="target:DelayToCycleType" minOccurs="0"/>          
+            <xs:element name="ConsolidateNonSubscriptionInvoice" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdateAutoPaymentsType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally posted as part of the Update Account request</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="AutoPaymentCalcMethod" type="target:AutoPaymentCalcMethodType" minOccurs="0"/>
+            <xs:element name="SuspendFromAutoPayment" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="SuspendUpToDueDate" type="base:ClearableDateType" minOccurs="0"/>
+            <xs:element name="SuspendDueDateUntil" type="base:ClearableDateType" minOccurs="0"/>
+            <xs:element name="SuspensionReason" type="target:SuspensionReasonType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>    
+        </xs:all>
+    </xs:complexType>    
+
+    <xs:complexType name="SubscriptionInvoiceControlType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally returned as part of the Account Query response</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="GenericText" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="OverrideTaxCode" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="PrintStatement" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="BillingMediaCode" type="base:StringMaxLength6Type" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType> 	
+    <xs:complexType name="NonSubscriptionInvoiceControlType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally returned as part of the Account Query response</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="PrintStatement" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="PrintStatementBillingMediaCode" type="base:StringMaxLength6Type"  minOccurs="0"/>
+            <xs:element name="ConsolidateInvoice" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="ConsolidateInvoiceBillingMediaCode" type="base:StringMaxLength6Type"  minOccurs="0"/>
+            <xs:element name="FirstInvoice" type="xs:date" minOccurs="0"/>
+            <xs:element name="LastInvoice" type="xs:date" minOccurs="0"/>
+            <xs:element name="NextExpectedInvoice" type="xs:date" minOccurs="0"/>
+            <xs:element name="SubsequentInvoiceFrequency" type="target:SubsequentInvoiceFrequencyType" minOccurs="0"/>
+            <xs:element name="DelayToCycle" type="target:DelayToCycleType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:complexType name="SubsequentInvoiceFrequencyType">
+        <xs:choice>
+            <xs:element name="SubsequentInvoiceFrequencyDays" type="base:DayOfMonthType" minOccurs="0" maxOccurs="1"/>
+	        <xs:element name="SubsequentInvoiceFrequencyMonths" type="base:MonthOfYearType" minOccurs="0" maxOccurs="1"/>	
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="SubsequentInvoiceFrequencyIntType">
+        <xs:choice>
+            <xs:element name="SubsequentInvoiceFrequencyDays" type="base:DayOfMonthIntType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="SubsequentInvoiceFrequencyMonths" type="base:MonthOfYearIntType" minOccurs="0" maxOccurs="1"/>	
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="AutoPaymentsType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally returned as part of the Account Query response</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="AutoPaymentCalcMethod" type="target:AutoPaymentCalcMethodType" minOccurs="0"/>
+            <xs:element name="SuspendFromAutoPayment" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="SuspendUpToDueDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="SuspendDueDateUntil" type="xs:date" minOccurs="0"/>
+            <xs:element name="SuspensionReason" type="target:SuspensionReasonType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CreditControlType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally returned as part of the Account Query response</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="CreditLimit" type="target:CreditLimitType" minOccurs="0"/>
+				<xs:element name="HardwareCreditLimit" type="target:HardwareCreditLimitType" minOccurs="0"/>
+            <xs:element name="CreditScore" type="target:CreditScoreType" minOccurs="0"/>
+            <xs:element name="IgnoreCreditControl" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="IgnoreCreditControlUpToDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="IgnoreUsageLimits" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="AccountInQuery" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="CreditControlAddressNumber" type="address:AddressCodeType" minOccurs="0"/>
+            <xs:element name="CreditControlStatus" type="target:CreditControlStatusType" minOccurs="0"/>            
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="AccountTypeAndUsageType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally returned as part of the Account Query response</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="AccountType" type="target:AccountTypeType" minOccurs="0"/>
+            <xs:element name="SubLedgerCode" type="target:SubLedgerCodeType" minOccurs="0"/>
+            <xs:element name="AccountUsage" type="target:AccountUsageType" minOccurs="0"/>
+            <xs:element name="CorrespondingAccount" type="base:AccountNumberType" minOccurs="0"/>
+			<xs:element name="AccountServiceAgreement" type="base:AgreementNumberType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+ 
+    <xs:complexType name="CustomerDetailsType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally returned as part of the Account Query response</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="AccountPassword" type="target:AccountPasswordType" minOccurs="0"/>
+            <xs:element name="AccountPIN" type="target:AccountPINType" minOccurs="0"/>
+            <xs:element name="ForAttnOfName" type="base:StringMaxLength30Type" minOccurs="0"/>
+            <xs:element name="AccountContactName" type="base:StringMaxLength30Type" minOccurs="0"/>
+            <xs:element name="CustomerCostCentre" type="base:StringMaxLength20NotRequiredType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="UpdatePaymentDetailsType">
+        <xs:annotation>
+            <xs:documentation>Data structure used to update the re-occurring payment type</xs:documentation>
+        </xs:annotation>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element name="PaymentCardDetails" type="payment:UpdatePaymentCardType" minOccurs="1"/>
+                    <xs:element name="DirectDebitDetails" type="payment:UpdateDirectDebitType" minOccurs="1"/>
+                </xs:choice>
+              </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AddRegisteredCardType">
+        <xs:annotation>
+            <xs:documentation>Data structure used to add a pre-registered card token with CMP for one-off payments.</xs:documentation>
+        </xs:annotation>
+            <xs:all>
+				<xs:element name="PaymentType" type="base:PaymentTypeType" minOccurs="1"/>
+				<xs:element name="PaymentCardToken" type="payment:PaymentCardTokenType" minOccurs="1"/>
+			</xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="PaymentDetailsType">
+        <xs:annotation>
+            <xs:documentation>Data structure optionally returned as part of Account Query</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="Cheque" type="payment:ChequeType"/>
+                <xs:element name="PaymentCard" type="payment:PaymentCardQueryType"/>
+                <xs:element name="DirectDebit" type="payment:DirectDebitResponseType"/>
+                <xs:element name="SEPADirectDebit" type="payment:SEPADirectDebitResponseType"/>
+            </xs:choice>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+            </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="AccountTransactionsListResponseType">
+	    <xs:annotation>
+                <xs:documentation>Data structure returned as response for QueryAccountTransaction after filter beeing applied</xs:documentation>
+            </xs:annotation>
+	    <xs:all>
+	        <xs:element name="DescriptionType" type="target:DescriptionTypeType" minOccurs="0"/>
+	        <xs:element name="ReferenceType" type="target:ReferenceTypeType" minOccurs="0"/>
+	        <xs:element name="TaxDateType" type="target:TaxDateTypeType" minOccurs="0"/>
+	        <xs:element name="RemarkType" type="target:RemarkTypeType" minOccurs="0"/>
+		<xs:element name="GrossAmountType" type="target:GrossAmountTypeType" minOccurs="0"/>
+		<xs:element name="OpenAmountType" type="target:OpenAmountTypeType" minOccurs="0"/>
+		<xs:element name="DueDateType" type="target:DueDateTypeType" minOccurs="0"/>
+	    </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="SimpleCreateAccountSerialNumbersType">
+        <xs:sequence>
+            <xs:element name="AccountSerialNumber" type="target:SimpleCreateAccountSerialNumberType"
+                minOccurs="1" maxOccurs="999"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SimpleCreateAccountSerialNumberType">
+        <xs:sequence>
+            <xs:element name="SerialNumberId" type="target:AccountSerialNumberIdType" minOccurs="1"/>
+            <xs:element name="SerialNumberValue" type="base:NetworkSerialNumberType" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AccountServicesBasicType">
+	<xs:sequence>
+		<xs:element name="AccountService" type="target:AccountServiceBasicType"
+			minOccurs="1" maxOccurs="unbounded"/>
+	</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AccountServiceBasicType">
+		<xs:complexContent>
+			<xs:extension base="services:GenericServiceBasicType">
+				<xs:sequence>
+					<xs:element name="PackageCode" type="subscription:PackageCodeType" minOccurs="0"/>
+					<xs:element name="PricePeriodCoverage" type="subscription:PricingPeriodCoverageType" minOccurs="0"/>
+					<xs:element name="SalesAccountNumber" type="subscription:SalesPersonNumberType" minOccurs="0"/>
+					<xs:element name="BillingOffset" type="subscription:BillingOffsetType" minOccurs="0"/>
+					<xs:element name="AddingEvent" type="base:NineDigitNumberType" minOccurs="0"/>
+					<xs:element name="NetworkConfirmed" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="Migrated" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="RecurringCharge" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="PerBill" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="BilledUntil" type="xs:date" minOccurs="0"/>
+					<xs:element name="ServiceBarred" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="ContractService" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="ContractDuration" type="base:ThreeDigitNumberType" minOccurs="0"/>
+					<xs:element name="SuppressRemainingCharge" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="ContractReference" type="services:ContractReferenceType" minOccurs="0"/>
+					<xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>	
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<xs:simpleType name="AccountSerialNumberIdType">
+        <xs:restriction base="base:ThreeDigitNumberType"/>
+    </xs:simpleType>
+    
+    <xs:complexType name="AccountSerialNumbersType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the some Query responses when
+                SERIALNUMBERS dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="AccountSerialNumber" type="target:AccountSerialNumberType" minOccurs="0" 
+            maxOccurs="999"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AccountSerialNumberType">
+        <xs:sequence>
+            <xs:element name="SerialNumberId" type="target:AccountSerialNumberIdType" minOccurs="1"/>
+            <xs:element name="SerialNumberValue" type="base:NetworkSerialNumberType" minOccurs="1"/>
+            <xs:element name="EffectiveDate" type="xs:date" minOccurs="1"/>
+            <xs:element name="SerialStatus" type="subscription:NetworkSerialStatusType" minOccurs="1"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="QueryAccountBondsType">
+        <xs:annotation>
+            <xs:documentation>This structure is returned as part of the some Query responses when
+                the BONDS dataset is specified</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Bond" type="target:QueryAccountBondType" minOccurs="0" maxOccurs="999"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TerminationFeeType">
+        <xs:sequence>
+            <xs:element name="TerminationFee" type="base:Currency9_2NotRequiredType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="QueryAccountBondType">
+        <xs:sequence>
+            <xs:element name="BondNumber" type="base:BondNumberType" minOccurs="0"/>
+            <xs:element name="BondSalesLedgerAccountNumber" type="base:AccountNumberType" minOccurs="0"/>
+            <xs:element name="BondPaymentType" type="base:PaymentTypeType" minOccurs="0"/>
+			<xs:element name="EventNumber" type="base:NineDigitNumberType" minOccurs="0"/>
+            <xs:element name="BondOrigin" type="base:BondOriginType" minOccurs="0"/>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="0"/>
+            <xs:element name="BondStatus" type="target:QueryAccountBondStatusType" minOccurs="0"/>
+            <xs:element name="BondAmount" type="base:BondAmountType" minOccurs="0"/>
+			<xs:element name="ReceivedDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="PostedDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="ExpectedRefundDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="ActualRefundDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="BondRefundType" type="base:PaymentTypeType" minOccurs="0"/>
+            <xs:element name="RefundOrCancellationReference" type="target:BondRefundOrCancellationReferenceType" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="QueryAccountBondStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Awaiting Approval"/>
+            <xs:enumeration value="Awaiting Batch Posting"/>
+            <xs:enumeration value="Awaiting Confirmation"/>
+            <xs:enumeration value="Awaiting Posting"/>
+            <xs:enumeration value="Cancelled"/>
+            <xs:enumeration value="Opened Posted"/>
+            <xs:enumeration value="Refund on Confirmation"/>
+            <xs:enumeration value="Refunded"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AccountPasswordType">
+        <xs:restriction base="base:StringMaxLength20Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AccountDescriptionType">
+        <xs:restriction base="base:StringMaxLength60Type"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AccountPINType">
+        <xs:restriction base="base:FourDigitNumberType"/>
+    </xs:simpleType>
+
+    <xs:annotation>
+        <xs:documentation>This field represents the internal company number under which the account
+            will be created.</xs:documentation>
+    </xs:annotation>
+
+    <xs:simpleType name="AccountTypeType">
+        <xs:restriction base="xs:string">
+        	<xs:minLength value="1"></xs:minLength>
+		<xs:maxLength value="3"></xs:maxLength>
+	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="SubLedgerCodeType">
+        <xs:restriction base="xs:string">
+	        <xs:minLength value="1"></xs:minLength>
+		<xs:maxLength value="6"></xs:maxLength>
+	</xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="PrintStatementSubscriptionFormatType">
+	<xs:restriction base="xs:string">
+		<xs:minLength value="1"></xs:minLength>
+		<xs:maxLength value="30"></xs:maxLength>
+	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PrintStatementInvoiceFormatType">
+	<xs:restriction base="xs:string">
+		<xs:minLength value="1"></xs:minLength>
+		<xs:maxLength value="30"></xs:maxLength>
+	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StatementFormatInvoiceFormatType">
+	<xs:restriction base="xs:string">
+		<xs:minLength value="1"></xs:minLength>
+		<xs:maxLength value="30"></xs:maxLength>
+	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CreditLimitType">
+        <xs:restriction base="base:NineDigitNumberType"/>
+    </xs:simpleType>
+	
+	<xs:simpleType name="HardwareCreditLimitType">
+        <xs:restriction base="base:NineDigitNumberType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="CreditScoreType">
+        <xs:restriction base="base:ThreeDigitNumberType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="BankBranchNameType">
+        <xs:restriction base="base:StringMaxLength60Type"/>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="AccountUsageType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Subscription"/>
+            <xs:enumeration value="Sales"/>
+            <xs:enumeration value="SubscriptionAndSales"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CreditControlStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Normal"/>
+            <xs:enumeration value="On Procedure"/>
+            <xs:enumeration value="Ignored"/>
+			<xs:enumeration value="Ignored Until"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DelayToCycleType">
+        <xs:restriction base="base:DayOfMonthZeroType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="SuspensionReasonType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="0"></xs:minLength>
+            <xs:maxLength value="90"></xs:maxLength>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="BondRefundOrCancellationReferenceType">
+        <xs:restriction base="base:StringMaxLength30Type"/>
+    </xs:simpleType>
+
+    <xs:complexType name="QueryAccountDatasetsType">
+        <xs:choice>
+            <xs:element name="Dataset" type="target:QueryAccountDatasetType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:simpleType name="QueryAccountDatasetType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ATTRIBUTES"/>
+            <xs:enumeration value="BASIC"/>
+            <xs:enumeration value="ACCOUNT_TYPE_AND_USAGE"/>
+            <xs:enumeration value="ADDRESS"/>
+            <xs:enumeration value="AUTO_PAYMENTS"/>
+            <xs:enumeration value="CREDIT_CONTROL"/>
+            <xs:enumeration value="CUSTOMER_DETAILS"/>
+            <xs:enumeration value="DISCOUNTS"/>
+            <xs:enumeration value="NON_SUBSCRIPTION_INVOICE"/>
+            <xs:enumeration value="PAYMENT_DETAILS"/>
+            <xs:enumeration value="SUBSCRIPTION_INVOICE"/>
+            <xs:enumeration value="ACCOUNT_SERIAL_NUMBERS"/>
+			<xs:enumeration value="SERVICES"/>
+			<xs:enumeration value="BONDS"/>
+			<xs:enumeration value="CREDIT_DEBIT_CARDS"/>
+			<xs:enumeration value="TERMINATION_FEE"/>
+			<xs:enumeration value="REWARD_ENTITLEMENTS"/>
+			<xs:enumeration value="DLP_PORT"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AutoPaymentCalcMethodType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CHILD"/>
+            <xs:enumeration value="PARENT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="DescriptionTypeType">
+		<xs:restriction base="base:StringMaxLength30NotRequiredType"/>
+	</xs:simpleType>
+	
+	<xs:simpleType name="ReferenceTypeType">
+		<xs:restriction base="base:StringMaxLength25NotRequiredType"/>
+	</xs:simpleType>
+
+	<xs:simpleType name="TaxDateTypeType">
+		<xs:restriction base="xs:date" />
+	</xs:simpleType>
+
+	<xs:simpleType name="RemarkTypeType">
+            <xs:restriction base="base:StringMaxLength30NotRequiredType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="GrossAmountTypeType">
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="15"/>
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="OpenAmountTypeType">
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="15"/>
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DueDateTypeType">
+        <xs:restriction base="xs:date" />
+    </xs:simpleType>
+
+    <xs:simpleType name="DescriptionType">
+        <xs:restriction base="base:StringMaxLength30NotRequiredType"/>
+    </xs:simpleType>	
+	
+	<xs:simpleType name="CustomerPreferenceOptionType">
+	<xs:restriction base="xs:string">
+		<xs:minLength value="1"></xs:minLength>
+		<xs:maxLength value="10"></xs:maxLength>
+	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="TargetIdentifierType">
+        <xs:choice>
+            <xs:element name="GroupIdentifier" type="base:GroupCodeType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="CorporateIdentifier" type="base:CorporateCodeType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="AccountIdentifier" type="base:AccountNumberType" minOccurs="0" maxOccurs="1"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <!--- temporary entry - it should be part of the account definition -->
+    <xs:complexType name="UpdateAccountType">
+        <xs:annotation>
+            <xs:documentation>Data structure used in Account Update</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="PaymentType" type="base:PaymentTypeType" minOccurs="0"/>
+            <xs:element name="PaymentTerm" type="base:PaymentTermType" minOccurs="0"/>
+            <xs:element name="AccountType" type="target:AccountTypeType" minOccurs="0"/>
+            <xs:element name="SubLedgerCode" type="target:SubLedgerCodeType" minOccurs="0"/>
+            <xs:element name="CreditLimit" type="target:CreditLimitType" minOccurs="0"/>
+            <xs:element name="AccountPassword" type="target:AccountPasswordType" minOccurs="0"/>
+            <xs:element name="AccountPIN" type="target:AccountPINType" minOccurs="0"/>
+            <xs:element name="AccountUsage" type="target:AccountUsageType" minOccurs="0"
+                default="SubscriptionAndSales"/>
+            <xs:element name="BankAccountNumber" type="base:BankAccountNumberType" minOccurs="0"/>
+            <xs:element name="BankSortCode" type="base:BankSortCodeType" minOccurs="0"/>
+            <xs:element name="BankName" type="base:BankNameType" minOccurs="0"/>
+            <xs:element name="ControlDigit" type="base:ControlDigitType" minOccurs="0"/>
+            <xs:element name="NameOfPayer" type="base:NameOfPayerType" minOccurs="0"/>
+            <xs:element name="DateMandateReceived" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="DDSetupMethodCode" type="base:DDSetupMethodCodeType" minOccurs="0"/>
+            <xs:element name="CCDCCardNumber" type="base:CCDCCardNumberType" minOccurs="0"/>
+            <xs:element name="NameOnCard" type="base:NameOnCardType" minOccurs="0"/>
+            <xs:element name="StartYear" type="base:YearNumberType" minOccurs="0"/>
+            <xs:element name="StartMonth" type="base:MonthNumberType" minOccurs="0"/>
+            <xs:element name="ExpiryYear" type="base:YearNumberType" minOccurs="0"/>
+            <xs:element name="ExpiryMonth" type="base:MonthNumberType" minOccurs="0"/>
+            <xs:element name="CreditSecurityCode" type="base:CreditSecurityCodeType" minOccurs="0"/>
+            <xs:element name="CorporateCode" type="base:CorporateCodeType" minOccurs="0"/>
+            <xs:element name="EmailAddress" type="base:StringMaxLength70Type" minOccurs="0"/>
+            <xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>    
+
+	<xs:complexType name="CommunicationPreferencesType">
+        <xs:annotation>
+            <xs:documentation>Data structure included Customer Preferences response</xs:documentation>
+        </xs:annotation>
+		<xs:all>
+			<xs:element name="CommunicationMethod" type="target:CustomerPreferenceOptionType" minOccurs="0"/>
+			<xs:element name="ParticularRequirement" type="target:CustomerPreferenceOptionType" minOccurs="0"/>
+			<xs:element name="Language" type="base:StringMaxLength2Type" minOccurs="0"/>
+			<xs:element name="MarketingByLetter" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="MarketingByEmail" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="MarketingByTelephone" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="MarketingBySMS" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="MarketingOnInvoiceStatement" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="LastAmendedDate" type="base:LastAmendedDateType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	
+    <xs:complexType name="CreateAccountBondType">
+        <xs:annotation>
+            <xs:documentation>Details required to record a Bond against an account for a subscription</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="0"/>
+            <xs:element name="PaymentType" type="base:PaymentTypeType" minOccurs="1"/>
+            <xs:element name="BondOrigin" type="base:BondOriginType" minOccurs="1"/>
+            <xs:element name="BondAmount" type="base:BondAmountType" minOccurs="1"/>
+			<xs:element name="ExpectedRefundDate" type="xs:date" minOccurs="1"/>
+			<xs:element name="PaymentDetails" type="recordpayment:BondPaymentDetailsType" minOccurs="0"/>	
+        </xs:all>
+    </xs:complexType>
+    
+
+
+
+    <xs:complexType name="CancelRegisteredCardType">
+        <xs:sequence>
+            <xs:element name="CardReference" type="base:PCI_CardOnFileReferenceType" minOccurs="1"/>
+            <xs:element name="CancellationReason" type="xs:string" minOccurs="0"/>                   
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="DlpPortsType">
+        <xs:annotation>
+            <xs:documentation>This structure optionally returned as part of the Query Account response
+				when the DLP_PORT Dataset is specified.</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="DLPPortIns" type="target:DlpPortInsType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    
+    <xs:complexType name="RegisteredCardTargetIdentifierType">
+        <xs:choice>
+        	<xs:element name="AccountNumber" type="base:AccountNumberType"/>
+            <xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType"/>
+            <xs:element name="NetworkSerialNumber" type="base:NetworkSerialNumberType"/>
+        </xs:choice>
+    </xs:complexType>
+	
+	<xs:complexType name="DlpPortInsType">
+		<xs:sequence>
+			<xs:element name="DLPPortIn" type="target:DlpPortInType" maxOccurs="unbounded" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="DlpPortInType">
+		<xs:all>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1"/>
+			<xs:element name="PACCode" type="porting:PacCodeType" minOccurs="1"/>
+			<xs:element name="PACExpiryDate" type="xs:date" minOccurs="1"/>
+			<xs:element name="PACCreationDate" type="xs:date" minOccurs="1"/>
+			<xs:element name="RNO" type="base:StringMaxLength2Type" minOccurs="0"/>
+			<xs:element name="DNO" type="base:StringMaxLength2Type" minOccurs="1"/>
+			<xs:element name="RSP" type="base:StringMaxLength3Type" minOccurs="0"/>
+			<xs:element name="DSP" type="base:StringMaxLength3Type" minOccurs="1"/>
+			<xs:element name="PortDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="PortStatus" type="target:PortStatusType" minOccurs="1"/>
+			<xs:element name="Cancellable" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="NumberBeingPortedIn" type="base:NetworkSerialNumberType" minOccurs="1"/>
+			<xs:element name="NumberBeingReplaced" type="base:NetworkSerialNumberType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:simpleType name="PortStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Closed"/>
+            <xs:enumeration value="Locked"/>
+			<xs:enumeration value="InProgress"/>
+			<xs:enumeration value="Error"/>
+			<xs:enumeration value="Complete"/>
+			<xs:enumeration value="Cancelled"/>			
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

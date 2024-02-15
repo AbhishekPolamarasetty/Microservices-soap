@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema targetNamespace="http://mdsuk.com/ws/dise3g/composite/dto/service"
+	xmlns:target="http://mdsuk.com/ws/dise3g/composite/dto/service"
+	xmlns:composite="http://mdsuk.com/ws/dise3g/composite/dto/business"
+	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="http://mdsuk.com/ws/dise3g/services/dto/business"
+	xmlns:base="http://mdsuk.com/ws/dise3g/base">
+
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/composite/dto/business"
+		schemaLocation="composite.xsd" />
+	<xs:import namespace="http://mdsuk.com/ws/dise3g/base"
+		schemaLocation="base.xsd" />
+
+	<xs:complexType name="ManageSubscriptionType">
+		<xs:sequence>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="SubscriptionNumber" type="base:SubscriptionNumberType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ManageSubscriptionServices" type="composite:ManageSubscriptionServices" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AuditRecord" type="base:AuditRecordType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ManageSubscriptionResponseType">
+		<xs:all>
+			<xs:element name="ExternalReference" type="base:ExternalReferenceType" minOccurs="0" maxOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	
+</xs:schema>

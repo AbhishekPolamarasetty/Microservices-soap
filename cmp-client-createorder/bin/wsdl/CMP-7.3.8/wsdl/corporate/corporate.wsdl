@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    $Id: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/corporate/corporate.wsdl#1 $
+    $Header: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/corporate/corporate.wsdl#1 $
+    $DateTime: 2008/01/06 10:20:44 $
+    $Author: Malgorzata.Grzybowska $
+    $File: //Source_Code/BCC/Dise3G/7.3/8/WebService/Schema/wsdl/corporate/corporate.wsdl $
+    $Revision: #1 $
+    (c) Copyright 2008 Martin Dawes Systems Ltd
+-->
+<definitions targetNamespace="http://mdsuk.com/ws/dise3g/corporate/definition"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:target="http://mdsuk.com/ws/dise3g/corporate/definition"
+    xmlns:fault="http://mdsuk.com/ws/dise3g/fault/definition">
+
+    <documentation>This Webservice definition encompasses all operations relating to Corporate management.
+    </documentation>
+
+	<import namespace="http://mdsuk.com/ws/dise3g/fault/definition" location="../fault/fault.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://mdsuk.com/ws/dise3g/corporate/definition"
+            xmlns:corporate="http://mdsuk.com/ws/dise3g/corporate/dto/service"
+            elementFormDefault="qualified">
+
+            <import namespace="http://mdsuk.com/ws/dise3g/corporate/dto/service" schemaLocation="../../xsd/corporateservice.xsd"/>
+
+            <element name="CreateCorporate">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="corporate:CreateCorporateType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="CreateCorporateResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="corporate:CreateCorporateResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="UpdateCorporate">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="corporate:UpdateCorporateType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="UpdateCorporateResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="corporate:UpdateCorporateResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="QueryCorporate">
+                <complexType>
+                    <sequence>
+                        <element name="Request" type="corporate:QueryCorporateType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="QueryCorporateResponse">
+                <complexType>
+                    <sequence>
+                        <element name="Result" type="corporate:QueryCorporateResponseType"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+        </schema>
+    </types>
+
+    <message name="CreateCorporateRequest">
+        <part name="Parameters" element="target:CreateCorporate"/>
+    </message>
+
+    <message name="CreateCorporateResponse">
+        <part name="Parameters" element="target:CreateCorporateResponse"/>
+    </message>
+
+    <message name="UpdateCorporateRequest">
+        <part name="Parameters" element="target:UpdateCorporate"/>
+    </message>
+
+    <message name="UpdateCorporateResponse">
+        <part name="Parameters" element="target:UpdateCorporateResponse"/>
+    </message>
+
+    <message name="QueryCorporateRequest">
+        <part name="Parameters" element="target:QueryCorporate"/>
+    </message>
+
+    <message name="QueryCorporateResponse">
+        <part name="Parameters" element="target:QueryCorporateResponse"/>
+    </message>
+
+    <portType name="CorporatePortType">
+        <operation name="CreateCorporate">
+            <input message="target:CreateCorporateRequest"/>
+            <output message="target:CreateCorporateResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+
+        <operation name="UpdateCorporate">
+            <input message="target:UpdateCorporateRequest"/>
+            <output message="target:UpdateCorporateResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+
+        <operation name="QueryCorporate">
+            <input message="target:QueryCorporateRequest"/>
+            <output message="target:QueryCorporateResponse"/>
+            <fault message="fault:SystemFault" name="SystemFault"/>
+            <fault message="fault:SecurityFault" name="SecurityFault"/>
+            <fault message="fault:ValidationFault" name="ValidationFault"/>
+            <fault message="fault:ServiceUnavailableFault" name="ServiceUnavailableFault"/>
+        </operation>
+    </portType>
+
+</definitions>
