@@ -17,8 +17,8 @@
 			</releases>
 		</repository>
 		<repository>
-			<id>Logging-ms</id>
-			<url>C:\Users\abhishek_pola\Downloads\repository\repository</url>
+			<id>Localrepo</id>
+			<url>file:///C:\Users\pashe\OneDrive\Desktop\microservices\repository</url>
 		</repository>
 	</repositories>
 <!--	<distributionManagement>
@@ -32,7 +32,7 @@
 		</repository>
 	</distributionManagement>-->
 	<properties>
-		<Logging-systemPath>C:\Users\abhishek_pola\Downloads\generic-super_pom\generic-super_pom/super_pom-services/libs/commons-logging-api-1.1.jar</Logging-systemPath>
+		<!--<Logging-systemPath>C:\Users\pashe\OneDrive\generic-super_pom\generic-super_pom/super_pom-services/libs/commons-logging-api-1.1.jar</Logging-systemPath>-->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
 		<maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>

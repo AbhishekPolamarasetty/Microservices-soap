@@ -17,6 +17,7 @@ public class ResponseBean<T> {
 	private ResponseStatus status;
 	private String code;
 	private String message;
+	private int statusCode;
 	private List<RootExceptionDetails> rootExceptions;
 
 	public enum ResponseStatus {
@@ -37,9 +38,36 @@ public class ResponseBean<T> {
 	 * @param t
 	 * @return
 	 */
+	
+	
+	
+	
+	//Added by shwetha
+public static <T> ResponseBean<T> errorRes(Class<?> T, String code, String message, int statusCode) {
+	ResponseBean<T> rb = new ResponseBean<>();
+	rb.setStatus(ResponseStatus.FAILURE);
+	rb.setCode(code);
+	rb.setMessage(message);
+	rb.setStatusCode(statusCode);
+	return rb;
+}
+
+
 	public static <T> ResponseBean<T> of(T t) {
 		ResponseBean<T> rb = new ResponseBean<>(t);
 		rb.setStatus(ResponseStatus.SUCCESS);
+		return rb;
+	}
+
+	public static <T> ResponseBean<T> of(int i, T productOrderResponse) {
+		ResponseBean<T> rb = new ResponseBean<>();
+		if (i > 399) {
+			rb.setStatus(ResponseStatus.FAILURE);
+		} else {
+			rb.setStatus(ResponseStatus.SUCCESS);
+		}
+		rb.setStatusCode(i);
+		rb.setData(productOrderResponse);
 		return rb;
 	}
 
@@ -56,6 +84,19 @@ public class ResponseBean<T> {
 		rb.setCode(resBean.getCode());
 		rb.setMessage(resBean.getMessage());
 		rb.setRootException(resBean.getRootExceptions());
+		return rb;
+	}
+
+	public static <T> ResponseBean<T> errorRes(Class<?> T) {
+		return errorRes(T, getAppConstant().getErrorRes().getClientErrorCode(),
+				getAppConstant().getErrorRes().getMessage());
+	}
+
+	public static <T> ResponseBean<T> errorRes(Class<?> T, String code, String message) {
+		ResponseBean<T> rb = new ResponseBean<>();
+		rb.setStatus(ResponseStatus.FAILURE);
+		rb.setCode(code);
+		rb.setMessage(message);
 		return rb;
 	}
 
@@ -182,4 +223,13 @@ public class ResponseBean<T> {
 	public static AppConstants getAppConstant() {
 		return SpringApplicationContextHolder.getBean(AppConstants.class);
 	}
+
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(int i) {
+		this.statusCode = i;
+	}
+
 }

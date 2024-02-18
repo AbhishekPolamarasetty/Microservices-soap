@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/** @author Suman Mandal */
+/** @author Shwetha G S */
 public class BaseHttpRequest {
 
   private Map<String, Object> headers = new HashMap<>();
